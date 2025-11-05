@@ -25,7 +25,6 @@
       max-width: 400px;
     }
     .screen.active { display: block; }
-
     h2 { color: #2196f3; margin-bottom: 10px; }
     button {
       background: #2196f3;
@@ -66,7 +65,7 @@
   <!-- Face Recognition Screen -->
   <div id="faceScreen" class="screen">
     <h3>Face Verification</h3>
-    <p>Enter your face here to begin exam</p>
+    <p>Align your face clearly before starting exam</p>
     <video id="video" autoplay muted></video>
     <div id="status">Initializing camera...</div>
   </div>
@@ -103,6 +102,24 @@
     let warningGiven = false;
     let flagged = false;
 
+    // ✅ Simple Beep Function
+    function playBeep(duration = 200, frequency = 500) {
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.type = "sine";
+        osc.frequency.value = frequency;
+        osc.start();
+        gain.gain.setValueAtTime(0.2, ctx.currentTime);
+        osc.stop(ctx.currentTime + duration / 1000);
+      } catch (e) {
+        console.warn("AudioContext not supported");
+      }
+    }
+
     // Proceed to Face Screen
     proceedBtn.onclick = () => {
       const name = nameInput.value.trim();
@@ -114,20 +131,28 @@
 
     async function startCamera() {
       try {
+        console.log("🎥 Starting camera...");
         const stream = await navigator.mediaDevices.getUserMedia({ video: true });
         video.srcObject = stream;
         await loadModels();
       } catch (err) {
-        alert("❌ Camera access denied. Please enable camera.");
+        console.error("❌ Camera error:", err);
+        alert("❌ Camera access denied. Please enable camera and reload.");
       }
     }
 
     async function loadModels() {
-      const MODEL_URL = "https://cdn.jsdelivr.net/npm/face-api.js/models";
-      await faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL);
-      await faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL);
-      statusEl.textContent = "✅ Face detection ready. Align your face...";
-      detectFace();
+      const MODEL_URL = "https://justadudewhohacks.github.io/face-api.js/models";
+      console.log("📦 Loading models from:", MODEL_URL);
+      try {
+        await faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL);
+        await faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL);
+        statusEl.textContent = "✅ Face detection ready. Align your face...";
+        detectFace();
+      } catch (err) {
+        console.error("⚠️ Error loading models:", err);
+        alert("Error loading face detection models. Please check internet connection.");
+      }
     }
 
     async function detectFace() {
@@ -146,10 +171,8 @@
       examScreen.classList.add('active');
       welcomeName.textContent = `Welcome, ${nameInput.value}!`;
 
-      // Start live camera on exam
       const stream = await navigator.mediaDevices.getUserMedia({ video: true });
       examVideo.srcObject = stream;
-
       monitorFace();
     }
 
@@ -158,8 +181,7 @@
 
       setInterval(async () => {
         const detection = await faceapi.detectSingleFace(examVideo, options).withFaceLandmarks();
-
-        if (!detection) return; // still monitoring silently
+        if (!detection) return;
 
         const landmarks = detection.landmarks;
         const leftEye = landmarks.getLeftEye();
@@ -167,16 +189,17 @@
         const eyeCenterX = (leftEye[0].x + rightEye[3].x) / 2;
         const faceBox = detection.detection.box;
         const faceCenterX = faceBox.x + faceBox.width / 2;
-
         const lookAway = Math.abs(eyeCenterX - faceCenterX) > faceBox.width * 0.15;
 
         if (lookAway && !warningGiven && !flagged) {
           warningGiven = true;
           warningEl.textContent = "⚠️ Please face forward — next time you'll be flagged!";
+          playBeep(300, 600);
         } else if (lookAway && warningGiven && !flagged) {
           flagged = true;
           flaggedEl.textContent = "🚫 Flagged Out: You looked away twice!";
           document.getElementById('questions').style.display = "none";
+          playBeep(1000, 300);
         } else if (!lookAway) {
           warningEl.textContent = "";
         }
