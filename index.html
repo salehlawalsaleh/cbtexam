@@ -83,7 +83,6 @@
     </div>
   </div>
 
-  <!-- Face-api.js -->
   <script defer src="https://cdn.jsdelivr.net/npm/face-api.js"></script>
   <script>
     const proceedBtn = document.getElementById('proceedBtn');
@@ -102,8 +101,8 @@
     let warningGiven = false;
     let flagged = false;
 
-    // ✅ Simple Beep Function
-    function playBeep(duration = 200, frequency = 500) {
+    // 🔊 Beep function
+    function playBeep(duration = 200, frequency = 600) {
       try {
         const ctx = new (window.AudioContext || window.webkitAudioContext)();
         const osc = ctx.createOscillator();
@@ -112,11 +111,11 @@
         gain.connect(ctx.destination);
         osc.type = "sine";
         osc.frequency.value = frequency;
-        osc.start();
         gain.gain.setValueAtTime(0.2, ctx.currentTime);
+        osc.start();
         osc.stop(ctx.currentTime + duration / 1000);
-      } catch (e) {
-        console.warn("AudioContext not supported");
+      } catch (err) {
+        console.warn("AudioContext not supported", err);
       }
     }
 
@@ -131,28 +130,38 @@
 
     async function startCamera() {
       try {
-        console.log("🎥 Starting camera...");
         const stream = await navigator.mediaDevices.getUserMedia({ video: true });
         video.srcObject = stream;
         await loadModels();
       } catch (err) {
-        console.error("❌ Camera error:", err);
         alert("❌ Camera access denied. Please enable camera and reload.");
       }
     }
 
+    // ⚙️ Load Models with fallback system
     async function loadModels() {
-      const MODEL_URL = "https://justadudewhohacks.github.io/face-api.js/models";
-      console.log("📦 Loading models from:", MODEL_URL);
-      try {
-        await faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL);
-        await faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL);
-        statusEl.textContent = "✅ Face detection ready. Align your face...";
-        detectFace();
-      } catch (err) {
-        console.error("⚠️ Error loading models:", err);
-        alert("Error loading face detection models. Please check internet connection.");
+      const MODEL_URLS = [
+        "https://raw.githubusercontent.com/justadudewhohacks/face-api.js/master/weights",
+        "https://justadudewhohacks.github.io/face-api.js/models"
+      ];
+
+      for (let url of MODEL_URLS) {
+        try {
+          statusEl.textContent = `📦 Loading models from: ${url}`;
+          console.log("Trying model:", url);
+
+          await faceapi.nets.tinyFaceDetector.loadFromUri(url);
+          await faceapi.nets.faceLandmark68Net.loadFromUri(url);
+
+          statusEl.textContent = "✅ Face detection ready. Align your face...";
+          detectFace();
+          return;
+        } catch (err) {
+          console.warn(`⚠️ Failed to load from ${url}:`, err);
+        }
       }
+
+      alert("❌ All model sources failed to load. Please check your internet connection.");
     }
 
     async function detectFace() {
@@ -194,7 +203,7 @@
         if (lookAway && !warningGiven && !flagged) {
           warningGiven = true;
           warningEl.textContent = "⚠️ Please face forward — next time you'll be flagged!";
-          playBeep(300, 600);
+          playBeep(300, 800);
         } else if (lookAway && warningGiven && !flagged) {
           flagged = true;
           flaggedEl.textContent = "🚫 Flagged Out: You looked away twice!";
