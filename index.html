@@ -2,63 +2,82 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>CBT Exam — Atech ICT Solution</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+<title>CBT Exam — ATech ICT Solution</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <style>
-  :root{--bg:#f3f6fb;--card:#fff;--accent:#0a84ff}
-  body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:var(--bg);display:flex;align-items:center;justify-content:center;height:100vh;padding:12px}
-  .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 10px 30px rgba(2,6,23,0.08);width:100%;max-width:900px}
-  .cols{display:flex;gap:16px}
-  .left{flex:1}
-  .right{width:300px}
-  h1{margin:0;color:#0f172a;font-size:20px}
-  .small{color:#6b7280;font-size:13px}
-  input[type="text"]{width:100%;padding:10px;border-radius:8px;border:1px solid #e6edf3;margin-top:8px}
-  button{background:var(--accent);color:white;border:0;padding:10px 14px;border-radius:8px;cursor:pointer;font-weight:700}
-  button[disabled]{background:#94a3b8;cursor:not-allowed}
-  video{width:320px;height:240px;border-radius:8px;border:3px solid var(--accent);background:#000;object-fit:cover}
-  .status{margin-top:6px;font-weight:700}
-  .warning{color:#f59e0b;font-weight:700}
-  .flag{color:#ef4444;font-weight:800}
-  .qbox{margin-top:12px;padding:12px;border-radius:8px;background:#f8fafc}
-  .opts label{display:block;margin:6px 0}
-  .controls{display:flex;gap:8px;align-items:center;margin-top:12px}
-  .timer{font-weight:800}
-  .result{padding:12px;background:#ecfeff;border-radius:8px;margin-top:12px}
-  .hidden{display:none}
-  .center{display:flex;align-items:center;gap:8px}
-  .progress{font-size:13px;color:#334155;margin-top:8px}
-  .section-title{font-weight:800;margin-top:10px}
-  .muted{color:#64748b;font-size:13px}
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+  :root{--bg:#f6f8fb;--card:#fff;--accent:#0ea5e9;--muted:#64748b;--ok:#16a34a;--warn:#f59e0b;--danger:#ef4444}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:var(--bg);-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1000px;margin:18px auto;padding:12px}
+  .card{background:var(--card);border-radius:14px;box-shadow:0 10px 30px rgba(2,6,23,0.06);overflow:hidden}
+  .grid{display:grid;grid-template-columns:1fr 320px;gap:16px;padding:18px}
+  @media(max-width:880px){ .grid{grid-template-columns:1fr;padding:12px} .right{order:2} .left{order:1} }
+  .header{padding:18px;background:linear-gradient(90deg,#e6f6ff, #f0fbff);display:flex;align-items:center;justify-content:space-between}
+  .title{font-weight:700;font-size:18px}
+  .sub{color:var(--muted);font-size:13px}
+  .left{padding:18px}
+  .right{padding:18px;background:#f8fafc;border-left:1px solid #eef2f7}
+  input[type="text"]{width:100%;padding:10px;border-radius:8px;border:1px solid #e6edf3;margin-top:10px;font-size:15px}
+  button{background:var(--accent);color:white;border:0;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer}
+  button[disabled]{opacity:.6;cursor:not-allowed}
+  video{width:100%;max-width:360px;height:240px;border-radius:10px;border:3px solid var(--accent);background:#000;object-fit:cover}
+  .row{display:flex;gap:12px;align-items:center}
+  .muted{color:var(--muted);font-size:13px}
+  .status{font-weight:700;margin-top:8px}
+  .warning{color:var(--warn);font-weight:800;margin-top:6px}
+  .flag{color:var(--danger);font-weight:900;margin-top:6px}
+  .qbox{margin-top:14px;padding:12px;border-radius:10px;background:#fff}
+  .opts label{display:block;margin:8px 0;padding:8px;border-radius:8px;border:1px solid #eef2f7;cursor:pointer}
+  .opts input{margin-right:8px}
+  .controls{display:flex;gap:10px;justify-content:flex-end;margin-top:10px}
+  .timer{font-weight:800;color:#0f172a}
+  .resultBox{padding:12px;background:#ecfeff;border-radius:10px;margin-top:12px}
+  .footer{padding:10px;text-align:center;font-size:13px;color:var(--muted);border-top:1px solid #eef2f7;background:#fafcff}
+  a.helpBtn{display:inline-block;background:#25D366;color:white;padding:8px 12px;border-radius:8px;text-decoration:none;font-weight:700}
+  /* small responsive */
+  @media(max-width:420px){
+    video{height:200px}
+    .grid{padding:10px}
+    .header{padding:12px}
+  }
 </style>
 </head>
 <body>
+<div class="wrap">
   <div class="card">
-    <div class="cols">
-      <div class="left">
-        <h1>CBT Exam — Atech ICT Solution</h1>
-        <div class="small">20 questions • 20 minutes • camera monitoring</div>
+    <div class="header">
+      <div>
+        <div class="title">CBT Exam — ATech ICT Solution</div>
+        <div class="sub">20 questions • 20 minutes • camera monitoring</div>
+      </div>
+      <div>
+        <a class="helpBtn" href="https://wa.me/2348145415083" target="_blank" rel="noopener">Help / Support</a>
+      </div>
+    </div>
 
-        <!-- Step 1: Welcome -->
-        <div id="welcomeStep">
-          <label class="muted" style="margin-top:12px;display:block">Enter your name</label>
-          <input id="name" placeholder="Full name" />
-          <div class="controls">
+    <div class="grid">
+      <div class="left">
+        <!-- Steps -->
+        <div id="step-welcome">
+          <label class="muted">Enter your name</label>
+          <input id="name" placeholder="Your full name" />
+          <div style="margin-top:10px" class="muted">You will be asked to allow camera</div>
+          <div style="margin-top:12px" class="controls">
             <button id="proceedBtn">Proceed</button>
-            <div class="muted">You will be asked to allow camera</div>
           </div>
         </div>
 
-        <!-- Step 2: Face verification -->
-        <div id="faceStep" class="hidden">
-          <h3 style="margin-top:10px">Face verification</h3>
-          <div class="center">
-            <video id="preview" autoplay muted playsinline></video>
+        <div id="step-face" style="display:none">
+          <h3 style="margin:0 0 8px 0">Face verification</h3>
+          <div class="row">
+            <div style="flex:0 0 360px"><video id="preview" autoplay muted playsinline></video></div>
             <div style="flex:1">
-              <div id="modelInfo" class="muted">Lightweight detector (no models)</div>
-              <div id="faceStatus" class="status">Detecting face...</div>
+              <div id="faceStatus" class="status">Initializing camera...</div>
               <div id="detectDebug" class="muted"></div>
-              <div class="controls" style="margin-top:8px">
+              <div style="margin-top:10px" class="controls">
                 <button id="startBtn" disabled>Start Exam</button>
                 <button id="backBtn">Back</button>
               </div>
@@ -66,106 +85,107 @@
           </div>
         </div>
 
-        <!-- Step 3: Exam -->
-        <div id="examStep" class="hidden">
-          <div class="center" style="justify-content:space-between">
+        <div id="step-exam" style="display:none">
+          <div style="display:flex;justify-content:space-between;align-items:center">
             <div>
-              <div class="section-title">Candidate: <span id="candName"></span></div>
+              <div style="font-weight:800">Candidate: <span id="candName"></span></div>
               <div class="muted">Subject: <span id="currentSubject"></span> — Q <span id="currentQIndex"></span>/5</div>
             </div>
-
             <div style="text-align:right">
-              <div class="timer">Total time left: <span id="totalTimer">20:00</span></div>
-              <div class="muted">Section time left: <span id="sectionTimer">05:00</span></div>
+              <div class="timer">Total: <span id="totalTimer">20:00</span></div>
+              <div class="muted">Section: <span id="sectionTimer">05:00</span></div>
               <div class="muted">Flags: <span id="flags">0</span> • Warnings: <span id="warns">0</span></div>
             </div>
           </div>
 
-          <div style="margin-top:12px" class="center">
-            <video id="examCam" autoplay muted playsinline></video>
+          <div style="margin-top:12px" class="row">
+            <div style="flex:0 0 360px"><video id="examCam" autoplay muted playsinline></video></div>
             <div style="flex:1">
               <div id="warnMsg" class="warning"></div>
               <div id="flagMsg" class="flag"></div>
+              <div id="log" class="muted" style="margin-top:8px"></div>
             </div>
           </div>
 
           <div id="qbox" class="qbox">
-            <!-- question rendered here -->
             <div id="qtext" style="font-weight:800"></div>
-            <div class="opts" id="options"></div>
-            <div class="controls" style="justify-content:flex-end">
+            <div id="options" class="opts"></div>
+            <div class="controls">
               <button id="nextBtn">Next</button>
               <button id="submitBtn">Submit Exam</button>
             </div>
-            <div class="progress" id="progressText"></div>
+            <div style="margin-top:8px" class="muted" id="progressText"></div>
           </div>
 
-          <div id="resultPanel" class="hidden">
-            <div class="result" id="resultContent"></div>
-            <div class="controls" style="margin-top:10px">
+          <div id="resultPanel" style="display:none">
+            <div class="resultBox" id="resultContent"></div>
+            <div style="margin-top:10px;display:flex;gap:8px;justify-content:flex-end">
               <button id="retryBtn">Retry</button>
             </div>
           </div>
         </div>
+
       </div>
 
       <div class="right">
-        <div style="padding:12px;background:#f8fafc;border-radius:8px">
-          <div class="muted">Notes</div>
+        <div style="padding:10px;border-radius:8px;background:#fff">
+          <div class="muted">Exam Rules</div>
           <ul class="muted">
             <li>20 questions — 5 per subject (English → Math → Civic → Nigerian Security)</li>
-            <li>Each subject = 5 minutes (auto-advance when finished)</li>
+            <li>Each subject = 5 minutes (auto-advance)</li>
             <li>Total = 20 minutes (auto submit when finished)</li>
-            <li>Each correct = 5 marks (max 100)</li>
-            <li>1st look-away = warning; 2nd = flagged out (stops exam)</li>
+            <li>Each correct = 5 marks; total = 100</li>
+            <li>1st look-away = warning; 2nd = flagged out (exam stops)</li>
           </ul>
         </div>
 
-        <div style="margin-top:12px;padding:12px;background:#fff;border-radius:8px">
-          <div class="muted">Debug</div>
-          <div id="log" class="muted" style="margin-top:8px"></div>
+        <div style="margin-top:12px;padding:10px;border-radius:8px;background:#fff">
+          <div class="muted">Contact</div>
+          <div style="margin-top:8px">
+            <div class="muted">ATech ICT Solution</div>
+            <div style="margin-top:6px"><a class="helpBtn" href="https://wa.me/2348145415083" target="_blank" rel="noopener">wa.me/08145415083</a></div>
+          </div>
         </div>
       </div>
     </div>
+
+    <div class="footer">© ATech ICT Solution</div>
   </div>
+</div>
 
 <script>
-/* Lightweight CBT Exam - single file
-   - One-by-one MCQ, subjects in order
-   - Per-section 5min, total 20min
-   - Camera monitoring: FaceDetector (if available) else motion fallback
-   - 1st look-away: warning; 2nd: flagged out (stops exam)
-   - Each question = 5 marks; total 100
+/* Responsive CBT Exam — improved monitoring + look-away fix + UI polish
+   - copy / paste whole file as index.html
 */
 
 const subjects = [
-  { name: 'English', questions: [
-      {q: 'Sentence is a group of ...', opts:['A. World','B. Word','C. Alphabet'], a:1},
-      {q: 'Choose the correct antonym of "hot".', opts:['A. Warm','B. Cold','C. Mild'], a:1},
-      {q: 'Plural of "child" is ...', opts:['A. Childs','B. Childes','C. Children'], a:2},
-      {q: 'Which is a noun?', opts:['A. Run','B. Apple','C. Quickly'], a:1},
-      {q: 'Synonym of "happy" is ...', opts:['A. Sad','B. Joyful','C. Angry'], a:1}
+  { name:'English', questions:[
+    {q:'Sentence is a group of ...', opts:['A. World','B. Word','C. Alphabet'], a:1},
+    {q:'Choose the antonym of "hot".', opts:['A. Warm','B. Cold','C. Mild'], a:1},
+    {q:'Plural of "child" is ...', opts:['A. Childs','B. Childes','C. Children'], a:2},
+    {q:'Which is a noun?', opts:['A. Run','B. Apple','C. Quickly'], a:1},
+    {q:'Synonym of "happy" is ...', opts:['A. Sad','B. Joyful','C. Angry'], a:1}
   ]},
-  { name: 'Mathematics', questions: [
-      {q:'5 + 5 = ?', opts:['A. 9','B. 10','C. 11'], a:1},
-      {q:'12 ÷ 3 = ?', opts:['A. 3','B. 4','C. 5'], a:1},
-      {q:'7 × 6 = ?', opts:['A. 42','B. 36','C. 48'], a:0},
-      {q:'10 - 4 = ?', opts:['A. 6','B. 5','C. 7'], a:0},
-      {q:'3 × 3 = ?', opts:['A. 6','B. 9','C. 8'], a:1}
+  { name:'Mathematics', questions:[
+    {q:'5 + 5 = ?', opts:['A. 9','B. 10','C. 11'], a:1},
+    {q:'12 ÷ 3 = ?', opts:['A. 3','B. 4','C. 5'], a:1},
+    {q:'7 × 6 = ?', opts:['A. 42','B. 36','C. 48'], a:0},
+    {q:'10 - 4 = ?', opts:['A. 6','B. 5','C. 7'], a:0},
+    {q:'3 × 3 = ?', opts:['A. 6','B. 9','C. 8'], a:1}
   ]},
-  { name: 'Civic Education', questions: [
-      {q:'Nigeria gained independence in ...', opts:['A. 1960','B. 1970','C. 1957'], a:0},
-      {q:'A democratic responsibility is ...', opts:['A. Voting','B. Looting','C. Forcing'], a:0},
-      {q:'Who is head of state in Nigeria?', opts:['A. Governor','B. President','C. Mayor'], a:1},
-      {q:'One right of a citizen is ...', opts:['A. Vote','B. Bomb','C. Rob'], a:0},
-      {q:'Legislative arm is called ...', opts:['A. Judiciary','B. Executive','C. Legislature'], a:2}
+  { name:'Civic Education', questions:[
+    {q:'Nigeria gained independence in ...', opts:['A. 1960','B. 1970','C. 1957'], a:0},
+    {q:'A democratic responsibility is ...', opts:['A. Voting','B. Looting','C. Forcing'], a:0},
+    {q:'Who is head of state in Nigeria?', opts:['A. Governor','B. President','C. Mayor'], a:1},
+    {q:'One right of a citizen is ...', opts:['A. Vote','B. Bomb','C. Rob'], a:0},
+    {q:'Legislative arm is called ...', opts:['A. Judiciary','B. Executive','C. Legislature'], a:2}
   ]},
-  { name: 'Nigerian Security', questions: [
-      {q:'Which agency handles internal security?', opts:['A. NCDC','B. Army','C. Police'], a:2},
-      {q:'Measure to improve security?', opts:['A. Community policing','B. Ignore crime','C. Support criminals'], a:0},
-      {q:'What is "integrity"?', opts:['A. Honesty','B. Bribery','C. Secrecy'], a:0},
-      {q:'What helps in emergency response?', opts:['A. Good roads','B. Bad governance','C. Noise'], a:0},
-      {q:'Who coordinates national security policy?', opts:['A. Local chief','B. President','C. Teacher'], a:1}
+  { name:'Nigerian Security', questions:[
+    {q:'Which agency handles internal security?', opts:['A. NCDC','B. Army','C. Police'], a:2},
+    {q:'Measure to improve security?', opts:['A. Community policing','B. Ignore crime','C. Support criminals'], a:0},
+    {q:'What is "integrity"?', opts:['A. Honesty','B. Bribery','C. Secrecy'], a:0},
+    {q:'What helps in emergency response?', opts:['A. Good roads','B. Bad governance','C. Noise'], a:0},
+    {q:'Who coordinates national security policy?', opts:['A. Local chief','B. President','C. Teacher'], a:1}
   ]}
 ];
 
@@ -177,11 +197,10 @@ const START_BTN = document.getElementById('startBtn');
 const BACK_BTN = document.getElementById('backBtn');
 const NAME_INPUT = document.getElementById('name');
 const CAND_NAME = document.getElementById('candName');
-const FACE_STEP = document.getElementById('faceStep');
-const WELCOME_STEP = document.getElementById('welcomeStep');
-const EXAM_STEP = document.getElementById('examStep');
+const FACE_STEP = document.getElementById('step-face');
+const WELCOME_STEP = document.getElementById('step-welcome');
+const EXAM_STEP = document.getElementById('step-exam');
 const EXAM_CAM = document.getElementById('examCam');
-const QBOX = document.getElementById('qbox');
 const QTEXT = document.getElementById('qtext');
 const OPTIONS = document.getElementById('options');
 const NEXT_BTN = document.getElementById('nextBtn');
@@ -200,35 +219,28 @@ const RESULT_PANEL = document.getElementById('resultPanel');
 const RESULT_CONTENT = document.getElementById('resultContent');
 const RETRY_BTN = document.getElementById('retryBtn');
 
-let detector = ('FaceDetector' in window) ? new (window.FaceDetector)({fastMode:true,maxDetectedFaces:1}) : null;
+let detector = null;
+try{ if('FaceDetector' in window) detector = new FaceDetector({fastMode:true,maxDetectedFaces:1}); }catch(e){detector=null;}
 let previewStream=null, examStream=null;
 let useFallback=false, prevFrame=null;
 let warningGiven=false, flagged=false, warnCount=0, flagCount=0;
 
 let totalSeconds = 20*60; // 20 minutes
 let sectionSeconds = 5*60; // 5 minutes per subject
-let totalTimerInterval=null, sectionTimerInterval=null;
+let totalTimerInterval=null, sectionTimerInterval=null, monitorInterval=null;
 
-let currentSubjectIndex = 0;
-let currentQuestionIndex = 0;
-let answers = []; // will store selected option index per question overall
-// initialize answers array with nulls: 20 entries
-for(let i=0;i<20;i++) answers.push(null);
+let currentSubjectIndex=0, currentQuestionIndex=0;
+let answers = new Array(20).fill(null);
 
-function log(msg){
-  LOG.innerText = msg + '\n' + LOG.innerText;
-}
+// small helper
+function log(msg){ LOG.innerText = msg + '\n' + LOG.innerText; }
+function beep(ms=220,f=700){ try{ const C=new (window.AudioContext||window.webkitAudioContext)(); const o=C.createOscillator(); const g=C.createGain(); o.connect(g); g.connect(C.destination); o.type='sine'; o.frequency.value=f; g.gain.setValueAtTime(0.18,C.currentTime); o.start(); o.stop(C.currentTime+ms/1000);}catch(e){} }
 
-// beep
-function beep(ms=220,f=700){ try{ const C=new (window.AudioContext||window.webkitAudioContext)(); const o=C.createOscillator(); const g=C.createGain(); o.connect(g); g.connect(C.destination); o.type='sine'; o.frequency.value=f; g.gain.setValueAtTime(0.2,C.currentTime); o.start(); o.stop(C.currentTime+ms/1000);}catch(e){} }
-
-// helper: frame -> ImageData (for fallback)
+// canvas for fallback
 const canvas = document.createElement('canvas'); canvas.width=320; canvas.height=240;
 const cctx = canvas.getContext('2d');
-function getFrameData(videoEl){
-  try{ cctx.drawImage(videoEl,0,0,canvas.width,canvas.height); return cctx.getImageData(0,0,canvas.width,canvas.height);}catch(e){return null;}
-}
-function frameDiffRatio(a,b){ if(!a||!b) return 0; let diff=0, total=a.data.length/4; for(let i=0,len=a.data.length;i<len;i+=4){ const y1=0.299*a.data[i]+0.587*a.data[i+1]+0.114*a.data[i+2]; const y2=0.299*b.data[i]+0.587*b.data[i+1]+0.114*b.data[i+2]; diff += Math.abs(y1-y2);} return diff/(total*255); }
+function getFrameData(videoEl){ try{ cctx.drawImage(videoEl,0,0,canvas.width,canvas.height); return cctx.getImageData(0,0,canvas.width,canvas.height);}catch(e){return null;} }
+function frameDiffRatio(a,b){ if(!a||!b) return 0; let diff=0, total=a.data.length/4; for(let i=0;i<a.data.length;i+=4){ const y1=0.299*a.data[i]+0.587*a.data[i+1]+0.114*a.data[i+2]; const y2=0.299*b.data[i]+0.587*b.data[i+1]+0.114*b.data[i+2]; diff+=Math.abs(y1-y2);} return diff/(total*255); }
 
 // UI flow
 PROCEED.addEventListener('click', async ()=>{
@@ -243,60 +255,55 @@ PROCEED.addEventListener('click', async ()=>{
     PREVIEW.srcObject = previewStream;
   }catch(e){
     alert('Camera permission required');
-    location.reload();
-    return;
+    location.reload(); return;
   }
-  // choose detector or fallback
-  if(!detector){ useFallback=true; FACE_STATUS.innerText='Fallback motion detection (no FaceDetector)'; }
+  if(!detector) { useFallback = true; FACE_STATUS.innerText = 'Fallback motion detection (no FaceDetector)'; }
   startPreviewDetection();
 });
 
 BACK_BTN.addEventListener('click', ()=>{
-  // cleanup
-  if(previewStream){ previewStream.getTracks().forEach(t=>t.stop()); previewStream=null; }
-  clearInterval(totalTimerInterval); clearInterval(sectionTimerInterval);
+  cleanupPreview();
   FACE_STEP.style.display='none'; WELCOME_STEP.style.display='block';
   START_BTN.disabled=true; FACE_STATUS.innerText='Detecting face...';
   log('Back to welcome');
 });
 
-// preview detection loop
+function cleanupPreview(){ if(previewStream){ previewStream.getTracks().forEach(t=>t.stop()); previewStream=null; } clearInterval(totalTimerInterval); clearInterval(sectionTimerInterval); clearInterval(monitorInterval); }
+
+// preview detection
 function startPreviewDetection(){
   let stable=0;
   const interval = setInterval(async ()=>{
     if(detector && !useFallback){
       try{
         const faces = await detector.detect(PREVIEW);
-        DETECT_DEBUG.innerText = 'faces:'+(faces?faces.length:0);
-        if(faces && faces.length>0){ stable++; FACE_STATUS.innerText = '✅ Face detected'; }
-        else { stable=0; FACE_STATUS.innerText = '❌ No face'; }
-      }catch(e){
-        // fallback to motion
-        useFallback=true;
-        log('FaceDetector error, switching to fallback');
-      }
+        DETECT_DEBUG.innerText = 'faces:' + (faces?faces.length:0);
+        if(faces && faces.length>0){ stable++; FACE_STATUS.innerText='✅ Face detected'; }
+        else { stable=0; FACE_STATUS.innerText='❌ No face'; }
+      }catch(e){ useFallback=true; log('FaceDetector error, switch to fallback'); }
     }
     if(useFallback){
       const frame = getFrameData(PREVIEW);
       const ratio = prevFrame ? frameDiffRatio(frame, prevFrame) : 0;
       prevFrame = frame;
-      DETECT_DEBUG.innerText = 'motion:'+ratio.toFixed(3);
+      DETECT_DEBUG.innerText = 'motion:' + ratio.toFixed(3);
       if(ratio > 0.012){ stable++; FACE_STATUS.innerText='✅ Motion detected'; } else { stable=0; FACE_STATUS.innerText='❌ Still/no motion'; }
     }
     if(stable >= 2){ START_BTN.disabled=false; clearInterval(interval); log('Face gate passed (preview)'); }
   },700);
 }
 
-// Start exam (after face verified + click Start)
+// start exam
 START_BTN.addEventListener('click', async ()=>{
-  // close preview
-  if(previewStream){ previewStream.getTracks().forEach(t=>t.stop()); previewStream=null; }
+  if(!previewStream) { alert('No preview stream'); return; }
+  // stop preview
+  cleanupPreview();
   FACE_STEP.style.display='none'; EXAM_STEP.style.display='block';
-  // start exam camera
   try{ examStream = await navigator.mediaDevices.getUserMedia({ video:{ facingMode:'user' } }); EXAM_CAM.srcObject = examStream; }catch(e){ alert('Exam camera failed'); return; }
-  // initialize timers & state
+  // init exam state
   totalSeconds = 20*60; sectionSeconds = 5*60;
   currentSubjectIndex = 0; currentQuestionIndex = 0;
+  answers = new Array(20).fill(null);
   warningGiven=false; flagged=false; warnCount=0; flagCount=0;
   FLAGS_EL.innerText = flagCount; WARNS_EL.innerText = warnCount;
   showQuestion();
@@ -305,98 +312,72 @@ START_BTN.addEventListener('click', async ()=>{
   startExamMonitoring();
 });
 
-// render current question (one-by-one)
+// render question
 function showQuestion(){
-  const subject = subjects[currentSubjectIndex];
-  const qObj = subject.questions[currentQuestionIndex];
-  CURRENT_SUBJECT.innerText = subject.name;
-  CURRENT_QINDEX.innerText = (currentQuestionIndex+1);
+  const subj = subjects[currentSubjectIndex];
+  const qObj = subj.questions[currentQuestionIndex];
+  CURRENT_SUBJECT.innerText = subj.name;
+  CURRENT_QINDEX.innerText = currentQuestionIndex+1;
   QTEXT.innerText = qObj.q;
   OPTIONS.innerHTML = '';
   qObj.opts.forEach((opt, idx)=>{
     const id = `opt_${currentSubjectIndex}_${currentQuestionIndex}_${idx}`;
     const wrapper = document.createElement('div');
-    wrapper.innerHTML = `<label><input type="radio" name="opt" value="${idx}" id="${id}"> ${opt}</label>`;
+    wrapper.innerHTML = `<label for="${id}"><input type="radio" name="opt" id="${id}" value="${idx}"> ${opt}</label>`;
     OPTIONS.appendChild(wrapper);
   });
-  updateProgressText();
+  updateProgress();
+}
+function updateProgress(){
+  const subjCount = currentSubjectIndex+1;
+  PROG_TEXT.innerText = `Subject ${subjCount} of ${subjects.length} • Q ${currentQuestionIndex+1} of 5`;
 }
 
-// Next button behaviour
+// next behaviour
 NEXT_BTN.addEventListener('click', ()=>{
-  if(flagged){ alert('Exam flagged out — cannot continue'); return; }
-  // save selection
+  if(flagged) { alert('Exam flagged out — cannot continue'); return; }
   const sel = document.querySelector('input[name="opt"]:checked');
   const overallIndex = currentSubjectIndex*5 + currentQuestionIndex;
   if(sel) answers[overallIndex] = Number(sel.value);
-  // move to next question or subject
-  if(currentQuestionIndex < 4){
-    currentQuestionIndex++;
-    showQuestion();
-  } else {
+  // move
+  if(currentQuestionIndex < 4){ currentQuestionIndex++; showQuestion(); }
+  else {
     // finished subject
-    // reset question index and advance subject if available
     if(currentSubjectIndex < subjects.length - 1){
-      currentSubjectIndex++;
-      currentQuestionIndex = 0;
-      sectionSeconds = 5*60; // reset section timer
-      showQuestion();
+      currentSubjectIndex++; currentQuestionIndex = 0; sectionSeconds = 5*60; showQuestion();
     } else {
-      // finished all subjects -> auto submit
       computeAndShowResults();
     }
   }
 });
 
-// Submit button (manual)
-SUBMIT_BTN.addEventListener('click', ()=>{
-  if(confirm('Submit exam now?')) computeAndShowResults();
-});
+// submit manual
+SUBMIT_BTN.addEventListener('click', ()=>{ if(confirm('Submit exam now?')) computeAndShowResults(); });
 
 // timers
 function startTotalTimer(){
   updateTotalTimerUI();
   totalTimerInterval = setInterval(()=>{
-    totalSeconds--;
+    totalSeconds--; if(totalSeconds<=0){ clearInterval(totalTimerInterval); computeAndShowResults(); }
     updateTotalTimerUI();
-    if(totalSeconds <= 0){
-      clearInterval(totalTimerInterval);
-      computeAndShowResults();
-    }
   },1000);
 }
-
-function updateTotalTimerUI(){
-  const m = Math.floor(totalSeconds/60); const s = totalSeconds%60;
-  TOTAL_TIMER.innerText = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-}
+function updateTotalTimerUI(){ const m=Math.floor(totalSeconds/60), s=totalSeconds%60; TOTAL_TIMER.innerText = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`; }
 
 function startSectionTimer(){
   updateSectionTimerUI();
   sectionTimerInterval = setInterval(()=>{
-    sectionSeconds--;
-    updateSectionTimerUI();
-    if(sectionSeconds <= 0){
-      // auto advance to next subject or submit if last
+    sectionSeconds--; if(sectionSeconds<=0){
       if(currentSubjectIndex < subjects.length -1){
-        currentSubjectIndex++;
-        currentQuestionIndex = 0;
-        sectionSeconds = 5*60;
-        showQuestion();
-      } else {
-        computeAndShowResults();
-      }
+        currentSubjectIndex++; currentQuestionIndex = 0; sectionSeconds = 5*60; showQuestion();
+      } else computeAndShowResults();
     }
+    updateSectionTimerUI();
   },1000);
 }
+function updateSectionTimerUI(){ const m=Math.floor(sectionSeconds/60), s=sectionSeconds%60; document.getElementById('sectionTimer').innerText = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`; }
 
-function updateSectionTimerUI(){
-  const m = Math.floor(sectionSeconds/60); const s = sectionSeconds%60;
-  SECTION_TIMER.innerText = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-}
-
-// monitoring during exam (face presence)
-let monitorInterval = null;
+// monitoring
 function startExamMonitoring(){
   prevFrame = null;
   monitorInterval = setInterval(async ()=>{
@@ -404,111 +385,105 @@ function startExamMonitoring(){
     try{
       if(detector && !useFallback){
         const faces = await detector.detect(EXAM_CAM);
-        DETECT_DEBUG.innerText = 'faces:'+ (faces?faces.length:0);
-        if(!faces || faces.length===0) handleViolation('no-face');
-        else { // face ok
-          WARN_MSG.innerText=''; 
+        DETECT_DEBUG.innerText = 'faces:' + (faces?faces.length:0);
+        if(!faces || faces.length===0){ handleViolation('no-face'); }
+        else {
+          // check center vs frame center to detect look-away
+          const box = faces[0].boundingBox;
+          const faceCenterX = box.x + box.width/2;
+          const frameCenterX = box.width ? (canvas.width/2) : (EXAM_CAM.videoWidth/2 || 160);
+          // use relative threshold: if face center deviates > 35% of faceBox width => look-away
+          const deviation = Math.abs(faceCenterX - (EXAM_CAM.videoWidth/2 || 160));
+          if(box.width && (deviation > box.width * 0.6)){ handleViolation('look-away'); }
+          else { // ok
+            WARN_MSG.innerText = '';
+          }
         }
       } else {
         const frame = getFrameData(EXAM_CAM);
         const ratio = prevFrame ? frameDiffRatio(frame, prevFrame) : 1;
         prevFrame = frame;
-        DETECT_DEBUG.innerText = 'motion:'+ratio.toFixed(3);
-        // ratio small -> likely turned away / static (threshold tuned)
-        if(ratio < 0.007) handleViolation('low-motion');
-        else { WARN_MSG.innerText=''; }
+        DETECT_DEBUG.innerText = 'motion:' + ratio.toFixed(3);
+        // if ratio very low => likely turned away / static
+        if(ratio < 0.007){ handleViolation('low-motion'); } else { WARN_MSG.innerText = ''; }
       }
     }catch(e){ console.warn('monitor err', e); }
-  },1200);
+  },1000);
 }
 
 function handleViolation(type){
   if(flagged) return;
-  log('violation: '+type);
+  log('violation:'+type);
   if(!warningGiven){
-    warningGiven=true; warnCount++; WARNS_EL.innerText = warnCount;
-    WARN_MSG.innerText = '⚠️ Warning: Face not detected — please face the camera';
-    beep(300,800);
+    warningGiven = true; warnCount++; WARNS_EL.innerText = warnCount;
+    WARN_MSG.innerText = '⚠️ Warning: Please face the camera';
+    beep(300,900);
   } else {
-    flagged=true; flagCount++; FLAGS_EL.innerText = flagCount;
+    flagged = true; flagCount++; FLAGS_EL.innerText = flagCount;
     FLAG_MSG.innerText = '🚫 FLAGGED OUT — Exam stopped due to repeated look-away';
     beep(1000,300);
-    // disable all inputs
+    // disable inputs and stop timers & monitoring
     Array.from(document.querySelectorAll('input[type=radio]')).forEach(i=>i.disabled=true);
     NEXT_BTN.disabled = true; SUBMIT_BTN.disabled = true;
-    // stop timers and monitoring
     clearInterval(totalTimerInterval); clearInterval(sectionTimerInterval); clearInterval(monitorInterval);
-    // show result as flagged out (0)
     showFlaggedResult();
   }
 }
 
 // compute results
 function computeAndShowResults(){
-  // stop timers and monitoring
   clearInterval(totalTimerInterval); clearInterval(sectionTimerInterval); clearInterval(monitorInterval);
-  // compute per-subject correct counts
-  let perSubject = [];
-  let totalCorrect = 0;
+  // ensure save current selection
+  const sel = document.querySelector('input[name="opt"]:checked');
+  if(sel){ const overall= currentSubjectIndex*5 + currentQuestionIndex; answers[overall] = Number(sel.value); }
+  // compute per-subject and total
+  let perSubject = [], totalCorrect = 0;
   for(let si=0; si<subjects.length; si++){
-    const subj = subjects[si];
     let correct = 0;
     for(let qi=0; qi<5; qi++){
-      const overallIndex = si*5 + qi;
-      const selected = answers[overallIndex];
-      if(typeof selected === 'number' && selected === subj.questions[qi].a) correct++;
+      const idx = si*5 + qi;
+      const selVal = answers[idx];
+      if(typeof selVal === 'number' && selVal === subjects[si].questions[qi].a) correct++;
     }
     perSubject.push(correct);
     totalCorrect += correct;
   }
-  // marks: each question 5 marks
   const totalMarks = totalCorrect * 5; // 0..100
-  // build result HTML
-  let html = `<div><strong>Results for ${NAME_INPUT.value || ''}</strong></div>`;
-  html += `<div style="margin-top:8px">Per-subject (correct out of 5):</div><ul>`;
+  let html = `<div><strong>Results — ${NAME_INPUT.value || ''}</strong></div><div style="margin-top:8px">Per-subject:</div><ul>`;
   for(let si=0; si<subjects.length; si++){
     html += `<li>${subjects[si].name}: ${perSubject[si]} / 5 (${perSubject[si]*5} marks)</li>`;
   }
   html += `</ul><div style="margin-top:8px"><strong>Total: ${totalMarks} / 100</strong></div>`;
-  // grade classification
-  let classText = '';
-  if(flagged){ classText = 'Flagged-out: Exam stopped. No valid score.'; }
-  else if(totalMarks >= 80) classText = 'Distinction';
-  else if(totalMarks >= 65) classText = 'Upper Class';
-  else if(totalMarks >= 50) classText = 'Lower Class';
-  else if(totalMarks >= 40) classText = 'Pass';
-  else if(totalMarks >= 30) classText = 'Play Class';
-  else classText = 'Failed — Retry';
-  html += `<div style="margin-top:8px"><strong>Grade: ${classText}</strong></div>`;
+  let grade = '';
+  if(flagged) grade = 'Flagged-out: Exam stopped. No valid score.';
+  else if(totalMarks >= 80) grade = 'Distinction';
+  else if(totalMarks >= 65) grade = 'Upper Class';
+  else if(totalMarks >= 50) grade = 'Lower Class';
+  else if(totalMarks >= 40) grade = 'Pass';
+  else if(totalMarks >= 30) grade = 'Play Class';
+  else grade = 'Failed — Retry';
+  html += `<div style="margin-top:8px"><strong>Grade: ${grade}</strong></div>`;
   RESULT_CONTENT.innerHTML = html;
-  RESULT_PANEL.classList.remove('hidden');
-  QBOX.classList.add('hidden');
+  document.getElementById('qbox').style.display='none';
+  RESULT_PANEL.style.display='block';
 }
 
-// flagged result display
+// flagged display
 function showFlaggedResult(){
-  RESULT_CONTENT.innerHTML = `<div><strong>FLAGGED OUT</strong></div>
-    <div style="margin-top:8px">You were flagged for repeated look-away. Exam stopped.</div>`;
-  RESULT_PANEL.classList.remove('hidden');
-  QBOX.classList.add('hidden');
+  RESULT_CONTENT.innerHTML = `<div><strong>FLAGGED OUT</strong></div><div style="margin-top:8px">You were flagged for repeated look-away. Exam stopped.</div>`;
+  document.getElementById('qbox').style.display='none';
+  RESULT_PANEL.style.display='block';
 }
 
 // retry
-RETRY_BTN.addEventListener('click', ()=>{
-  location.reload();
-});
+RETRY_BTN.addEventListener('click', ()=> location.reload());
 
-// utility: get frame data and frame diff function (same as preview one)
-function getFrameData(videoEl){ try{ cctx.drawImage(videoEl,0,0,canvas.width,canvas.height); return cctx.getImageData(0,0,canvas.width,canvas.height);}catch(e){return null;} }
-function frameDiffRatio(a,b){ if(!a||!b) return 0; let diff=0, total=a.data.length/4; for(let i=0,len=a.data.length;i<len;i+=4){ const y1=0.299*a.data[i]+0.587*a.data[i+1]+0.114*a.data[i+2]; const y2=0.299*b.data[i]+0.587*b.data[i+1]+0.114*b.data[i+2]; diff += Math.abs(y1-y2);} return diff/(total*255); }
-
-// initial setup: global canvas context (reused)
+// initial
 (function init(){
-  // render first question UI (for subject 0 q 0)
-  showQuestion();
-  log('Ready. Fill name and Proceed.');
+  // pre-load UI with first question (so Next will save properly)
+  // render first question when exam starts
+  log('Ready. Enter name and press Proceed.');
 })();
-
 </script>
 </body>
 </html>
