@@ -4,111 +4,107 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
 <title>CBT Exam — ATech ICT Solution</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="theme-color" content="#16A34A" />
+<link rel="icon" href="data:," />
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-  :root{--bg:#f6f8fb;--card:#fff;--accent:#0ea5e9;--muted:#64748b;--ok:#16a34a;--warn:#f59e0b;--danger:#ef4444}
+  /* Mobile-first green theme */
+  :root{
+    --bg:#f0fdf4; --card:#ffffff; --accent:#16A34A; --muted:#4b5563; --warn:#f59e0b; --danger:#dc2626;
+    --soft:#ecfdf0;
+  }
   *{box-sizing:border-box}
-  body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:var(--bg);-webkit-font-smoothing:antialiased}
-  .wrap{max-width:1000px;margin:18px auto;padding:12px}
-  .card{background:var(--card);border-radius:14px;box-shadow:0 10px 30px rgba(2,6,23,0.06);overflow:hidden}
-  .grid{display:grid;grid-template-columns:1fr 320px;gap:16px;padding:18px}
-  @media(max-width:880px){ .grid{grid-template-columns:1fr;padding:12px} .right{order:2} .left{order:1} }
-  .header{padding:18px;background:linear-gradient(90deg,#e6f6ff, #f0fbff);display:flex;align-items:center;justify-content:space-between}
+  body{margin:0;font-family:Inter,system-ui,Roboto,Arial;color:#0f172a;background:var(--bg);-webkit-font-smoothing:antialiased}
+  .wrap{max-width:760px;margin:14px auto;padding:12px}
+  .card{background:var(--card);border-radius:14px;box-shadow:0 8px 24px rgba(6,95,70,0.06);overflow:hidden}
+  .header{display:flex;justify-content:space-between;align-items:center;padding:16px 16px;background:linear-gradient(90deg,#ecfdf5,#f0fdf4)}
   .title{font-weight:700;font-size:18px}
-  .sub{color:var(--muted);font-size:13px}
-  .left{padding:18px}
-  .right{padding:18px;background:#f8fafc;border-left:1px solid #eef2f7}
-  input[type="text"]{width:100%;padding:10px;border-radius:8px;border:1px solid #e6edf3;margin-top:10px;font-size:15px}
-  button{background:var(--accent);color:white;border:0;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer}
-  button[disabled]{opacity:.6;cursor:not-allowed}
-  video{width:100%;max-width:360px;height:240px;border-radius:10px;border:3px solid var(--accent);background:#000;object-fit:cover}
-  .row{display:flex;gap:12px;align-items:center}
+  .sub{font-size:13px;color:var(--muted)}
+  .grid{display:grid;grid-template-columns:1fr;gap:0}
+  .container{padding:16px}
+  input[type="text"]{width:100%;padding:12px;border-radius:10px;border:1px solid #e6f4ea;margin-top:10px;font-size:16px}
+  button{background:var(--accent);color:#fff;border:0;padding:10px 14px;border-radius:10px;font-weight:700;box-shadow:0 6px 18px rgba(22,163,74,0.12)}
+  button[disabled]{opacity:.6;cursor:not-allowed;box-shadow:none}
   .muted{color:var(--muted);font-size:13px}
-  .status{font-weight:700;margin-top:8px}
+  .row{display:flex;gap:12px;align-items:center}
+  .videoWrap{width:100%;display:flex;justify-content:center;margin-top:12px}
+  video{width:320px;height:240px;border-radius:12px;border:4px solid rgba(22,163,74,0.12);background:#000;object-fit:cover}
+  .status{margin-top:8px;font-weight:700}
   .warning{color:var(--warn);font-weight:800;margin-top:6px}
   .flag{color:var(--danger);font-weight:900;margin-top:6px}
-  .qbox{margin-top:14px;padding:12px;border-radius:10px;background:#fff}
-  .opts label{display:block;margin:8px 0;padding:8px;border-radius:8px;border:1px solid #eef2f7;cursor:pointer}
-  .opts input{margin-right:8px}
-  .controls{display:flex;gap:10px;justify-content:flex-end;margin-top:10px}
-  .timer{font-weight:800;color:#0f172a}
-  .resultBox{padding:12px;background:#ecfeff;border-radius:10px;margin-top:12px}
-  .footer{padding:10px;text-align:center;font-size:13px;color:var(--muted);border-top:1px solid #eef2f7;background:#fafcff}
-  a.helpBtn{display:inline-block;background:#25D366;color:white;padding:8px 12px;border-radius:8px;text-decoration:none;font-weight:700}
-  /* small responsive */
+  .qbox{margin-top:14px;padding:14px;border-radius:12px;background:var(--soft)}
+  .opts label{display:block;margin:8px 0;padding:8px;border-radius:10px;border:1px solid #e6f4ea;cursor:pointer}
+  .controls{display:flex;gap:10px;justify-content:flex-end;margin-top:12px}
+  .timer{font-weight:800;color:#064e3b}
+  .resultBox{padding:12px;background:#ecfdf4;border-radius:10px;margin-top:12px}
+  .footer{padding:12px;text-align:center;font-size:13px;color:var(--muted);background:#ffffff;border-top:1px solid #eefaf0}
+  .help{background:#25D366;color:white;padding:8px 10px;border-radius:8px;text-decoration:none;font-weight:700}
   @media(max-width:420px){
-    video{height:200px}
-    .grid{padding:10px}
-    .header{padding:12px}
+    video{width:280px;height:200px}
+    .title{font-size:16px}
   }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="card">
-    <div class="header">
-      <div>
-        <div class="title">CBT Exam — ATech ICT Solution</div>
-        <div class="sub">20 questions • 20 minutes • camera monitoring</div>
+  <div class="wrap">
+    <div class="card">
+      <div class="header">
+        <div>
+          <div class="title">CBT Exam — ATech ICT Solution</div>
+          <div class="sub">Mobile-only • 20 questions • 20 minutes • Live camera monitoring</div>
+        </div>
+        <div><a class="help" href="https://wa.me/2348145415083" target="_blank" rel="noopener">Help / Support</a></div>
       </div>
-      <div>
-        <a class="helpBtn" href="https://wa.me/2348145415083" target="_blank" rel="noopener">Help / Support</a>
-      </div>
-    </div>
 
-    <div class="grid">
-      <div class="left">
-        <!-- Steps -->
+      <div class="container">
+        <!-- Welcome -->
         <div id="step-welcome">
-          <label class="muted">Enter your name</label>
-          <input id="name" placeholder="Your full name" />
-          <div style="margin-top:10px" class="muted">You will be asked to allow camera</div>
-          <div style="margin-top:12px" class="controls">
+          <label class="muted">Enter your full name</label>
+          <input id="name" placeholder="Your full name" type="text" />
+          <div style="display:flex;gap:8px;margin-top:12px;align-items:center">
             <button id="proceedBtn">Proceed</button>
+            <div class="muted">You will be asked to allow camera access</div>
           </div>
         </div>
 
-        <div id="step-face" style="display:none">
-          <h3 style="margin:0 0 8px 0">Face verification</h3>
-          <div class="row">
-            <div style="flex:0 0 360px"><video id="preview" autoplay muted playsinline></video></div>
-            <div style="flex:1">
-              <div id="faceStatus" class="status">Initializing camera...</div>
-              <div id="detectDebug" class="muted"></div>
-              <div style="margin-top:10px" class="controls">
-                <button id="startBtn" disabled>Start Exam</button>
-                <button id="backBtn">Back</button>
-              </div>
-            </div>
+        <!-- Face capture -->
+        <div id="step-capture" style="display:none">
+          <h3 style="margin:12px 0 6px 0">Face verification (capture)</h3>
+          <div class="videoWrap"><video id="preview" autoplay muted playsinline></video></div>
+          <div id="captureStatus" class="status">Initializing camera...</div>
+          <div style="margin-top:10px;display:flex;gap:8px;justify-content:center">
+            <button id="captureRefBtn" disabled>Capture Reference Photo</button>
+            <button id="retakeBtn" style="display:none;background:#ef4444">Retake</button>
+          </div>
+          <div class="muted" style="margin-top:10px">Reference photo is used to detect if the candidate changes during the exam. If the face changes significantly, the exam will be flagged as malpractice.</div>
+        </div>
+
+        <!-- Start exam -->
+        <div id="step-start" style="display:none">
+          <h3 style="margin:12px 0 6px 0">Ready to start</h3>
+          <div class="muted">Name: <span id="displayName"></span></div>
+          <div style="margin-top:12px;display:flex;gap:8px;justify-content:center">
+            <button id="startBtn" disabled>Start Exam</button>
+            <button id="backToCapture" style="background:#ef4444">Back</button>
           </div>
         </div>
 
+        <!-- Exam -->
         <div id="step-exam" style="display:none">
           <div style="display:flex;justify-content:space-between;align-items:center">
-            <div>
-              <div style="font-weight:800">Candidate: <span id="candName"></span></div>
-              <div class="muted">Subject: <span id="currentSubject"></span> — Q <span id="currentQIndex"></span>/5</div>
-            </div>
+            <div style="font-weight:800">Candidate: <span id="candName"></span></div>
             <div style="text-align:right">
               <div class="timer">Total: <span id="totalTimer">20:00</span></div>
               <div class="muted">Section: <span id="sectionTimer">05:00</span></div>
-              <div class="muted">Flags: <span id="flags">0</span> • Warnings: <span id="warns">0</span></div>
             </div>
           </div>
 
-          <div style="margin-top:12px" class="row">
-            <div style="flex:0 0 360px"><video id="examCam" autoplay muted playsinline></video></div>
-            <div style="flex:1">
-              <div id="warnMsg" class="warning"></div>
-              <div id="flagMsg" class="flag"></div>
-              <div id="log" class="muted" style="margin-top:8px"></div>
-            </div>
-          </div>
+          <div class="videoWrap" style="margin-top:12px"><video id="examCam" autoplay muted playsinline></video></div>
+          <div id="warn" class="warning"></div>
+          <div id="flag" class="flag"></div>
 
           <div id="qbox" class="qbox">
-            <div id="qtext" style="font-weight:800"></div>
+            <div id="qSubject" style="font-weight:800"></div>
+            <div id="qText" style="margin-top:8px;font-weight:700"></div>
             <div id="options" class="opts"></div>
             <div class="controls">
               <button id="nextBtn">Next</button>
@@ -119,7 +115,7 @@
 
           <div id="resultPanel" style="display:none">
             <div class="resultBox" id="resultContent"></div>
-            <div style="margin-top:10px;display:flex;gap:8px;justify-content:flex-end">
+            <div style="display:flex;justify-content:flex-end;margin-top:12px">
               <button id="retryBtn">Retry</button>
             </div>
           </div>
@@ -127,35 +123,17 @@
 
       </div>
 
-      <div class="right">
-        <div style="padding:10px;border-radius:8px;background:#fff">
-          <div class="muted">Exam Rules</div>
-          <ul class="muted">
-            <li>20 questions — 5 per subject (English → Math → Civic → Nigerian Security)</li>
-            <li>Each subject = 5 minutes (auto-advance)</li>
-            <li>Total = 20 minutes (auto submit when finished)</li>
-            <li>Each correct = 5 marks; total = 100</li>
-            <li>1st look-away = warning; 2nd = flagged out (exam stops)</li>
-          </ul>
-        </div>
-
-        <div style="margin-top:12px;padding:10px;border-radius:8px;background:#fff">
-          <div class="muted">Contact</div>
-          <div style="margin-top:8px">
-            <div class="muted">ATech ICT Solution</div>
-            <div style="margin-top:6px"><a class="helpBtn" href="https://wa.me/2348145415083" target="_blank" rel="noopener">wa.me/08145415083</a></div>
-          </div>
-        </div>
-      </div>
+      <div class="footer">© ATech ICT Solution • <a class="help" href="https://wa.me/2348145415083" target="_blank" rel="noopener">wa.me/08145415083</a></div>
     </div>
-
-    <div class="footer">© ATech ICT Solution</div>
   </div>
-</div>
 
 <script>
-/* Responsive CBT Exam — improved monitoring + look-away fix + UI polish
-   - copy / paste whole file as index.html
+/* Mobile CBT — Green theme + lightweight snapshot monitoring
+   - capture reference snapshot at start
+   - during exam compare new frames to reference (every 3s)
+   - if change > threshold => warning; second => flagged out (malpractice)
+   - total 20 minutes, 4 sections (5min each), question-by-question
+   - MCQ A/B/C, each question 5 marks, total 100
 */
 
 const subjects = [
@@ -189,162 +167,197 @@ const subjects = [
   ]}
 ];
 
-const PROCEED = document.getElementById('proceedBtn');
-const PREVIEW = document.getElementById('preview');
-const FACE_STATUS = document.getElementById('faceStatus');
-const DETECT_DEBUG = document.getElementById('detectDebug');
-const START_BTN = document.getElementById('startBtn');
-const BACK_BTN = document.getElementById('backBtn');
-const NAME_INPUT = document.getElementById('name');
-const CAND_NAME = document.getElementById('candName');
-const FACE_STEP = document.getElementById('step-face');
-const WELCOME_STEP = document.getElementById('step-welcome');
-const EXAM_STEP = document.getElementById('step-exam');
-const EXAM_CAM = document.getElementById('examCam');
-const QTEXT = document.getElementById('qtext');
-const OPTIONS = document.getElementById('options');
-const NEXT_BTN = document.getElementById('nextBtn');
-const SUBMIT_BTN = document.getElementById('submitBtn');
-const PROG_TEXT = document.getElementById('progressText');
-const TOTAL_TIMER = document.getElementById('totalTimer');
-const SECTION_TIMER = document.getElementById('sectionTimer');
-const CURRENT_SUBJECT = document.getElementById('currentSubject');
-const CURRENT_QINDEX = document.getElementById('currentQIndex');
-const WARN_MSG = document.getElementById('warnMsg');
-const FLAG_MSG = document.getElementById('flagMsg');
-const FLAGS_EL = document.getElementById('flags');
-const WARNS_EL = document.getElementById('warns');
-const LOG = document.getElementById('log');
-const RESULT_PANEL = document.getElementById('resultPanel');
-const RESULT_CONTENT = document.getElementById('resultContent');
-const RETRY_BTN = document.getElementById('retryBtn');
+// DOM
+const proceedBtn = document.getElementById('proceedBtn');
+const preview = document.getElementById('preview');
+const captureStatus = document.getElementById('captureStatus');
+const captureRefBtn = document.getElementById('captureRefBtn');
+const retakeBtn = document.getElementById('retakeBtn');
+const stepCapture = document.getElementById('step-capture');
+const stepStart = document.getElementById('step-start');
+const stepWelcome = document.getElementById('step-welcome');
+const stepStartBlock = document.getElementById('step-start');
+const displayName = document.getElementById('displayName');
+const startBtn = document.getElementById('startBtn');
+const backToCapture = document.getElementById('backToCapture');
+const stepExam = document.getElementById('step-exam');
+const examCam = document.getElementById('examCam');
+const qSubject = document.getElementById('qSubject');
+const qText = document.getElementById('qText');
+const optionsEl = document.getElementById('options');
+const nextBtn = document.getElementById('nextBtn');
+const submitBtn = document.getElementById('submitBtn');
+const progressText = document.getElementById('progressText');
+const totalTimerEl = document.getElementById('totalTimer');
+const sectionTimerEl = document.getElementById('sectionTimer');
+const candName = document.getElementById('candName');
+const warnEl = document.getElementById('warn');
+const flagEl = document.getElementById('flag');
+const resultPanel = document.getElementById('resultPanel');
+const resultContent = document.getElementById('resultContent');
+const retryBtn = document.getElementById('retryBtn');
 
-let detector = null;
-try{ if('FaceDetector' in window) detector = new FaceDetector({fastMode:true,maxDetectedFaces:1}); }catch(e){detector=null;}
-let previewStream=null, examStream=null;
-let useFallback=false, prevFrame=null;
-let warningGiven=false, flagged=false, warnCount=0, flagCount=0;
+let previewStream = null, examStream = null;
+let refImageData = null; // reference snapshot
+let refHash = null;
+let warningGiven = false, flagged = false, warnCount = 0, flagCount = 0;
 
-let totalSeconds = 20*60; // 20 minutes
-let sectionSeconds = 5*60; // 5 minutes per subject
-let totalTimerInterval=null, sectionTimerInterval=null, monitorInterval=null;
+let totalSeconds = 20 * 60;
+let sectionSeconds = 5 * 60;
+let totalTimerInterval = null, sectionTimerInterval = null, monitorInterval = null;
 
-let currentSubjectIndex=0, currentQuestionIndex=0;
+let currentSubject = 0, currentQ = 0;
 let answers = new Array(20).fill(null);
 
-// small helper
-function log(msg){ LOG.innerText = msg + '\n' + LOG.innerText; }
-function beep(ms=220,f=700){ try{ const C=new (window.AudioContext||window.webkitAudioContext)(); const o=C.createOscillator(); const g=C.createGain(); o.connect(g); g.connect(C.destination); o.type='sine'; o.frequency.value=f; g.gain.setValueAtTime(0.18,C.currentTime); o.start(); o.stop(C.currentTime+ms/1000);}catch(e){} }
+// small helpers: canvas for capture & compare
+const canvas = document.createElement('canvas');
+canvas.width = 320; canvas.height = 240;
+const ctx = canvas.getContext('2d');
 
-// canvas for fallback
-const canvas = document.createElement('canvas'); canvas.width=320; canvas.height=240;
-const cctx = canvas.getContext('2d');
-function getFrameData(videoEl){ try{ cctx.drawImage(videoEl,0,0,canvas.width,canvas.height); return cctx.getImageData(0,0,canvas.width,canvas.height);}catch(e){return null;} }
-function frameDiffRatio(a,b){ if(!a||!b) return 0; let diff=0, total=a.data.length/4; for(let i=0;i<a.data.length;i+=4){ const y1=0.299*a.data[i]+0.587*a.data[i+1]+0.114*a.data[i+2]; const y2=0.299*b.data[i]+0.587*b.data[i+1]+0.114*b.data[i+2]; diff+=Math.abs(y1-y2);} return diff/(total*255); }
-
-// UI flow
-PROCEED.addEventListener('click', async ()=>{
-  const name = NAME_INPUT.value.trim();
-  if(!name) return alert('Enter your name');
-  WELCOME_STEP.style.display='none';
-  FACE_STEP.style.display='block';
-  CAND_NAME.innerText = name;
-  // start preview camera
+function takeSnapshot(videoEl){
   try{
-    previewStream = await navigator.mediaDevices.getUserMedia({ video:{ facingMode:'user' } });
-    PREVIEW.srcObject = previewStream;
+    ctx.drawImage(videoEl, 0, 0, canvas.width, canvas.height);
+    return ctx.getImageData(0,0,canvas.width,canvas.height);
   }catch(e){
-    alert('Camera permission required');
-    location.reload(); return;
+    return null;
   }
-  if(!detector) { useFallback = true; FACE_STATUS.innerText = 'Fallback motion detection (no FaceDetector)'; }
-  startPreviewDetection();
-});
-
-BACK_BTN.addEventListener('click', ()=>{
-  cleanupPreview();
-  FACE_STEP.style.display='none'; WELCOME_STEP.style.display='block';
-  START_BTN.disabled=true; FACE_STATUS.innerText='Detecting face...';
-  log('Back to welcome');
-});
-
-function cleanupPreview(){ if(previewStream){ previewStream.getTracks().forEach(t=>t.stop()); previewStream=null; } clearInterval(totalTimerInterval); clearInterval(sectionTimerInterval); clearInterval(monitorInterval); }
-
-// preview detection
-function startPreviewDetection(){
-  let stable=0;
-  const interval = setInterval(async ()=>{
-    if(detector && !useFallback){
-      try{
-        const faces = await detector.detect(PREVIEW);
-        DETECT_DEBUG.innerText = 'faces:' + (faces?faces.length:0);
-        if(faces && faces.length>0){ stable++; FACE_STATUS.innerText='✅ Face detected'; }
-        else { stable=0; FACE_STATUS.innerText='❌ No face'; }
-      }catch(e){ useFallback=true; log('FaceDetector error, switch to fallback'); }
-    }
-    if(useFallback){
-      const frame = getFrameData(PREVIEW);
-      const ratio = prevFrame ? frameDiffRatio(frame, prevFrame) : 0;
-      prevFrame = frame;
-      DETECT_DEBUG.innerText = 'motion:' + ratio.toFixed(3);
-      if(ratio > 0.012){ stable++; FACE_STATUS.innerText='✅ Motion detected'; } else { stable=0; FACE_STATUS.innerText='❌ Still/no motion'; }
-    }
-    if(stable >= 2){ START_BTN.disabled=false; clearInterval(interval); log('Face gate passed (preview)'); }
-  },700);
 }
 
-// start exam
-START_BTN.addEventListener('click', async ()=>{
-  if(!previewStream) { alert('No preview stream'); return; }
-  // stop preview
-  cleanupPreview();
-  FACE_STEP.style.display='none'; EXAM_STEP.style.display='block';
-  try{ examStream = await navigator.mediaDevices.getUserMedia({ video:{ facingMode:'user' } }); EXAM_CAM.srcObject = examStream; }catch(e){ alert('Exam camera failed'); return; }
-  // init exam state
+// compute simple normalized diff between two ImageData
+function imageDiffRatio(a,b){
+  if(!a||!b) return 1;
+  const len = a.data.length;
+  let diff = 0;
+  // sample pixels to reduce CPU
+  const step = 8; // sample every 8th channel (~every 2 pixels)
+  for(let i=0;i<len;i+=4*step){
+    const r1=a.data[i], g1=a.data[i+1], b1=a.data[i+2];
+    const r2=b.data[i], g2=b.data[i+1], b2=b.data[i+2];
+    diff += Math.abs(r1-r2) + Math.abs(g1-g2) + Math.abs(b1-b2);
+  }
+  const max = (len/(4*step)) * 3 * 255;
+  return diff / max; // 0..1
+}
+
+// tiny hash for quick compare (not secure, just quick)
+function quickHash(img){
+  if(!img) return '';
+  let s = 0;
+  for(let i=0;i<img.data.length;i+=4*64) s = (s + img.data[i] + img.data[i+1] + img.data[i+2]) % 100000;
+  return String(s);
+}
+
+// beep
+function beep(ms=220,f=700){ try{ const C=new (window.AudioContext||window.webkitAudioContext)(); const o=C.createOscillator(); const g=C.createGain(); o.connect(g); g.connect(C.destination); o.type='sine'; o.frequency.value=f; g.gain.setValueAtTime(0.16,C.currentTime); o.start(); o.stop(C.currentTime+ms/1000);}catch(e){} }
+
+// UI flow: Proceed -> open camera preview
+proceedBtn.addEventListener('click', async ()=>{
+  const name = document.getElementById('name').value.trim();
+  if(!name) return alert('Please enter your name');
+  stepWelcome.style.display = 'none';
+  stepCapture.style.display = 'block';
+  displayName.textContent = name;
+  document.getElementById('displayName').textContent = name;
+  try{
+    previewStream = await navigator.mediaDevices.getUserMedia({ video:{ facingMode:'user' }, audio:false });
+    preview.srcObject = previewStream;
+    captureStatus.textContent = 'Camera started. Align your face and tap "Capture Reference Photo".';
+    captureRefBtn.disabled = false;
+  }catch(e){
+    alert('Camera permission required. Allow and reload.');
+    location.reload();
+  }
+});
+
+// capture reference
+captureRefBtn.addEventListener('click', ()=>{
+  const img = takeSnapshot(preview);
+  if(!img) return alert('Failed to capture. Try again.');
+  refImageData = img;
+  refHash = quickHash(img);
+  captureStatus.textContent = 'Reference photo captured. You may retake if not clear.';
+  retakeBtn.style.display = 'inline-block';
+  startBtn.disabled = false;
+  // show preview thumbnail briefly
+  beep(200,900);
+});
+
+// retake
+retakeBtn.addEventListener('click', ()=>{
+  refImageData = null; refHash = null;
+  captureStatus.textContent = 'Reference cleared. Align face and capture again.';
+  retakeBtn.style.display = 'none';
+  startBtn.disabled = true;
+});
+
+// show start block
+captureRefBtn.addEventListener('click', ()=>{
+  if(refImageData) {
+    stepStart.style.display = 'block';
+    document.getElementById('displayName').textContent = document.getElementById('name').value.trim();
+  }
+});
+
+// back to capture
+backToCapture.addEventListener('click', ()=>{
+  stepStart.style.display = 'none';
+  stepCapture.style.display = 'block';
+});
+
+// start exam: open exam camera, start timers & monitoring
+startBtn.addEventListener('click', async ()=>{
+  if(!refImageData) return alert('Please capture reference photo first.');
+  stepCapture.style.display = 'none';
+  stepStart.style.display = 'none';
+  stepExam.style.display = 'block';
+  candName.textContent = document.getElementById('name').value.trim();
+  // start exam camera
+  try{
+    examStream = await navigator.mediaDevices.getUserMedia({ video:{ facingMode:'user' }, audio:false });
+    examCam.srcObject = examStream;
+  }catch(e){
+    alert('Exam camera failed. Allow camera and retry.');
+    location.reload();
+  }
+  // init state
   totalSeconds = 20*60; sectionSeconds = 5*60;
-  currentSubjectIndex = 0; currentQuestionIndex = 0;
+  currentSubject = 0; currentQ = 0;
   answers = new Array(20).fill(null);
-  warningGiven=false; flagged=false; warnCount=0; flagCount=0;
-  FLAGS_EL.innerText = flagCount; WARNS_EL.innerText = warnCount;
-  showQuestion();
-  startTotalTimer();
-  startSectionTimer();
-  startExamMonitoring();
+  warningGiven = false; flagged = false; warnCount = 0; flagCount = 0;
+  updateTimersUI(); showCurrentQuestion();
+  startTotalTimer(); startSectionTimer();
+  startMonitoringLoop();
 });
 
 // render question
-function showQuestion(){
-  const subj = subjects[currentSubjectIndex];
-  const qObj = subj.questions[currentQuestionIndex];
-  CURRENT_SUBJECT.innerText = subj.name;
-  CURRENT_QINDEX.innerText = currentQuestionIndex+1;
-  QTEXT.innerText = qObj.q;
-  OPTIONS.innerHTML = '';
+function showCurrentQuestion(){
+  const subj = subjects[currentSubject];
+  const qObj = subj.questions[currentQ];
+  qSubject.textContent = subj.name;
+  qText.textContent = qObj.q;
+  optionsEl.innerHTML = '';
   qObj.opts.forEach((opt, idx)=>{
-    const id = `opt_${currentSubjectIndex}_${currentQuestionIndex}_${idx}`;
-    const wrapper = document.createElement('div');
-    wrapper.innerHTML = `<label for="${id}"><input type="radio" name="opt" id="${id}" value="${idx}"> ${opt}</label>`;
-    OPTIONS.appendChild(wrapper);
+    const id = `opt_${currentSubject}_${currentQ}_${idx}`;
+    const label = document.createElement('label');
+    label.innerHTML = `<input type="radio" name="opt" id="${id}" value="${idx}"> ${opt}`;
+    optionsEl.appendChild(label);
   });
-  updateProgress();
-}
-function updateProgress(){
-  const subjCount = currentSubjectIndex+1;
-  PROG_TEXT.innerText = `Subject ${subjCount} of ${subjects.length} • Q ${currentQuestionIndex+1} of 5`;
+  progressText.textContent = `Subject ${currentSubject+1}/${subjects.length} • Q ${currentQ+1}/5`;
 }
 
-// next behaviour
-NEXT_BTN.addEventListener('click', ()=>{
-  if(flagged) { alert('Exam flagged out — cannot continue'); return; }
+// next button
+nextBtn.addEventListener('click', ()=>{
+  if(flagged) return alert('Exam flagged out — cannot continue');
   const sel = document.querySelector('input[name="opt"]:checked');
-  const overallIndex = currentSubjectIndex*5 + currentQuestionIndex;
-  if(sel) answers[overallIndex] = Number(sel.value);
-  // move
-  if(currentQuestionIndex < 4){ currentQuestionIndex++; showQuestion(); }
-  else {
+  const overall = currentSubject*5 + currentQ;
+  if(sel) answers[overall] = Number(sel.value);
+  // move to next
+  if(currentQ < 4){
+    currentQ++; showCurrentQuestion();
+  } else {
     // finished subject
-    if(currentSubjectIndex < subjects.length - 1){
-      currentSubjectIndex++; currentQuestionIndex = 0; sectionSeconds = 5*60; showQuestion();
+    if(currentSubject < subjects.length -1){
+      currentSubject++; currentQ = 0; sectionSeconds = 5*60; showCurrentQuestion();
     } else {
       computeAndShowResults();
     }
@@ -352,138 +365,137 @@ NEXT_BTN.addEventListener('click', ()=>{
 });
 
 // submit manual
-SUBMIT_BTN.addEventListener('click', ()=>{ if(confirm('Submit exam now?')) computeAndShowResults(); });
+submitBtn.addEventListener('click', ()=>{
+  if(confirm('Submit exam now?')) computeAndShowResults();
+});
 
 // timers
+function updateTimersUI(){
+  const tm = Math.floor(totalSeconds/60), ts = totalSeconds%60;
+  totalTimerEl.textContent = `${String(tm).padStart(2,'0')}:${String(ts).padStart(2,'0')}`;
+  const sm = Math.floor(sectionSeconds/60), ss = sectionSeconds%60;
+  sectionTimerEl.textContent = `${String(sm).padStart(2,'0')}:${String(ss).padStart(2,'0')}`;
+}
 function startTotalTimer(){
-  updateTotalTimerUI();
+  updateTimersUI();
   totalTimerInterval = setInterval(()=>{
-    totalSeconds--; if(totalSeconds<=0){ clearInterval(totalTimerInterval); computeAndShowResults(); }
-    updateTotalTimerUI();
+    totalSeconds--; updateTimersUI();
+    if(totalSeconds <= 0){ clearInterval(totalTimerInterval); clearInterval(sectionTimerInterval); computeAndShowResults(); }
   },1000);
 }
-function updateTotalTimerUI(){ const m=Math.floor(totalSeconds/60), s=totalSeconds%60; TOTAL_TIMER.innerText = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`; }
-
 function startSectionTimer(){
-  updateSectionTimerUI();
+  updateTimersUI();
   sectionTimerInterval = setInterval(()=>{
-    sectionSeconds--; if(sectionSeconds<=0){
-      if(currentSubjectIndex < subjects.length -1){
-        currentSubjectIndex++; currentQuestionIndex = 0; sectionSeconds = 5*60; showQuestion();
-      } else computeAndShowResults();
-    }
-    updateSectionTimerUI();
-  },1000);
-}
-function updateSectionTimerUI(){ const m=Math.floor(sectionSeconds/60), s=sectionSeconds%60; document.getElementById('sectionTimer').innerText = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`; }
-
-// monitoring
-function startExamMonitoring(){
-  prevFrame = null;
-  monitorInterval = setInterval(async ()=>{
-    if(flagged) return;
-    try{
-      if(detector && !useFallback){
-        const faces = await detector.detect(EXAM_CAM);
-        DETECT_DEBUG.innerText = 'faces:' + (faces?faces.length:0);
-        if(!faces || faces.length===0){ handleViolation('no-face'); }
-        else {
-          // check center vs frame center to detect look-away
-          const box = faces[0].boundingBox;
-          const faceCenterX = box.x + box.width/2;
-          const frameCenterX = box.width ? (canvas.width/2) : (EXAM_CAM.videoWidth/2 || 160);
-          // use relative threshold: if face center deviates > 35% of faceBox width => look-away
-          const deviation = Math.abs(faceCenterX - (EXAM_CAM.videoWidth/2 || 160));
-          if(box.width && (deviation > box.width * 0.6)){ handleViolation('look-away'); }
-          else { // ok
-            WARN_MSG.innerText = '';
-          }
-        }
+    sectionSeconds--; updateTimersUI();
+    if(sectionSeconds <= 0){
+      if(currentSubject < subjects.length -1){
+        currentSubject++; currentQ = 0; sectionSeconds = 5*60; showCurrentQuestion();
       } else {
-        const frame = getFrameData(EXAM_CAM);
-        const ratio = prevFrame ? frameDiffRatio(frame, prevFrame) : 1;
-        prevFrame = frame;
-        DETECT_DEBUG.innerText = 'motion:' + ratio.toFixed(3);
-        // if ratio very low => likely turned away / static
-        if(ratio < 0.007){ handleViolation('low-motion'); } else { WARN_MSG.innerText = ''; }
+        computeAndShowResults();
       }
-    }catch(e){ console.warn('monitor err', e); }
+    }
   },1000);
 }
 
-function handleViolation(type){
-  if(flagged) return;
-  log('violation:'+type);
-  if(!warningGiven){
-    warningGiven = true; warnCount++; WARNS_EL.innerText = warnCount;
-    WARN_MSG.innerText = '⚠️ Warning: Please face the camera';
-    beep(300,900);
-  } else {
-    flagged = true; flagCount++; FLAGS_EL.innerText = flagCount;
-    FLAG_MSG.innerText = '🚫 FLAGGED OUT — Exam stopped due to repeated look-away';
-    beep(1000,300);
-    // disable inputs and stop timers & monitoring
-    Array.from(document.querySelectorAll('input[type=radio]')).forEach(i=>i.disabled=true);
-    NEXT_BTN.disabled = true; SUBMIT_BTN.disabled = true;
-    clearInterval(totalTimerInterval); clearInterval(sectionTimerInterval); clearInterval(monitorInterval);
-    showFlaggedResult();
-  }
+// monitoring: compare snapshots every 3s
+function startMonitoringLoop(){
+  monitorInterval = setInterval(()=>{
+    if(flagged) return;
+    const cur = takeSnapshot(examCam);
+    if(!cur){ console.warn('frame capture failed'); return; }
+    const ratio = imageDiffRatio(refImageData, cur); // 0..1
+    // small tolerance because lighting + head movement expected
+    // If ratio > 0.18 => significant change (possible different person / different face)
+    // If ratio > 0.12 => suspicious (warning)
+    // tune thresholds if needed for your devices
+    log(`monitor ratio:${ratio.toFixed(3)}`);
+    if(ratio > 0.18){
+      // immediate malpractice -> flagged out
+      handleFlag('Significant face change detected (possible different person / major change).');
+    } else if(ratio > 0.12){
+      // suspicious -> warning or second -> flagged
+      if(!warningGiven){
+        warningGiven = true; warnCount++; warnEl.textContent = '⚠️ Warning: Face differs from reference — please return to camera';
+        beep(300,900);
+      } else {
+        handleFlag('Repeated suspicious behavior detected (face changed).');
+      }
+    } else {
+      // okay -> clear warning message
+      warnEl.textContent = '';
+    }
+  }, 3000);
 }
 
-// compute results
+function handleFlag(reason){
+  if(flagged) return;
+  flagged = true; flagCount++; flagEl.textContent = '🚫 Malpractice detected: Exam stopped';
+  beep(1000,300);
+  log('Flagged: ' + reason);
+  // stop cameras and timers
+  if(previewStream){ previewStream.getTracks().forEach(t=>t.stop()); previewStream=null; }
+  if(examStream){ examStream.getTracks().forEach(t=>t.stop()); examStream=null; }
+  clearInterval(monitorInterval); clearInterval(totalTimerInterval); clearInterval(sectionTimerInterval);
+  // disable inputs
+  Array.from(document.querySelectorAll('input[type=radio]')).forEach(i=>i.disabled = true);
+  nextBtn.disabled = true; submitBtn.disabled = true;
+  // show malpractice result
+  resultPanel.style.display = 'block';
+  resultContent.innerHTML = `<div style="font-weight:800;color:#a02121">MALPRACTICE DETECTED</div>
+    <div style="margin-top:8px">Your session was flagged for suspicious face change or absence. Exam stopped.</div>`;
+  document.getElementById('qbox').style.display = 'none';
+}
+
+// compute result
 function computeAndShowResults(){
-  clearInterval(totalTimerInterval); clearInterval(sectionTimerInterval); clearInterval(monitorInterval);
-  // ensure save current selection
+  clearInterval(monitorInterval); clearInterval(totalTimerInterval); clearInterval(sectionTimerInterval);
+  // save current selection
   const sel = document.querySelector('input[name="opt"]:checked');
-  if(sel){ const overall= currentSubjectIndex*5 + currentQuestionIndex; answers[overall] = Number(sel.value); }
-  // compute per-subject and total
-  let perSubject = [], totalCorrect = 0;
-  for(let si=0; si<subjects.length; si++){
+  if(sel) answers[currentSubject*5 + currentQ] = Number(sel.value);
+  // compute
+  let perSub = [], totalCorrect = 0;
+  for(let s=0;s<subjects.length;s++){
     let correct = 0;
-    for(let qi=0; qi<5; qi++){
-      const idx = si*5 + qi;
-      const selVal = answers[idx];
-      if(typeof selVal === 'number' && selVal === subjects[si].questions[qi].a) correct++;
+    for(let q=0;q<5;q++){
+      const idx = s*5 + q;
+      if(typeof answers[idx] === 'number' && answers[idx] === subjects[s].questions[q].a) correct++;
     }
-    perSubject.push(correct);
+    perSub.push(correct);
     totalCorrect += correct;
   }
   const totalMarks = totalCorrect * 5; // 0..100
-  let html = `<div><strong>Results — ${NAME_INPUT.value || ''}</strong></div><div style="margin-top:8px">Per-subject:</div><ul>`;
-  for(let si=0; si<subjects.length; si++){
-    html += `<li>${subjects[si].name}: ${perSubject[si]} / 5 (${perSubject[si]*5} marks)</li>`;
-  }
-  html += `</ul><div style="margin-top:8px"><strong>Total: ${totalMarks} / 100</strong></div>`;
+  // grade
   let grade = '';
-  if(flagged) grade = 'Flagged-out: Exam stopped. No valid score.';
-  else if(totalMarks >= 80) grade = 'Distinction';
+  if(totalMarks >= 80) grade = 'Distinction';
   else if(totalMarks >= 65) grade = 'Upper Class';
   else if(totalMarks >= 50) grade = 'Lower Class';
   else if(totalMarks >= 40) grade = 'Pass';
   else if(totalMarks >= 30) grade = 'Play Class';
   else grade = 'Failed — Retry';
+  // show
+  let html = `<div style="font-weight:800">Result for ${document.getElementById('name').value}</div>`;
+  html += `<div style="margin-top:8px">Per-subject:</div><ul>`;
+  for(let s=0;s<subjects.length;s++){
+    html += `<li>${subjects[s].name}: ${perSub[s]} / 5 (${perSub[s]*5} marks)</li>`;
+  }
+  html += `</ul><div style="margin-top:8px"><strong>Total: ${totalMarks} / 100</strong></div>`;
   html += `<div style="margin-top:8px"><strong>Grade: ${grade}</strong></div>`;
-  RESULT_CONTENT.innerHTML = html;
-  document.getElementById('qbox').style.display='none';
-  RESULT_PANEL.style.display='block';
+  resultContent.innerHTML = html;
+  resultPanel.style.display = 'block';
+  document.getElementById('qbox').style.display = 'none';
+  // stop camera
+  if(examStream){ examStream.getTracks().forEach(t=>t.stop()); examStream=null; }
 }
 
-// flagged display
-function showFlaggedResult(){
-  RESULT_CONTENT.innerHTML = `<div><strong>FLAGGED OUT</strong></div><div style="margin-top:8px">You were flagged for repeated look-away. Exam stopped.</div>`;
-  document.getElementById('qbox').style.display='none';
-  RESULT_PANEL.style.display='block';
-}
+// util: log to right panel
+function log(msg){ const e = document.getElementById('log'); e.textContent = msg + '\n' + e.textContent; }
 
 // retry
-RETRY_BTN.addEventListener('click', ()=> location.reload());
+retryBtn.addEventListener('click', ()=> location.reload());
 
-// initial
-(function init(){
-  // pre-load UI with first question (so Next will save properly)
-  // render first question when exam starts
-  log('Ready. Enter name and press Proceed.');
-})();
+// quick init: nothing to do until user proceeds
+log('Ready — mobile CBT (green).');
+
 </script>
 </body>
 </html>
