@@ -3,60 +3,48 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
-<title>CBT Exam — ATech ICT Solution (Strict Monitoring)</title>
+<title>CBT Exam — ATech ICT Solution</title>
 <meta name="theme-color" content="#16A34A" />
 <link rel="icon" href="data:," />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#f0fdf4; --card:#ffffff; --accent:#16A34A; --accent-600:#15803d;
-    --muted:#4b5563; --soft:#ecfdf0; --warn:#f59e0b; --danger:#dc2626;
-    --glass: rgba(255,255,255,0.6);
+    --bg:#f0fff4; --card:#ffffff; --accent:#16A34A; --accent-600:#15803d;
+    --muted:#4b5563; --soft:#ecfef3; --warn:#f59e0b; --danger:#dc2626;
   }
   *{box-sizing:border-box}
-  html,body{height:100%}
   body{
     margin:0;font-family:Inter,system-ui,Roboto,-apple-system,"Segoe UI",Arial;
-    background:linear-gradient(180deg,#f6fff6 0%, #effff0 100%);
-    -webkit-font-smoothing:antialiased;color:#052e14;
+    background:linear-gradient(180deg,#f7fff7 0%, #f0fff4 100%);
+    color:#052e14;-webkit-font-smoothing:antialiased;
     display:flex;align-items:center;justify-content:center;padding:12px;
   }
   .wrap{width:100%;max-width:760px}
-  .card{
-    background:var(--card);border-radius:14px;overflow:hidden;
-    box-shadow:0 12px 30px rgba(6,95,70,0.08);border:1px solid rgba(6,95,70,0.03);
-  }
-  .header{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;background:linear-gradient(90deg,#f0fdf4,#f6fff6)}
-  .brand{display:flex;flex-direction:column}
-  .title{font-weight:700;font-size:18px;color:var(--accent-600)}
-  .subtitle{font-size:13px;color:var(--muted)}
-  .helpBtn{background:#25D366;color:white;padding:8px 10px;border-radius:10px;text-decoration:none;font-weight:700}
-  .content{display:grid;grid-template-columns:1fr;gap:0;padding:16px}
+  .card{background:var(--card);border-radius:12px;overflow:hidden;box-shadow:0 12px 30px rgba(6,95,70,0.06);border:1px solid rgba(6,95,70,0.04)}
+  .header{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:linear-gradient(90deg,#f0fff4,#f6fff6)}
+  .title{font-weight:700;color:var(--accent-600)}
+  .sub{font-size:13px;color:var(--muted)}
+  .content{display:grid;grid-template-columns:1fr;gap:0}
   @media(min-width:880px){ .content{grid-template-columns:1fr 300px} }
-  .left{padding:6px 12px}
-  .right{padding:12px;border-left:1px solid rgba(6,95,70,0.03);background:linear-gradient(180deg,#fbfff9, #f8fff6)}
-  .card-section{background:var(--card);border-radius:12px;padding:12px;margin-bottom:12px}
-  input[type="text"]{width:100%;padding:12px;border-radius:10px;border:1px solid #e6f6ea;font-size:15px}
-  .row{display:flex;gap:10px;align-items:center}
+  .left{padding:12px}
+  .right{padding:12px;border-left:1px solid rgba(6,95,70,0.03);background:linear-gradient(180deg,#fbfff9,#f8fff6)}
+  .card-section{background:var(--card);border-radius:10px;padding:12px;margin-bottom:12px}
+  input[type="text"]{width:100%;padding:12px;border-radius:10px;border:1px solid #eaf6ec;font-size:15px}
+  button{background:var(--accent);color:white;border:0;padding:10px 14px;border-radius:10px;font-weight:700}
+  button[disabled]{opacity:.6;cursor:not-allowed}
   .videoWrap{display:flex;justify-content:center;margin-top:12px}
   video{width:320px;height:240px;border-radius:12px;border:4px solid rgba(22,163,74,0.08);background:#000;object-fit:cover}
-  .status{font-weight:700;margin-top:8px}
   .muted{color:var(--muted);font-size:13px}
+  .status{font-weight:700;margin-top:8px}
   .warning{color:var(--warn);font-weight:800;margin-top:8px}
   .flag{color:var(--danger);font-weight:900;margin-top:8px}
-  .qbox{margin-top:12px;padding:12px;border-radius:12px;background:var(--soft)}
-  .opts label{display:block;margin:8px 0;padding:10px;border-radius:10px;border:1px solid #e6f4ea;cursor:pointer}
+  .qbox{margin-top:12px;padding:12px;border-radius:10px;background:var(--soft)}
+  .opts label{display:block;margin:8px 0;padding:10px;border-radius:10px;border:1px solid #ecf9ed;cursor:pointer}
   .controls{display:flex;gap:10px;justify-content:flex-end;margin-top:12px}
   .timer{font-weight:800;color:var(--accent-600)}
-  .progressBar{height:8px;background:#e6f9ea;border-radius:8px;overflow:hidden;margin-top:8px}
-  .progressFill{height:100%;background:linear-gradient(90deg,var(--accent-600),#10b981);width:0%;transition:width 400ms ease}
-  .resultBox{padding:12px;background:#ecfdf4;border-radius:10px;margin-top:12px}
-  .footer{padding:12px;text-align:center;font-size:13px;color:var(--muted);background:transparent;border-top:1px solid rgba(6,95,70,0.03)}
-  button{background:var(--accent);color:white;border:0;padding:10px 14px;border-radius:10px;font-weight:700;box-shadow:0 6px 18px rgba(22,163,74,0.10)}
-  button[disabled]{opacity:.6;cursor:not-allowed;box-shadow:none}
-  .smallBtn{background:transparent;border:1px solid rgba(6,95,70,0.08);color:var(--accent-600);padding:8px 10px;border-radius:8px}
-  .center{display:flex;align-items:center;gap:8px}
-  .hidden{display:none}
+  .resultBox{padding:12px;background:#ecfff5;border-radius:10px;margin-top:12px}
+  .footer{padding:10px;text-align:center;font-size:13px;color:var(--muted);border-top:1px solid rgba(6,95,70,0.03);background:transparent}
+  .help{background:#25D366;color:white;padding:8px 10px;border-radius:8px;text-decoration:none;font-weight:700}
   @media(max-width:420px){ video{width:280px;height:200px} .header{padding:12px} }
 </style>
 </head>
@@ -64,11 +52,11 @@
   <div class="wrap">
     <div class="card" role="main" aria-labelledby="appTitle">
       <div class="header">
-        <div class="brand">
+        <div>
           <div id="appTitle" class="title">CBT Exam — ATech ICT Solution</div>
-          <div class="subtitle">Mobile-only • Strict monitoring • 20 questions • 20 minutes</div>
+          <div class="sub">Mobile-only • Strict monitoring • 20 questions • 20 minutes</div>
         </div>
-        <div><a class="helpBtn" href="https://wa.me/2348145415083" target="_blank" rel="noopener">Help / Support</a></div>
+        <div><a class="help" href="https://wa.me/2348145415083" target="_blank" rel="noopener">Help / Support</a></div>
       </div>
 
       <div class="content">
@@ -79,29 +67,29 @@
             <input id="nameInput" placeholder="e.g. Musa Ahmed" aria-label="Full name">
             <div style="margin-top:12px" class="row">
               <button id="proceedBtn">Proceed</button>
-              <div class="muted" style="flex:1">Allow camera when prompted. Strict monitoring enabled.</div>
+              <div class="muted" style="flex:1;margin-left:8px">Allow camera when prompted. Strict monitoring enabled.</div>
             </div>
           </div>
 
-          <!-- Capture reference -->
+          <!-- Face verification (capture reference) -->
           <div id="captureCard" class="card-section hidden" aria-hidden="true">
             <h3 style="margin:0 0 8px 0">1 • Capture reference</h3>
             <div class="videoWrap"><video id="preview" autoplay muted playsinline></video></div>
             <div id="captureStatus" class="status">Initializing camera...</div>
             <div style="margin-top:10px" class="row">
-              <button id="captureBtn" disabled>Capture Reference Photo</button>
-              <button id="retakeBtn" class="smallBtn hidden">Retake</button>
-              <div class="muted" style="flex:1">Reference photo will be strict baseline — large changes = malpractice.</div>
+              <button id="captureBtn" disabled>Capture Reference</button>
+              <button id="retakeBtn" style="display:none;background:#ef4444">Retake</button>
+              <div class="muted" style="flex:1;margin-left:8px">Reference photo is strict baseline — leaving camera or swapping face = malpractice.</div>
             </div>
           </div>
 
-          <!-- Start -->
+          <!-- Start exam -->
           <div id="startCard" class="card-section hidden" aria-hidden="true">
             <h3 style="margin:0 0 8px 0">2 • Start exam</h3>
             <div class="muted">Candidate: <span id="displayName"></span></div>
             <div style="margin-top:12px" class="row">
               <button id="startBtn" disabled>Start Exam</button>
-              <button id="backToCapture" class="smallBtn">Back</button>
+              <button id="backToCapture" style="background:#ef4444">Back</button>
             </div>
           </div>
 
@@ -119,27 +107,21 @@
             <div id="warnMsg" class="warning" role="alert"></div>
             <div id="flagMsg" class="flag" role="alert"></div>
 
-            <div class="qbox" id="qbox">
-              <div id="qmeta" style="display:flex;justify-content:space-between;align-items:center">
-                <div style="font-weight:800" id="qSubject"></div>
-                <div style="font-size:12px;color:var(--muted)" id="qProgress"></div>
-              </div>
-              <div id="qText" style="margin-top:10px;font-weight:700"></div>
-              <div id="options" style="margin-top:10px"></div>
-
-              <div class="progressBar" aria-hidden="true">
-                <div id="progressFill" class="progressFill"></div>
-              </div>
+            <div id="qbox" class="qbox">
+              <div id="qSubject" style="font-weight:800"></div>
+              <div id="qText" style="margin-top:8px;font-weight:700"></div>
+              <div id="options" class="opts"></div>
 
               <div class="controls">
                 <button id="nextBtn">Next</button>
                 <button id="submitBtn">Submit Exam</button>
               </div>
+              <div style="margin-top:8px" class="muted" id="progressText"></div>
             </div>
 
-            <div id="resultPanel" class="hidden" aria-live="polite">
-              <div class="resultBox" id="resultBox"></div>
-              <div style="display:flex;justify-content:flex-end;margin-top:10px">
+            <div id="resultPanel" style="display:none">
+              <div class="resultBox" id="resultContent"></div>
+              <div style="display:flex;justify-content:flex-end;margin-top:12px">
                 <button id="retryBtn">Retry</button>
               </div>
             </div>
@@ -155,29 +137,33 @@
               <li>Each subject = 5 minutes (auto-advance)</li>
               <li>Total = 20 minutes (auto submit)</li>
               <li>Each correct = 5 marks; total = 100</li>
-              <li><strong>Strict monitoring:</strong> 1st violation = immediate warning; if not corrected within <strong>5 seconds</strong> → flagged out.</li>
+              <li><strong>Strict:</strong> 1st violation = warning; if not corrected within 5s → flagged out. Leaving camera = flagged out.</li>
             </ul>
           </div>
 
           <div class="card-section" style="margin-top:12px">
-            <div class="muted">Debug / Logs</div>
-            <pre id="log" class="muted" style="height:160px;overflow:auto;margin-top:8px;background:#fff;padding:8px;border-radius:8px"></pre>
+            <div class="muted">Contact</div>
+            <div style="margin-top:8px">
+              <div class="muted">ATech ICT Solution</div>
+              <div style="margin-top:6px"><a class="help" href="https://wa.me/2348145415083" target="_blank" rel="noopener">wa.me/08145415083</a></div>
+            </div>
           </div>
         </aside>
       </div>
 
-      <div class="footer">© ATech ICT Solution • <a href="https://wa.me/2348145415083" target="_blank" rel="noopener" style="color:var(--accent-600)">wa.me/08145415083</a></div>
+      <div class="footer">© ATech ICT Solution</div>
     </div>
   </div>
 
 <script>
-/* Strict monitoring CBT — modern design
-   - strict: immediate warning on violation, graceWindow (5s) to fix, otherwise flag
-   - FaceDetector preferred; fallback = image diff sampling
-   - mobile-first, green theme, beep sounds
+/* Final: mobile green strict CBT
+   - Capture reference photo first
+   - Monitoring compares to reference every 1500ms
+   - If no face / big change / stream ended => warning -> 5s grace -> flag out
+   - If flag => exam stops immediately
 */
 
-// QUESTIONS & SUBJECTS (same structure)
+// Questions
 const subjects = [
   { name:'English', questions:[
     {q:'Sentence is a group of ...', opts:['A. World','B. Word','C. Alphabet'], a:1},
@@ -221,130 +207,113 @@ const startCard = document.getElementById('startCard');
 const startBtn = document.getElementById('startBtn');
 const backToCapture = document.getElementById('backToCapture');
 const displayName = document.getElementById('displayName');
-const candName = document.getElementById('candName');
 const examCard = document.getElementById('examCard');
 const examCam = document.getElementById('examCam');
-const warnMsg = document.getElementById('warnMsg');
-const flagMsg = document.getElementById('flagMsg');
 const qSubject = document.getElementById('qSubject');
 const qText = document.getElementById('qText');
 const optionsEl = document.getElementById('options');
 const nextBtn = document.getElementById('nextBtn');
 const submitBtn = document.getElementById('submitBtn');
+const progressText = document.getElementById('progressText');
 const totalTimerEl = document.getElementById('totalTimer');
 const sectionTimerEl = document.getElementById('sectionTimer');
-const qProgress = document.getElementById('qProgress');
-const progressFill = document.getElementById('progressFill');
-const logEl = document.getElementById('log');
+const candName = document.getElementById('candName');
+const warnEl = document.getElementById('warnMsg');
+const flagEl = document.getElementById('flagMsg');
 const resultPanel = document.getElementById('resultPanel');
-const resultBox = document.getElementById('resultBox');
+const resultContent = document.getElementById('resultContent');
 const retryBtn = document.getElementById('retryBtn');
 const welcomeCard = document.getElementById('welcomeCard');
-const captureCardEl = document.getElementById('captureCard');
-const startCardEl = document.getElementById('startCard');
-const examCardEl = document.getElementById('examCard');
+const resultBoxEl = document.getElementById('resultContent');
 
 // state
-let previewStream = null, examStream = null;
-let refImage = null, refHash = null;
-let warningGiven = false, flagged = false, warnCount = 0, flagCount = 0;
+let previewStream=null, examStream=null;
+let refImage=null; // ImageData reference
 let totalSeconds = 20*60, sectionSeconds = 5*60;
-let totalTimerInterval = null, sectionTimerInterval = null, monitorInterval = null, graceTimer = null;
-let currentSubject = 0, currentQ = 0;
+let totalTimerInterval=null, sectionTimerInterval=null, monitorInterval=null, graceTimer=null;
+let currentSubject=0, currentQ=0;
 let answers = new Array(20).fill(null);
+let warned=false, flagged=false, warnCount=0, flagCount=0;
 
-// FaceDetector if available
-let FaceDetectorClass = ('FaceDetector' in window) ? window.FaceDetector : null;
-let detector = null;
-try{ if(FaceDetectorClass) detector = new FaceDetectorClass({fastMode:true, maxDetectedFaces:1}); }catch(e){ detector = null; }
-
-// canvas helper
-const canvas = document.createElement('canvas'); canvas.width = 320; canvas.height = 240;
+// canvas for snapshots
+const canvas = document.createElement('canvas'); canvas.width=320; canvas.height=240;
 const ctx = canvas.getContext('2d');
 
-// image snapshot + quick hash & diff sampling
 function takeSnapshot(videoEl){
-  try{
-    ctx.drawImage(videoEl, 0, 0, canvas.width, canvas.height);
-    return ctx.getImageData(0,0,canvas.width,canvas.height);
-  }catch(e){ return null; }
+  try{ ctx.drawImage(videoEl,0,0,canvas.width,canvas.height); return ctx.getImageData(0,0,canvas.width,canvas.height); }catch(e){ return null; }
 }
 function quickHash(img){
   if(!img) return '';
-  let s = 0;
+  let s=0;
   for(let i=0;i<img.data.length;i+=4*128) s = (s + img.data[i] + img.data[i+1] + img.data[i+2]) % 100000;
   return String(s);
 }
 function imageDiffRatio(a,b){
   if(!a||!b) return 1;
-  let diff=0; const step=12; const len=a.data.length;
-  for(let i=0;i<len;i+=4*step){
+  let diff=0; const step=12;
+  for(let i=0;i<a.data.length;i+=4*step){
     diff += Math.abs(a.data[i]-b.data[i]) + Math.abs(a.data[i+1]-b.data[i+1]) + Math.abs(a.data[i+2]-b.data[i+2]);
   }
-  const max = (len/(4*step)) * 3 * 255;
+  const max = (a.data.length/(4*step)) * 3 * 255;
   return diff / max;
 }
+function beep(ms=200,f=800){ try{ const A=new (window.AudioContext||window.webkitAudioContext)(); const o=A.createOscillator(); const g=A.createGain(); o.connect(g); g.connect(A.destination); o.type='sine'; o.frequency.value=f; g.gain.setValueAtTime(0.16,A.currentTime); o.start(); o.stop(A.currentTime+ms/1000);}catch(e){} }
 
-// audio cues
-function beep(ms=220,f=700){ try{ const A=new (window.AudioContext||window.webkitAudioContext)(); const o=A.createOscillator(); const g=A.createGain(); o.connect(g); g.connect(A.destination); o.type='sine'; o.frequency.value=f; g.gain.setValueAtTime(0.16,A.currentTime); o.start(); o.stop(A.currentTime + ms/1000);}catch(e){} }
-
-// logging
-function log(msg){ logEl.textContent = new Date().toLocaleTimeString() + ' — ' + msg + '\n' + logEl.textContent; }
-
-// UI helpers
-function show(el){ el.classList.remove('hidden'); el.style.display='block'; }
-function hide(el){ el.classList.add('hidden'); el.style.display='none'; }
-
-// PROCEED -> open preview camera
+// Open preview & capture reference
 proceedBtn.addEventListener('click', async ()=>{
   const name = nameInput.value.trim();
   if(!name) return alert('Enter your name');
-  welcomeCard.style.display = 'none'; welcomeCard.classList.add('hidden');
-  captureCardEl.style.display = 'block'; captureCardEl.classList.remove('hidden');
-  displayName.textContent = name; document.getElementById('displayName').textContent = name;
+  welcomeCard.style.display='none';
+  captureCard.style.display='block';
+  displayName.textContent = name;
   try{
     previewStream = await navigator.mediaDevices.getUserMedia({video:{facingMode:'user'}, audio:false});
     preview.srcObject = previewStream;
-    captureStatus.textContent = 'Camera started. Align face and capture a clear reference photo.';
+    captureStatus.textContent = 'Camera started. Align face and tap Capture Reference.';
     captureBtn.disabled = false;
-    log('Preview camera started');
+    // stop if stream ended (user revokes)
+    previewStream.getVideoTracks()[0].onended = ()=> { handleStreamEnded('Preview camera ended'); };
   }catch(e){
-    alert('Camera permission is required. Allow then reload.');
+    alert('Camera permission needed. Allow camera and reload.');
   }
 });
 
-// capture reference
+// Capture reference
 captureBtn.addEventListener('click', ()=>{
   const img = takeSnapshot(preview);
-  if(!img) return alert('Capture failed — try again.');
-  refImage = img; refHash = quickHash(img);
-  captureStatus.textContent = 'Reference captured. If not clear, retake.';
-  retakeBtn.classList.remove('hidden'); startBtn.disabled = false;
-  beep(200,900);
-  // show start block
-  startCardEl.style.display = 'block'; startCardEl.classList.remove('hidden');
-  log('Reference captured (hash:'+refHash+')');
+  if(!img) return alert('Capture failed. Try again.');
+  refImage = img;
+  captureStatus.textContent = 'Reference captured. If clear, press Start Exam.';
+  beep(150,1000);
+  retakeBtn.style.display='inline-block';
+  startBtn.disabled = false;
+  previewStream.getVideoTracks()[0].onended = ()=> { handleStreamEnded('Preview camera ended'); };
 });
 
-// retake
+// Retake
 retakeBtn.addEventListener('click', ()=>{
-  refImage = null; refHash = null; captureStatus.textContent = 'Reference cleared. Capture again.';
-  retakeBtn.classList.add('hidden'); startBtn.disabled = true;
-  log('Reference cleared');
+  refImage = null;
+  captureStatus.textContent = 'Reference cleared. Capture again.';
+  retakeBtn.style.display='none';
+  startBtn.disabled = true;
 });
 
-// start exam
+// Start exam
 startBtn.addEventListener('click', async ()=>{
-  if(!refImage) return alert('Please capture reference photo first.');
-  captureCardEl.style.display='none'; startCardEl.style.display='none';
-  examCardEl.style.display='block';
+  if(!refImage) return alert('Please capture reference first.');
+  // stop preview tracks
+  if(previewStream){ previewStream.getTracks().forEach(t=>t.stop()); previewStream=null; }
+  captureCard.style.display='none';
+  document.getElementById('startCard').style.display='none';
+  document.getElementById('examCard').style.display='block';
   candName.textContent = nameInput.value.trim();
   try{
     examStream = await navigator.mediaDevices.getUserMedia({video:{facingMode:'user'}, audio:false});
     examCam.srcObject = examStream;
-    log('Exam camera started');
+    // monitor if camera stopped
+    examStream.getVideoTracks()[0].onended = ()=> handleStreamEnded('Exam camera stopped');
   }catch(e){
-    alert('Exam camera error. Allow camera and retry.');
+    alert('Exam camera failed. Allow camera and retry.');
     location.reload();
     return;
   }
@@ -352,13 +321,13 @@ startBtn.addEventListener('click', async ()=>{
   totalSeconds = 20*60; sectionSeconds = 5*60;
   currentSubject = 0; currentQ = 0;
   answers = new Array(20).fill(null);
-  warningGiven = false; flagged = false; warnCount = 0; flagCount = 0;
+  warned=false; flagged=false; warnCount=0; flagCount=0;
   updateTimersUI(); renderQuestion();
   startTotalTimer(); startSectionTimer();
-  startStrictMonitoring();
+  startMonitoring();
 });
 
-// render question
+// Render a question
 function renderQuestion(){
   const subj = subjects[currentSubject];
   const q = subj.questions[currentQ];
@@ -367,18 +336,14 @@ function renderQuestion(){
   optionsEl.innerHTML = '';
   q.opts.forEach((opt, idx)=>{
     const id = `opt_${currentSubject}_${currentQ}_${idx}`;
-    const label = document.createElement('label');
-    label.innerHTML = `<input type="radio" name="opt" id="${id}" value="${idx}"> ${opt}`;
-    optionsEl.appendChild(label);
+    const l = document.createElement('label');
+    l.innerHTML = `<input type="radio" name="opt" id="${id}" value="${idx}"> ${opt}`;
+    optionsEl.appendChild(l);
   });
-  qProgress.textContent = `Q ${currentQ+1}/5 • Subject ${currentSubject+1}/${subjects.length}`;
-  const overallIndex = currentSubject*5 + currentQ;
-  const filled = answers.filter(a=>a!==null).length;
-  const progressPct = Math.round((filled / 20) * 100);
-  progressFill.style.width = progressPct + '%';
+  progressText.textContent = `Subject ${currentSubject+1}/${subjects.length} • Q ${currentQ+1}/5`;
 }
 
-// next button
+// Next button
 nextBtn.addEventListener('click', ()=>{
   if(flagged) return alert('Exam flagged out — cannot continue');
   const sel = document.querySelector('input[name="opt"]:checked');
@@ -386,18 +351,15 @@ nextBtn.addEventListener('click', ()=>{
   if(sel) answers[overall] = Number(sel.value);
   if(currentQ < 4){ currentQ++; renderQuestion(); }
   else {
-    if(currentSubject < subjects.length -1){
-      currentSubject++; currentQ = 0; sectionSeconds = 5*60; renderQuestion();
-    } else computeAndShowResults();
+    if(currentSubject < subjects.length -1){ currentSubject++; currentQ = 0; sectionSeconds = 5*60; renderQuestion(); }
+    else computeAndShowResults();
   }
 });
 
-// submit manual
-submitBtn.addEventListener('click', ()=> {
-  if(confirm('Submit exam now?')) computeAndShowResults();
-});
+// Submit manual
+submitBtn.addEventListener('click', ()=> { if(confirm('Submit exam now?')) computeAndShowResults(); });
 
-// timers
+// Timers
 function updateTimersUI(){
   const tm = Math.floor(totalSeconds/60), ts = totalSeconds%60;
   totalTimerEl.textContent = `${String(tm).padStart(2,'0')}:${String(ts).padStart(2,'0')}`;
@@ -406,153 +368,111 @@ function updateTimersUI(){
 }
 function startTotalTimer(){
   updateTimersUI();
-  totalTimerInterval = setInterval(()=>{
-    totalSeconds--; updateTimersUI();
-    if(totalSeconds <= 0){ clearInterval(totalTimerInterval); clearInterval(sectionTimerInterval); computeAndShowResults(); }
-  },1000);
+  totalTimerInterval = setInterval(()=>{ totalSeconds--; updateTimersUI(); if(totalSeconds<=0){ clearInterval(totalTimerInterval); clearInterval(sectionTimerInterval); computeAndShowResults(); } },1000);
 }
 function startSectionTimer(){
   updateTimersUI();
-  sectionTimerInterval = setInterval(()=>{
-    sectionSeconds--; updateTimersUI();
-    if(sectionSeconds <= 0){
-      if(currentSubject < subjects.length -1){
-        currentSubject++; currentQ = 0; sectionSeconds = 5*60; renderQuestion();
-      } else computeAndShowResults();
-    }
-  },1000);
+  sectionTimerInterval = setInterval(()=>{ sectionSeconds--; updateTimersUI(); if(sectionSeconds<=0){ if(currentSubject < subjects.length-1){ currentSubject++; currentQ=0; sectionSeconds=5*60; renderQuestion(); } else computeAndShowResults(); } },1000);
 }
 
-// STRICT monitoring logic:
-// - interval 1500ms
-// - if FaceDetector available: detect face bounding box -> if none => immediate warning; if center deviation > threshold => immediate warning
-// - if fallback: compute imageDiffRatio(refImage, current). If > highThreshold => immediate flag; if > warnThreshold => warn (graceTimer 5s), if still above after grace => flag
-// thresholds tuned strict:
-//   warnThreshold = 0.10  (suspicious)  -> immediate warning; if not corrected in 5s -> flag
-//   flagThreshold = 0.14  (major change) -> immediate flag
-
-const CHECK_INTERVAL = 1500;
+// Monitoring logic
+const CHECK_MS = 1500;
 const WARN_THRESHOLD = 0.10;
-const FLAG_THRESHOLD = 0.14;
+const FLAG_THRESHOLD = 0.16;
 const GRACE_MS = 5000;
 
-function startStrictMonitoring(){
+function startMonitoring(){
   if(monitorInterval) clearInterval(monitorInterval);
-  monitorInterval = setInterval(async ()=>{
+  monitorInterval = setInterval(()=>{
     if(flagged) return;
-    try{
-      // prefer FaceDetector if available
-      if(detector){
-        const faces = await detector.detect(examCam).catch(()=>[]);
-        log('detector faces:'+ (faces ? faces.length : 0));
-        if(!faces || faces.length === 0){
-          triggerWarning('Face not detected by FaceDetector');
-        } else {
-          // check face center deviation relative to video center
-          const box = faces[0].boundingBox;
-          const faceCenterX = box.x + box.width/2;
-          const videoCenterX = (examCam.videoWidth || canvas.width) / 2;
-          const deviation = Math.abs(faceCenterX - videoCenterX);
-          if(box.width && deviation > box.width * 0.6){
-            triggerWarning('Face looks away (center deviation)');
-          } else {
-            // OK
-            clearWarning();
-          }
-        }
-      } else {
-        // fallback image diff
-        const cur = takeSnapshot(examCam);
-        if(!cur){ log('frame capture failed'); return; }
-        const ratio = imageDiffRatio(refImage, cur);
-        log('monitor ratio:'+ratio.toFixed(3));
-        if(ratio > FLAG_THRESHOLD){
-          // immediate severe change -> flag
-          handleFlag('Significant face change detected (possible different person or major change).');
-        } else if(ratio > WARN_THRESHOLD){
-          triggerWarning('Face differs from reference (suspicious).');
-        } else {
-          clearWarning();
-        }
-      }
-    }catch(e){
-      console.warn('monitor err', e);
+    // if camera stream invalid -> immediate warning then flag
+    if(!examStream || examStream.getVideoTracks().length===0 || examStream.getVideoTracks()[0].readyState === 'ended'){
+      triggerWarning('Camera disconnected');
+      return;
     }
-  }, CHECK_INTERVAL);
+    const cur = takeSnapshot(examCam);
+    if(!cur){ triggerWarning('No frame'); return; }
+    // compare to reference
+    const ratio = imageDiffRatio(refImage, cur); // 0..1
+    // If ratio very high => immediate flag (face swapped / removed)
+    if(ratio > FLAG_THRESHOLD){
+      handleFlag('Significant visual change detected (possible different person or absence)');
+      return;
+    }
+    // If ratio above warn threshold -> warning and grace
+    if(ratio > WARN_THRESHOLD){
+      triggerWarning('Face differs from reference (suspicious)');
+      return;
+    }
+    // otherwise clear warning
+    clearWarning();
+  }, CHECK_MS);
 }
 
-// warning/flag handlers and grace timer
+// Warning handlers
 function triggerWarning(reason){
   if(flagged) return;
-  log('Warning triggered: ' + reason);
-  warnCount++; document.getElementById('warns')?.innerText = warnCount;
-  warnMsg.textContent = '⚠️ Warning: Please face camera (strict monitoring).';
+  warnCount++; warned = true;
+  warnEl.textContent = '⚠️ Warning: Please face the camera';
   beep(280,880);
-  // start grace timer: if not cleared in GRACE_MS -> flag
+  // if there is an existing graceTimer, clear and restart
   if(graceTimer) clearTimeout(graceTimer);
-  graceTimer = setTimeout(()=> {
-    // recheck quickly once before flagging to avoid transient false positive
-    (async ()=>{
-      if(flagged) return;
-      const cur = takeSnapshot(examCam);
-      if(!cur) { handleFlag('No frame during grace'); return; }
-      const ratio = imageDiffRatio(refImage, cur);
-      log('grace recheck ratio:'+ratio.toFixed(3));
-      if(ratio > WARN_THRESHOLD){
-        handleFlag('Violation persisted after warning (grace expired).');
-      } else {
-        // cleared
-        clearWarning();
-      }
-    })();
+  graceTimer = setTimeout(()=>{
+    // re-check immediately
+    const cur = takeSnapshot(examCam);
+    if(!cur){ handleFlag('No camera/frame after warning'); return; }
+    const ratio = imageDiffRatio(refImage, cur);
+    if(ratio > WARN_THRESHOLD){
+      handleFlag('Violation persisted after warning');
+    } else {
+      clearWarning();
+    }
   }, GRACE_MS);
-  // set warning state
-  warningGiven = true;
+  log('Warning: '+reason);
 }
 
 function clearWarning(){
-  if(warnMsg.textContent) log('Warning cleared');
-  warnMsg.textContent = '';
-  if(graceTimer) { clearTimeout(graceTimer); graceTimer = null; }
-  // don't reset warning count (we keep counts) but remove active warning state
-  warningGiven = false;
+  if(warnEl.textContent) log('Warning cleared');
+  warnEl.textContent = '';
+  warned = false;
+  if(graceTimer){ clearTimeout(graceTimer); graceTimer = null; }
 }
 
+// Handle immediate flag
 function handleFlag(reason){
   if(flagged) return;
-  flagged = true; flagCount++; document.getElementById('flags')?.innerText = flagCount;
-  flagMsg.textContent = '🚫 MALPRACTICE: Exam stopped due to suspicious face change.';
-  beep(900,320);
-  log('FLAGGED: ' + reason);
-  // stop timers and monitoring and camera
+  flagged = true; flagCount++;
+  flagEl.textContent = '🚫 MALPRACTICE: Exam stopped due to suspicious behavior';
+  beep(1000,320);
+  log('Flagged: '+reason);
+  // stop everything
   if(totalTimerInterval) clearInterval(totalTimerInterval);
   if(sectionTimerInterval) clearInterval(sectionTimerInterval);
   if(monitorInterval) clearInterval(monitorInterval);
   if(previewStream){ previewStream.getTracks().forEach(t=>t.stop()); previewStream=null; }
   if(examStream){ examStream.getTracks().forEach(t=>t.stop()); examStream=null; }
-  // disable UI
+  // disable inputs
   Array.from(document.querySelectorAll('input[type=radio]')).forEach(i=>i.disabled=true);
   nextBtn.disabled = true; submitBtn.disabled = true;
-  // show malpractice result
-  showFlaggedResult(reason);
-}
-
-// flagged result UI
-function showFlaggedResult(reason){
-  resultPanel.classList.remove('hidden'); resultPanel.style.display = 'block';
-  resultBox.innerHTML = `<div style="font-weight:800;color:var(--danger)">MALPRACTICE DETECTED</div>
+  // show flagged result
+  resultPanel.style.display='block';
+  resultContent.innerHTML = `<div style="font-weight:800;color:var(--danger)">MALPRACTICE DETECTED</div>
     <div style="margin-top:8px">Reason: ${reason}</div>
-    <div style="margin-top:8px">You were flagged for violating the strict monitoring rules. Exam has been stopped.</div>`;
-  document.getElementById('qbox').style.display = 'none';
+    <div style="margin-top:8px">Exam stopped.</div>`;
+  document.getElementById('qbox').style.display='none';
 }
 
-// compute results (normal end)
+// If stream ends (user closed camera), treat as violation
+function handleStreamEnded(reason){
+  log('Stream ended: '+reason);
+  // immediate warning then escalate
+  triggerWarning('Camera disconnected or blocked');
+}
+
+// Compute and show results
 function computeAndShowResults(){
-  if(flagged){
-    showFlaggedResult('Flagged before submit');
-    return;
-  }
-  // stop everything
+  if(flagged){ handleFlag('Flagged before submit'); return; }
+  // stop timers and monitoring
   if(totalTimerInterval) clearInterval(totalTimerInterval);
   if(sectionTimerInterval) clearInterval(sectionTimerInterval);
   if(monitorInterval) clearInterval(monitorInterval);
@@ -560,7 +480,7 @@ function computeAndShowResults(){
   // save current selection
   const sel = document.querySelector('input[name="opt"]:checked');
   if(sel) answers[currentSubject*5 + currentQ] = Number(sel.value);
-  // compute per subject and total
+  // compute per-subject & total
   let perSub = [], totalCorrect = 0;
   for(let s=0;s<subjects.length;s++){
     let correct=0;
@@ -572,67 +492,33 @@ function computeAndShowResults(){
     totalCorrect += correct;
   }
   const totalMarks = totalCorrect * 5;
-  let grade = '';
-  if(totalMarks >= 80) grade = 'Distinction';
-  else if(totalMarks >= 65) grade = 'Upper Class';
-  else if(totalMarks >= 50) grade = 'Lower Class';
-  else if(totalMarks >= 40) grade = 'Pass';
-  else if(totalMarks >= 30) grade = 'Play Class';
-  else grade = 'Failed — Retry';
-  // show results
-  let html = `<div style="font-weight:800">Result for ${nameInput.value}</div>`;
-  html += `<div style="margin-top:8px">Per-subject:</div><ul>`;
+  let grade='';
+  if(totalMarks >= 80) grade='Distinction';
+  else if(totalMarks >= 65) grade='Upper Class';
+  else if(totalMarks >= 50) grade='Lower Class';
+  else if(totalMarks >= 40) grade='Pass';
+  else if(totalMarks >= 30) grade='Play Class';
+  else grade='Failed — Retry';
+  // render results
+  let html = `<div style="font-weight:800">Result — ${nameInput.value}</div><div style="margin-top:8px">Per-subject:</div><ul>`;
   for(let s=0;s<subjects.length;s++){
     html += `<li>${subjects[s].name}: ${perSub[s]} / 5 (${perSub[s]*5} marks)</li>`;
   }
   html += `</ul><div style="margin-top:8px"><strong>Total: ${totalMarks} / 100</strong></div>`;
   html += `<div style="margin-top:8px"><strong>Grade: ${grade}</strong></div>`;
-  resultBox.innerHTML = html;
-  resultPanel.classList.remove('hidden'); resultPanel.style.display = 'block';
-  document.getElementById('qbox').style.display = 'none';
+  resultContent.innerHTML = html;
+  resultPanel.style.display='block';
+  document.getElementById('qbox').style.display='none';
 }
 
-// initial render question (for when exam starts)
-function renderQuestion(){ /* defined earlier; placeholder to avoid linter */ }
+// Utility log (right panel not present in simplified layout) -> console
+function log(msg){ console.log(new Date().toLocaleTimeString(),'|', msg); }
 
-// reuse earlier renderQuestion definition (duplicated here for clarity)
-function renderQuestion(){
-  const subj = subjects[currentSubject];
-  const q = subj.questions[currentQ];
-  qSubject.textContent = subj.name;
-  qText.textContent = q.q;
-  optionsEl.innerHTML = '';
-  q.opts.forEach((opt, idx)=>{
-    const id = `opt_${currentSubject}_${currentQ}_${idx}`;
-    const label = document.createElement('label');
-    label.innerHTML = `<input type="radio" name="opt" id="${id}" value="${idx}"> ${opt}`;
-    optionsEl.appendChild(label);
-  });
-  qProgress.textContent = `Q ${currentQ+1}/5 • Subject ${currentSubject+1}/${subjects.length}`;
-  const filled = answers.filter(a=>a!==null).length;
-  const pct = Math.round((filled/20)*100);
-  progressFill.style.width = pct + '%';
-}
-
-// next button handler (already defined earlier but ensure consistency)
-nextBtn.addEventListener('click', ()=>{
-  if(flagged) return alert('Exam flagged out — cannot continue');
-  const sel = document.querySelector('input[name="opt"]:checked');
-  const overall = currentSubject*5 + currentQ;
-  if(sel) answers[overall] = Number(sel.value);
-  if(currentQ < 4){ currentQ++; renderQuestion(); }
-  else {
-    if(currentSubject < subjects.length -1){
-      currentSubject++; currentQ = 0; sectionSeconds = 5*60; renderQuestion();
-    } else computeAndShowResults();
-  }
-});
-
-// retry
+// Retry
 retryBtn.addEventListener('click', ()=> location.reload());
 
-// initial log
-log('App ready — strict monitoring enabled. Enter name and press Proceed.');
+// Init: nothing until user proceeds
+log('Ready — mobile strict CBT. Enter name and proceed.');
 </script>
 </body>
 </html>
