@@ -54,7 +54,6 @@
 </head>
 <body>
 
-  <!-- Welcome Screen -->
   <div id="welcome" class="screen active">
     <h2>Welcome to CBT Exams</h2>
     <p>Powered by <strong>Atech ICT Solution</strong></p>
@@ -62,15 +61,13 @@
     <button id="proceedBtn">Proceed</button>
   </div>
 
-  <!-- Face Recognition Screen -->
   <div id="faceScreen" class="screen">
     <h3>Face Verification</h3>
-    <p>Align your face clearly before starting exam</p>
+    <p>Enter your face here to begin exam</p>
     <video id="video" autoplay muted></video>
     <div id="status">Initializing camera...</div>
   </div>
 
-  <!-- Exam Screen -->
   <div id="examScreen" class="screen">
     <h3>Exam Dashboard</h3>
     <p id="welcomeName"></p>
@@ -91,7 +88,6 @@
     const welcome = document.getElementById('welcome');
     const faceScreen = document.getElementById('faceScreen');
     const examScreen = document.getElementById('examScreen');
-
     const video = document.getElementById('video');
     const examVideo = document.getElementById('examVideo');
     const statusEl = document.getElementById('status');
@@ -101,25 +97,12 @@
     let warningGiven = false;
     let flagged = false;
 
-    // 🔊 Beep function
-    function playBeep(duration = 200, frequency = 600) {
-      try {
-        const ctx = new (window.AudioContext || window.webkitAudioContext)();
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.type = "sine";
-        osc.frequency.value = frequency;
-        gain.gain.setValueAtTime(0.2, ctx.currentTime);
-        osc.start();
-        osc.stop(ctx.currentTime + duration / 1000);
-      } catch (err) {
-        console.warn("AudioContext not supported", err);
-      }
-    }
+    const MODEL_PATHS = [
+      "./models",
+      "https://cdn.jsdelivr.net/gh/justadudewhohacks/face-api.js/weights/",
+      "https://cdn.jsdelivr.net/gh/cgarciagl/face-api.js/weights/"
+    ];
 
-    // Proceed to Face Screen
     proceedBtn.onclick = () => {
       const name = nameInput.value.trim();
       if (!name) return alert("Please enter your name!");
@@ -134,34 +117,30 @@
         video.srcObject = stream;
         await loadModels();
       } catch (err) {
-        alert("❌ Camera access denied. Please enable camera and reload.");
+        alert("❌ Camera access denied. Please enable camera.");
       }
     }
 
-    // ⚙️ Load Models with fallback system
     async function loadModels() {
-      const MODEL_URLS = [
-        "https://raw.githubusercontent.com/justadudewhohacks/face-api.js/master/weights",
-        "https://justadudewhohacks.github.io/face-api.js/models"
-      ];
-
-      for (let url of MODEL_URLS) {
+      let loaded = false;
+      for (let url of MODEL_PATHS) {
         try {
-          statusEl.textContent = `📦 Loading models from: ${url}`;
-          console.log("Trying model:", url);
-
+          console.log("📦 Loading models from:", url);
           await faceapi.nets.tinyFaceDetector.loadFromUri(url);
           await faceapi.nets.faceLandmark68Net.loadFromUri(url);
-
-          statusEl.textContent = "✅ Face detection ready. Align your face...";
-          detectFace();
-          return;
+          loaded = true;
+          break;
         } catch (err) {
-          console.warn(`⚠️ Failed to load from ${url}:`, err);
+          console.warn("❌ Failed to load models from:", url);
         }
       }
 
-      alert("❌ All model sources failed to load. Please check your internet connection.");
+      if (!loaded) {
+        statusEl.textContent = "⚠️ Error loading face detection models. Check your connection.";
+      } else {
+        statusEl.textContent = "✅ Face detection ready. Align your face...";
+        detectFace();
+      }
     }
 
     async function detectFace() {
@@ -182,6 +161,7 @@
 
       const stream = await navigator.mediaDevices.getUserMedia({ video: true });
       examVideo.srcObject = stream;
+
       monitorFace();
     }
 
@@ -191,7 +171,6 @@
       setInterval(async () => {
         const detection = await faceapi.detectSingleFace(examVideo, options).withFaceLandmarks();
         if (!detection) return;
-
         const landmarks = detection.landmarks;
         const leftEye = landmarks.getLeftEye();
         const rightEye = landmarks.getRightEye();
@@ -203,12 +182,10 @@
         if (lookAway && !warningGiven && !flagged) {
           warningGiven = true;
           warningEl.textContent = "⚠️ Please face forward — next time you'll be flagged!";
-          playBeep(300, 800);
         } else if (lookAway && warningGiven && !flagged) {
           flagged = true;
           flaggedEl.textContent = "🚫 Flagged Out: You looked away twice!";
           document.getElementById('questions').style.display = "none";
-          playBeep(1000, 300);
         } else if (!lookAway) {
           warningEl.textContent = "";
         }
