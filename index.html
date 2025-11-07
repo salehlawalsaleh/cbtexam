@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
 <title>CBT Exam — ATech ICT Solution</title>
 <meta name="theme-color" content="#16A34A" />
-<link rel="icon" href="data:," />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -24,6 +23,10 @@
   .header{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:linear-gradient(90deg,#f0fff4,#f6fff6)}
   .title{font-weight:700;color:var(--accent-600)}
   .sub{font-size:13px;color:var(--muted)}
+  .progressWrap{padding:12px 16px;border-top:1px solid rgba(0,0,0,0.03);display:flex;align-items:center;gap:12px}
+  .stepText{font-weight:700;color:var(--accent-600);font-size:14px}
+  .progressBar{flex:1;height:8px;background:#e6f6ec;border-radius:999px;overflow:hidden}
+  .progressFill{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent-600));border-radius:999px;transition:width .35s ease}
   .content{display:grid;grid-template-columns:1fr;gap:0}
   @media(min-width:880px){ .content{grid-template-columns:1fr 300px} }
   .left{padding:12px}
@@ -39,14 +42,15 @@
   .warning{color:var(--warn);font-weight:800;margin-top:8px}
   .flag{color:var(--danger);font-weight:900;margin-top:8px}
   .qbox{margin-top:12px;padding:12px;border-radius:10px;background:var(--soft)}
-  .opts label{display:block;margin:8px 0;padding:10px;border-radius:10px;border:1px solid #ecf9ed;cursor:pointer}
+  .opts label{display:block;margin:8px 0;padding:12px;border-radius:10px;border:1px solid #ecf9ed;cursor:pointer;background:white}
   .controls{display:flex;gap:10px;justify-content:flex-end;margin-top:12px}
   .timer{font-weight:800;color:var(--accent-600)}
   .resultBox{padding:12px;background:#ecfff5;border-radius:10px;margin-top:12px}
   .footer{padding:10px;text-align:center;font-size:13px;color:var(--muted);border-top:1px solid rgba(6,95,70,0.03);background:transparent}
   .help{background:#25D366;color:white;padding:8px 10px;border-radius:8px;text-decoration:none;font-weight:700}
   .secondary{background:transparent;border:1px solid rgba(6,95,70,0.08);color:var(--accent);padding:8px 12px;border-radius:8px}
-  @media(max-width:420px){ video{width:280px;height:200px} .header{padding:12px} }
+  .hidden{display:none !important}
+  @media(max-width:420px){ video{width:280px;height:200px} .header{padding:12px} .opts label{padding:10px} }
 </style>
 </head>
 <body>
@@ -54,48 +58,51 @@
     <div class="card" role="main" aria-labelledby="appTitle">
       <div class="header">
         <div>
-          <div id="appTitle" class="title">CBT Exam — ATech ICT Solution</div>
-          <div class="sub">Mobile-only • Strict monitoring • 40 questions (10 per subject) • 20 minutes</div>
+          <div id="appTitle" class="title">ATech ICT Solution — Online CBT Exam Training</div>
+          <div class="sub">Mobile-only • Strict monitoring • 40 questions • 20 minutes</div>
         </div>
         <div><a class="help" href="https://wa.me/2348145415083" target="_blank" rel="noopener">Help / Support</a></div>
       </div>
 
+      <!-- progress -->
+      <div class="progressWrap">
+        <div class="stepText" id="stepText">Step 1 of 4 — Enter name</div>
+        <div class="progressBar"><div class="progressFill" id="progressFill"></div></div>
+      </div>
+
       <div class="content">
         <div class="left">
-          <!-- Welcome -->
-          <div id="welcomeCard" class="card-section" aria-live="polite">
+          <!-- STEP 1: Welcome -->
+          <div id="step1" class="card-section">
+            <h3 style="margin:0 0 8px 0">Welcome</h3>
+            <p class="muted">ATech ICT Solution — Welcome to Online CBT Exam Training</p>
             <label class="muted">Enter your full name</label>
             <input id="nameInput" placeholder="e.g. Musa Ahmed" aria-label="Full name">
             <div style="margin-top:12px" class="row">
-              <button id="proceedBtn">Proceed</button>
+              <button id="proceedBtn">Next</button>
               <div class="muted" style="flex:1;margin-left:8px">Allow camera when prompted. Strict monitoring enabled.</div>
             </div>
           </div>
 
-          <!-- Face verification (capture reference) -->
-          <div id="captureCard" class="card-section hidden" aria-hidden="true">
-            <h3 style="margin:0 0 8px 0">1 • Capture reference</h3>
+          <!-- STEP 2: Reference capture -->
+          <div id="step2" class="card-section hidden" aria-hidden="true">
+            <h3 style="margin:0 0 8px 0">Step 2 — Reference picture</h3>
+            <p class="muted">Capture a clear photo of your face. This reference is used during monitoring.</p>
             <div class="videoWrap"><video id="preview" autoplay muted playsinline></video></div>
             <div id="captureStatus" class="status">Initializing camera...</div>
             <div style="margin-top:10px" class="row">
               <button id="captureBtn" class="secondary" disabled>Capture Reference</button>
-              <button id="retakeBtn" style="display:none;background:#ef4444">Retake</button>
-              <div class="muted" style="flex:1;margin-left:8px">Reference photo is strict baseline — leaving camera or swapping face = malpractice.</div>
+              <button id="retakeBtn" class="secondary hidden" style="background:#ef4444;color:white">Retake</button>
+              <div style="margin-left:8px;flex:1" class="muted">If reference changes or camera is blocked you'll be flagged.</div>
             </div>
-          </div>
-
-          <!-- Start exam -->
-          <div id="startCard" class="card-section hidden" aria-hidden="true">
-            <h3 style="margin:0 0 8px 0">2 • Start exam</h3>
-            <div class="muted">Candidate: <span id="displayName"></span></div>
-            <div style="margin-top:12px" class="row">
+            <div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end">
+              <button id="backToStep1" class="secondary">Back</button>
               <button id="startBtn" disabled>Start Exam</button>
-              <button id="backToCapture" class="secondary" style="background:#ef4444;color:white">Back</button>
             </div>
           </div>
 
-          <!-- Exam -->
-          <div id="examCard" class="card-section hidden" aria-hidden="true">
+          <!-- STEP 3: Exam -->
+          <div id="step3" class="card-section hidden" aria-hidden="true">
             <div style="display:flex;justify-content:space-between;align-items:center">
               <div style="font-weight:800">Candidate: <span id="candName"></span></div>
               <div style="text-align:right">
@@ -111,7 +118,7 @@
             <div id="qbox" class="qbox">
               <div id="qSubject" style="font-weight:800"></div>
               <div id="qText" style="margin-top:8px;font-weight:700"></div>
-              <div id="options" class="opts"></div>
+              <div id="options" class="opts" role="group" aria-label="Question options"></div>
 
               <div class="controls">
                 <button id="prevBtn" class="secondary">Previous</button>
@@ -120,10 +127,17 @@
               </div>
               <div style="margin-top:8px" class="muted" id="progressText"></div>
             </div>
+          </div>
 
-            <div id="resultPanel" style="display:none">
-              <div class="resultBox" id="resultContent"></div>
-              <div style="display:flex;justify-content:flex-end;margin-top:12px">
+          <!-- STEP 4: Results -->
+          <div id="step4" class="card-section hidden" aria-hidden="true">
+            <h3 style="margin:0 0 8px 0">Step 4 — Results</h3>
+            <div class="resultBox" id="resultContent"></div>
+            <div style="margin-top:12px">
+              <div style="font-weight:700">Thank you for taking the exam</div>
+              <p class="muted">Contact ATech ICT Solution for support:</p>
+              <p><a class="help" href="https://wa.me/2348145415083" target="_blank" rel="noopener">wa.me/08145415083</a></p>
+              <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:8px">
                 <button id="retryBtn">Retry</button>
               </div>
             </div>
@@ -137,9 +151,9 @@
             <ul class="muted" style="margin-top:8px">
               <li>40 questions — 10 per subject (English → Math → Civic → Nigerian Security)</li>
               <li>Each subject = 5 minutes (auto-advance)</li>
-              <li>Total = 20 minutes (auto submit when finished)</li>
-              <li>Each correct contributes to total 100 (marks per question = 100 ÷ 40)</li>
-              <li><strong>Strict:</strong> 1st violation = warning; if not corrected within 5s → flagged out. Leaving camera = flagged out.</li>
+              <li>Total = 20 minutes (auto submit)</li>
+              <li>Each correct contributes to total 100 (marks per question = 2.5)</li>
+              <li><strong>Strict:</strong> 1st violation = warning; if not corrected within 5s → flagged out. Leaving/covering camera = flagged out.</li>
             </ul>
           </div>
 
@@ -158,14 +172,12 @@
   </div>
 
 <script>
-/* Final fixed file:
-   - Restored sectionTimer element usage
-   - Safe null checks
-   - Improved button classes & small UX fixes
-   - 10 questions per subject (40 total)
+/* Multi-step CBT with progress indicator.
+   Steps:
+   1 = name, 2 = capture ref + start, 3 = exam, 4 = results
 */
 
-// QUESTIONS: 10 per subject
+// QUESTIONS: 10 per subject (40 total)
 const subjects = [
   { name:'English', questions:[
     {q:'Sentence is a group of ...', opts:['A. World','B. Word','C. Alphabet'], a:1},
@@ -218,18 +230,22 @@ const subjects = [
 ];
 
 // DOM refs
+const stepText = document.getElementById('stepText');
+const progressFill = document.getElementById('progressFill');
+const step1 = document.getElementById('step1');
+const step2 = document.getElementById('step2');
+const step3 = document.getElementById('step3');
+const step4 = document.getElementById('step4');
+
 const proceedBtn = document.getElementById('proceedBtn');
 const nameInput = document.getElementById('nameInput');
-const captureCard = document.getElementById('captureCard');
+const preview = document.getElementById('preview');
 const captureBtn = document.getElementById('captureBtn');
 const retakeBtn = document.getElementById('retakeBtn');
-const preview = document.getElementById('preview');
 const captureStatus = document.getElementById('captureStatus');
-const startCard = document.getElementById('startCard');
+const backToStep1 = document.getElementById('backToStep1');
 const startBtn = document.getElementById('startBtn');
-const backToCapture = document.getElementById('backToCapture');
-const displayName = document.getElementById('displayName');
-const examCard = document.getElementById('examCard');
+
 const examCam = document.getElementById('examCam');
 const qSubject = document.getElementById('qSubject');
 const qText = document.getElementById('qText');
@@ -243,30 +259,54 @@ const sectionTimerEl = document.getElementById('sectionTimer');
 const candName = document.getElementById('candName');
 const warnEl = document.getElementById('warnMsg');
 const flagEl = document.getElementById('flagMsg');
-const resultPanel = document.getElementById('resultPanel');
 const resultContent = document.getElementById('resultContent');
 const retryBtn = document.getElementById('retryBtn');
-const welcomeCard = document.getElementById('welcomeCard');
 
-// state
-let previewStream=null, examStream=null;
-let refImage=null;
 const QUESTIONS_PER_SUBJECT = 10;
 const SUBJECT_COUNT = subjects.length;
 const TOTAL_QUESTIONS = SUBJECT_COUNT * QUESTIONS_PER_SUBJECT; // 40
+const MARK_PER_Q = 100 / TOTAL_QUESTIONS; // 2.5
+
+// state
+let currentStep = 1;
+let previewStream = null;
+let examStream = null;
+let refImage = null; // ImageData
 let totalSeconds = 20*60, sectionSeconds = 5*60;
 let totalTimerInterval=null, sectionTimerInterval=null, monitorInterval=null, graceTimer=null;
 let currentSubject=0, currentQ=0;
 let answers = new Array(TOTAL_QUESTIONS).fill(null);
-let warned=false, flagged=false, warnCount=0, flagCount=0;
-const MARK_PER_Q = 100 / TOTAL_QUESTIONS; // 2.5
-
-// canvas for snapshots
+let warned=false, flagged=false;
 const canvas = document.createElement('canvas'); canvas.width=320; canvas.height=240;
 const ctx = canvas.getContext('2d');
 
+// helpers
+function setStep(n){
+  currentStep = n;
+  // hide all
+  step1.classList.add('hidden');
+  step2.classList.add('hidden');
+  step3.classList.add('hidden');
+  step4.classList.add('hidden');
+  // show needed
+  if(n===1) step1.classList.remove('hidden');
+  if(n===2) step2.classList.remove('hidden');
+  if(n===3) step3.classList.remove('hidden');
+  if(n===4) step4.classList.remove('hidden');
+  // progress UI
+  const titles = ['Enter name','Reference picture','Exam in progress','Results'];
+  stepText.textContent = `Step ${n} of 4 — ${titles[n-1]}`;
+  progressFill.style.width = `${((n-1)/3)*100}%`;
+}
+// snapshot helpers
 function takeSnapshot(videoEl){
   try{ ctx.drawImage(videoEl,0,0,canvas.width,canvas.height); return ctx.getImageData(0,0,canvas.width,canvas.height); }catch(e){ return null; }
+}
+function avgLuminance(img){
+  if(!img) return 0;
+  let sum=0,cnt=0;
+  for(let i=0;i<img.data.length;i+=4*30){ const r=img.data[i], g=img.data[i+1], b=img.data[i+2]; sum += 0.299*r + 0.587*g + 0.114*b; cnt++; }
+  return Math.round(sum/cnt || 0);
 }
 function imageDiffRatio(a,b){
   if(!a||!b) return 1;
@@ -277,21 +317,13 @@ function imageDiffRatio(a,b){
   const max = (a.data.length/(4*step)) * 3 * 255;
   return diff / max;
 }
-function avgLuminance(img){
-  if(!img) return 0;
-  let sum=0,cnt=0;
-  for(let i=0;i<img.data.length;i+=4*30){ const r=img.data[i], g=img.data[i+1], b=img.data[i+2]; sum += 0.299*r + 0.587*g + 0.114*b; cnt++; }
-  return Math.round(sum/cnt || 0);
-}
 function beep(ms=200,f=800){ try{ const A=new (window.AudioContext||window.webkitAudioContext)(); const o=A.createOscillator(); const g=A.createGain(); o.connect(g); g.connect(A.destination); o.type='sine'; o.frequency.value=f; g.gain.setValueAtTime(0.16,A.currentTime); o.start(); o.stop(A.currentTime+ms/1000);}catch(e){} }
 
-// UI flow
+// Step 1 -> Step 2 (open preview)
 proceedBtn.addEventListener('click', async ()=>{
   const name = nameInput.value.trim();
   if(!name) return alert('Enter your name');
-  welcomeCard.style.display='none';
-  captureCard.style.display='block';
-  displayName.textContent = name;
+  setStep(2);
   try{
     previewStream = await navigator.mediaDevices.getUserMedia({video:{facingMode:'user'}, audio:false});
     preview.srcObject = previewStream;
@@ -299,44 +331,43 @@ proceedBtn.addEventListener('click', async ()=>{
     captureBtn.disabled = false;
   }catch(e){
     alert('Camera permission needed. Allow camera and reload.');
+    setStep(1);
   }
 });
 
-backToCapture.addEventListener('click', ()=>{
-  // if user goes back, try to restart preview
-  if(previewStream){ previewStream.getTracks().forEach(t=>t.stop()); previewStream=null; }
-  captureCard.style.display='block';
-  startCard.style.display='none';
+// back to step1
+backToStep1.addEventListener('click', ()=>{
+  if(previewStream){ previewStream.getTracks().forEach(t=>t.stop()); previewStream = null; }
+  setStep(1);
 });
 
+// capture reference
 captureBtn.addEventListener('click', ()=>{
   const img = takeSnapshot(preview);
   if(!img) return alert('Capture failed. Try again.');
-  // check light
   const lum = avgLuminance(img);
   if(lum < 25) { alert('Too dark — increase lighting and retake'); return; }
   refImage = img;
-  captureStatus.textContent = 'Reference captured. If clear, press Start Exam.';
-  beep(150,1000);
-  retakeBtn.style.display='inline-block';
+  captureStatus.textContent = 'Reference captured. Ready to start.';
+  retakeBtn.classList.remove('hidden');
   startBtn.disabled = false;
-  startCard.style.display='block';
+  beep(150,1000);
 });
 
+// retake
 retakeBtn.addEventListener('click', ()=>{
   refImage = null;
   captureStatus.textContent = 'Reference cleared. Capture again.';
-  retakeBtn.style.display='none';
+  retakeBtn.classList.add('hidden');
   startBtn.disabled = true;
 });
 
+// Start exam (Step 3)
 startBtn.addEventListener('click', async ()=>{
   if(!refImage) return alert('Please capture reference first.');
   // stop preview to free camera
   if(previewStream){ previewStream.getTracks().forEach(t=>t.stop()); previewStream=null; }
-  captureCard.style.display='none';
-  startCard.style.display='none';
-  examCard.style.display='block';
+  setStep(3);
   candName.textContent = nameInput.value.trim();
   try{
     examStream = await navigator.mediaDevices.getUserMedia({video:{facingMode:'user'}, audio:false});
@@ -347,11 +378,11 @@ startBtn.addEventListener('click', async ()=>{
     location.reload();
     return;
   }
-  // init
+  // init exam state
   totalSeconds = 20*60; sectionSeconds = 5*60;
   currentSubject = 0; currentQ = 0;
   answers = new Array(TOTAL_QUESTIONS).fill(null);
-  warned=false; flagged=false; warnCount=0; flagCount=0;
+  warned=false; flagged=false;
   updateTimersUI();
   renderQuestion();
   startTotalTimer();
@@ -377,7 +408,7 @@ function renderQuestion(){
   nextBtn.textContent = (currentSubject===SUBJECT_COUNT-1 && currentQ===QUESTIONS_PER_SUBJECT-1) ? 'Finish' : 'Next';
 }
 
-// prev / next
+// navigation
 prevBtn.addEventListener('click', ()=>{
   if(flagged) return;
   if(currentQ > 0){ currentQ--; renderQuestion(); }
@@ -389,7 +420,6 @@ nextBtn.addEventListener('click', ()=>{
   const sel = document.querySelector('input[name="opt"]:checked');
   const overall = currentSubject*QUESTIONS_PER_SUBJECT + currentQ;
   if(sel) answers[overall] = Number(sel.value);
-  // move forward
   if(currentQ < QUESTIONS_PER_SUBJECT-1){ currentQ++; renderQuestion(); }
   else {
     if(currentSubject < SUBJECT_COUNT - 1){ currentSubject++; currentQ = 0; sectionSeconds = 5*60; renderQuestion(); }
@@ -400,7 +430,7 @@ nextBtn.addEventListener('click', ()=>{
 submitBtn.addEventListener('click', ()=> { if(confirm('Submit exam now?')) computeAndShowResults(); });
 
 // timers
-function updateTimersUI(){ const m=Math.floor(totalSeconds/60), s=totalSeconds%60; totalTimerEl.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`; const sm=Math.floor(sectionSeconds/60), ss=sectionSeconds%60; if(sectionTimerEl) sectionTimerEl.textContent = `${String(sm).padStart(2,'0')}:${String(ss).padStart(2,'0')}`; }
+function updateTimersUI(){ const m=Math.floor(totalSeconds/60), s=totalSeconds%60; totalTimerEl.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`; const sm=Math.floor(sectionSeconds/60), ss=sectionSeconds%60; sectionTimerEl.textContent = `${String(sm).padStart(2,'0')}:${String(ss).padStart(2,'0')}`; }
 function startTotalTimer(){ updateTimersUI(); totalTimerInterval = setInterval(()=>{ totalSeconds--; if(totalSeconds<=0){ clearInterval(totalTimerInterval); clearInterval(sectionTimerInterval); computeAndShowResults(); } updateTimersUI(); },1000); }
 function startSectionTimer(){ updateTimersUI(); sectionTimerInterval = setInterval(()=>{ sectionSeconds--; if(sectionSeconds<=0){ if(currentSubject < SUBJECT_COUNT-1){ currentSubject++; currentQ=0; sectionSeconds = 5*60; renderQuestion(); } else computeAndShowResults(); } updateTimersUI(); },1000); }
 
@@ -429,7 +459,6 @@ function startMonitoring(){
 
 function triggerWarning(reason){
   if(flagged) return;
-  warnCount++;
   warnEl.textContent = '⚠️ Warning: Please face the camera';
   beep(280,880);
   if(graceTimer) clearTimeout(graceTimer);
@@ -443,14 +472,13 @@ function triggerWarning(reason){
 }
 
 function clearWarning(){
-  if(warnEl.textContent) console.log('warning cleared');
   warnEl.textContent = '';
   if(graceTimer){ clearTimeout(graceTimer); graceTimer = null; }
 }
 
 function handleFlag(reason){
   if(flagged) return;
-  flagged = true; flagCount++;
+  flagged = true;
   flagEl.textContent = '🚫 MALPRACTICE: Exam stopped due to suspicious behavior';
   beep(1000,320);
   if(totalTimerInterval) clearInterval(totalTimerInterval);
@@ -460,10 +488,11 @@ function handleFlag(reason){
   if(examStream){ examStream.getTracks().forEach(t=>t.stop()); examStream=null; }
   Array.from(document.querySelectorAll('input[type=radio]')).forEach(i=>i.disabled=true);
   nextBtn.disabled = true; submitBtn.disabled = true; prevBtn.disabled = true;
-  resultPanel.style.display='block';
+  // show flagged result in step4
   resultContent.innerHTML = `<div style="font-weight:800;color:var(--danger)">MALPRACTICE DETECTED</div>
     <div style="margin-top:8px">Reason: ${reason}</div>
     <div style="margin-top:8px">Exam stopped.</div>`;
+  setStep(4);
   document.getElementById('qbox').style.display='none';
 }
 
@@ -514,14 +543,17 @@ function computeAndShowResults(){
   html += `<div style="margin-top:8px"><strong>Grade: ${grade}</strong></div>`;
 
   resultContent.innerHTML = html;
-  resultPanel.style.display='block';
+  // go to results step
+  setStep(4);
   document.getElementById('qbox').style.display='none';
 }
 
 // retry
 retryBtn.addEventListener('click', ()=> location.reload());
 
-console.log('Ready — 10 questions per subject (40 total).');
+// init
+setStep(1);
+console.log('Ready — multi-step CBT (1: name, 2: ref, 3: exam, 4: result).');
 </script>
 </body>
 </html>
