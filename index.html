@@ -1,5 +1,4 @@
 <!doctype html>
-
 <html lang="ha">
 <head>
 <meta charset="utf-8" />
@@ -41,6 +40,7 @@
   input[type="text"]:focus{box-shadow:0 10px 30px rgba(6,95,70,0.06); outline:none}
   .btn{background:var(--accent);color:white;border:0;padding:12px 16px;border-radius:12px;font-weight:700;cursor:pointer;display:inline-flex;gap:8px;align-items:center}
   .btn.secondary{background:transparent;border:1px solid rgba(6,95,70,0.08);color:var(--accent-700);padding:10px 12px;border-radius:10px}
+  .btn.print{background:linear-gradient(90deg,#06b6d4,#0891b2);border-radius:10px;padding:10px 12px}
   .btn:disabled{opacity:.6;cursor:not-allowed}
   .videoWrap{display:flex;justify-content:center;margin:12px 0}
   video{width:300px;height:220px;border-radius:12px;border:4px solid rgba(22,163,74,0.06);background:#000;object-fit:cover;box-shadow:0 10px 30px rgba(2,6,23,0.06)}
@@ -72,12 +72,15 @@
   /* profile pill for displayName in step 2 */
   .profilePill{display:inline-flex;gap:10px;align-items:center;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg,#fbfff9,#f6fff6);border:1px solid rgba(6,95,70,0.04)}
   .profileAvatar{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-700));display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
-  /* modern congrats card (small addition only for step 4) */
-  .congratsCard{display:flex;gap:12px;align-items:center;padding:14px;border-radius:14px;background:linear-gradient(135deg,#ecfdf5,#e6fff8);border:1px solid rgba(6,95,70,0.06);box-shadow:0 12px 30px rgba(6,95,70,0.06)}
-  .congratsIcon{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-700));display:flex;align-items:center;justify-content:center;color:white;font-size:22px;font-weight:800}
-  .congratsText{font-weight:800;color:var(--accent-700);font-size:18px}
-  .resultSummary{margin-top:10px}
   @media(max-width:420px){ video{width:240px;height:180px} .btn{padding:10px 12px} .optCard{padding:10px} }
+
+  /* small modern congratulations card (only used inside results) */
+  .congratsCard{
+    display:flex;gap:12px;align-items:center;padding:12px;border-radius:12px;
+    background:linear-gradient(90deg,#ecfeff,#f0fff9);border:1px solid rgba(6,95,70,0.06);
+    box-shadow:0 12px 30px rgba(6,95,70,0.04);
+  }
+  .congratsIcon{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,#06b6d4,#0891b2);display:flex;align-items:center;justify-content:center;color:white;font-size:22px;font-weight:800}
 </style>
 </head>
 <body>
@@ -93,139 +96,147 @@
       <div style="display:flex;gap:10px;align-items:center">
         <a class="helpLink" href="https://wa.me/2348145415083" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Help</a>
       </div>
-    </div><div class="main">
-  <div class="card left">
-    <!-- pageTitle/subtitle will be hidden automatically when user advances -->
-    <div class="title" id="pageTitle">Online CBT — ATech ICT Solution</div>
-    <div class="muted" id="pageSubtitle" style="margin-bottom:8px">Multi-step exam training — camera monitoring enabled</div>
-
-    <div class="progressWrap">
-      <div class="stepText" id="stepText">Step 1 — Enter name</div>
-      <div class="progressBar"><div class="progressFill" id="progressFill"></div></div>
     </div>
 
-    <!-- STEP 1 -->
-    <div id="step1">
-      <div style="margin:10px 0">
-        <label class="muted">Enter your full name</label>
-        <div class="inputWrap" style="margin-top:8px">
-          <div class="inputIcon"><i class="fa-solid fa-user"></i></div>
-          <input id="nameInput" placeholder="Musa Ahmed" autocomplete="name" />
+    <div class="main">
+      <div class="card left">
+        <!-- pageTitle/subtitle will be hidden automatically when user advances -->
+        <div class="title" id="pageTitle">Online CBT — ATech ICT Solution</div>
+        <div class="muted" id="pageSubtitle" style="margin-bottom:8px">Multi-step exam training — camera monitoring enabled</div>
+
+        <div class="progressWrap">
+          <div class="stepText" id="stepText">Step 1 — Enter name</div>
+          <div class="progressBar"><div class="progressFill" id="progressFill"></div></div>
         </div>
-      </div>
-      <div style="display:flex;gap:10px;justify-content:flex-end">
-        <button id="proceedBtn" class="btn"><i class="fa-solid fa-arrow-right"></i> Next</button>
-      </div>
-    </div>
 
-    <!-- STEP 2 (capture ref) -->
-    <div id="step2" class="hidden" aria-hidden="true">
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <div style="display:flex;flex-direction:column;gap:6px">
-          <!-- profile pill -->
-          <div class="profilePill" id="profilePill">
-            <div class="profileAvatar" id="profileAvatar"><i class="fa-solid fa-user"></i></div>
-            <div style="font-weight:800" id="displayName">—</div>
+        <!-- STEP 1 -->
+        <div id="step1">
+          <div style="margin:10px 0">
+            <label class="muted">Enter your full name</label>
+            <div class="inputWrap" style="margin-top:8px">
+              <div class="inputIcon"><i class="fa-solid fa-user"></i></div>
+              <input id="nameInput" placeholder="Musa Ahmed" autocomplete="name" />
+            </div>
           </div>
-          <div class="muted" style="font-size:13px">Welcome — capture your reference</div>
+          <div style="display:flex;gap:10px;justify-content:flex-end">
+            <button id="proceedBtn" class="btn"><i class="fa-solid fa-arrow-right"></i> Next</button>
+          </div>
         </div>
-        <div class="muted">Reference photo used for monitoring</div>
+
+        <!-- STEP 2 (capture ref) -->
+        <div id="step2" class="hidden" aria-hidden="true">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <!-- profile pill -->
+              <div class="profilePill" id="profilePill">
+                <div class="profileAvatar" id="profileAvatar"><i class="fa-solid fa-user"></i></div>
+                <div style="font-weight:800" id="displayName">—</div>
+              </div>
+              <div class="muted" style="font-size:13px">Welcome — capture your reference</div>
+            </div>
+            <div class="muted">Reference photo used for monitoring</div>
+          </div>
+
+          <!-- red instruction box -->
+          <div class="redBox" id="redInstr">
+            INSTRUCTIONS: Ensure your face is centered, well-lit and not wearing shades. Reference will be used for continuous monitoring.
+          </div>
+
+          <div class="videoWrap"><video id="preview" autoplay muted playsinline></video></div>
+          <div id="captureStatus" class="status muted">Waiting for camera...</div>
+
+          <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px">
+            <button id="backToStep1" class="btn secondary"><i class="fa-solid fa-arrow-left"></i> Back</button>
+            <button id="captureBtn" class="btn secondary" disabled><i class="fa-solid fa-camera"></i> Capture</button>
+            <button id="startBtn" class="btn" disabled><i class="fa-solid fa-play"></i> Start Exam</button>
+          </div>
+        </div>
+
+        <!-- STEP 3: Exam (no rules shown here) -->
+        <div id="step3" class="hidden" aria-hidden="true">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div style="font-weight:800">Candidate: <span id="candName"></span></div>
+            <div style="text-align:right">
+              <div class="timer">Total: <span id="totalTimer">10:00</span></div>
+              <div class="muted">Section: <span id="sectionTimer">02:30</span></div>
+            </div>
+          </div>
+
+          <div class="videoWrap" style="margin-top:12px"><video id="examCam" autoplay muted playsinline></video></div>
+          <div id="warnMsg" class="warning" role="alert"></div>
+          <div id="flagMsg" class="flag" role="alert"></div>
+
+          <div id="qbox" class="qbox">
+            <div id="qSubject" style="font-weight:800"></div>
+            <div id="qText" style="margin-top:8px;font-weight:700"></div>
+            <div id="options" class="opts" role="group" aria-label="Question options"></div>
+
+            <div class="controls">
+              <button id="prevBtn" class="btn secondary"><i class="fa-solid fa-chevron-left"></i> Previous</button>
+              <button id="nextBtn" class="btn"><i class="fa-solid fa-chevron-right"></i> Next</button>
+              <button id="submitBtn" class="btn"><i class="fa-solid fa-paper-plane"></i> Submit</button>
+            </div>
+            <div style="margin-top:8px" class="muted" id="progressText"></div>
+          </div>
+        </div>
+
+        <!-- STEP 4: Results (loader -> then results) -->
+        <div id="step4" class="hidden" aria-hidden="true">
+          <h3 style="margin:0 0 8px 0">Results</h3>
+
+          <!-- loading container -->
+          <div id="resultsLoader" class="loaderWrap hidden" aria-hidden="true">
+            <div class="spinner" aria-hidden="true"></div>
+            <div class="muted">We are calculating your results — please wait</div>
+            <div class="percent" id="percentText">0%</div>
+          </div>
+
+          <div id="resultContent" class="resultBox hidden" aria-hidden="true"></div>
+
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+            <div class="muted">Thank you for taking the exam</div>
+            <a class="helpLink" href="https://wa.me/2348145415083" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Contact</a>
+          </div>
+          <div style="display:flex;justify-content:flex-end;margin-top:12px">
+            <button id="retryBtn" class="btn secondary">Retry</button>
+          </div>
+        </div>
+
       </div>
 
-      <!-- red instruction box -->
-      <div class="redBox" id="redInstr">
-        INSTRUCTIONS: Ensure your face is centered, well-lit and not wearing shades. Reference will be used for continuous monitoring.
-      </div>
-
-      <div class="videoWrap"><video id="preview" autoplay muted playsinline></video></div>
-      <div id="captureStatus" class="status muted">Waiting for camera...</div>
-
-      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px">
-        <button id="backToStep1" class="btn secondary"><i class="fa-solid fa-arrow-left"></i> Back</button>
-        <button id="captureBtn" class="btn secondary" disabled><i class="fa-solid fa-camera"></i> Capture</button>
-        <button id="startBtn" class="btn" disabled><i class="fa-solid fa-play"></i> Start Exam</button>
-      </div>
+      <aside id="rulesAside" class="card aside">
+        <div class="title" style="font-size:16px">Exam Rules</div>
+        <div class="muted" style="margin-top:8px">
+          <ul class="rules">
+            <li>40 questions — 10 per subject (English → Math → Civic → Nigerian Security)</li>
+            <li>Each subject = 2.5 minutes (auto-advance)</li>
+            <li>Total = 10 minutes (auto submit)</li>
+            <li>Marks per question = 2.5 (total = 100)</li>
+            <li><strong>Strict:</strong> 1st violation = warning; if not corrected within 5s → flagged out.</li>
+          </ul>
+        </div>
+        <div style="margin-top:12px">
+          <div class="muted">Contact</div>
+          <div style="margin-top:8px"><a class="helpLink" href="https://wa.me/2348145415083" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> wa.me/08145415083</a></div>
+        </div>
+      </aside>
     </div>
 
-    <!-- STEP 3: Exam (no rules shown here) -->
-    <div id="step3" class="hidden" aria-hidden="true">
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <div style="font-weight:800">Candidate: <span id="candName"></span></div>
-        <div style="text-align:right">
-          <div class="timer">Total: <span id="totalTimer">10:00</span></div>
-          <div class="muted">Section: <span id="sectionTimer">02:30</span></div>
-        </div>
-      </div>
-
-      <div class="videoWrap" style="margin-top:12px"><video id="examCam" autoplay muted playsinline></video></div>
-      <div id="warnMsg" class="warning" role="alert"></div>
-      <div id="flagMsg" class="flag" role="alert"></div>
-
-      <div id="qbox" class="qbox">
-        <div id="qSubject" style="font-weight:800"></div>
-        <div id="qText" style="margin-top:8px;font-weight:700"></div>
-        <div id="options" class="opts" role="group" aria-label="Question options"></div>
-
-        <div class="controls">
-          <button id="prevBtn" class="btn secondary"><i class="fa-solid fa-chevron-left"></i> Previous</button>
-          <button id="nextBtn" class="btn"><i class="fa-solid fa-chevron-right"></i> Next</button>
-          <button id="submitBtn" class="btn"><i class="fa-solid fa-paper-plane"></i> Submit</button>
-        </div>
-        <div style="margin-top:8px" class="muted" id="progressText"></div>
-      </div>
-    </div>
-
-    <!-- STEP 4: Results (loader -> then results) -->
-    <div id="step4" class="hidden" aria-hidden="true">
-      <h3 style="margin:0 0 8px 0">Results</h3>
-
-      <!-- loading container -->
-      <div id="resultsLoader" class="loaderWrap hidden" aria-hidden="true">
-        <div class="spinner" aria-hidden="true"></div>
-        <div class="muted">We are calculating your results — please wait</div>
-        <div class="percent" id="percentText">0%</div>
-      </div>
-
-      <div id="resultContent" class="resultBox hidden" aria-hidden="true"></div>
-
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
-        <div class="muted">Thank you for taking the exam</div>
-        <a class="helpLink" href="https://wa.me/2348145415083" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Contact</a>
-      </div>
-      <div style="display:flex;justify-content:flex-end;margin-top:12px;gap:8px">
-        <button id="retryBtn" class="btn secondary">Retry</button>
-        <!-- Print button will be shown once results are ready -->
-        <button id="printResultBtn" class="btn" style="display:none"><i class="fa-solid fa-print"></i> Print Result</button>
-      </div>
-    </div>
-
+    <div class="footer">© ATech ICT Solution</div>
   </div>
 
-  <aside id="rulesAside" class="card aside">
-    <div class="title" style="font-size:16px">Exam Rules</div>
-    <div class="muted" style="margin-top:8px">
-      <ul class="rules">
-        <li>40 questions — 10 per subject (English → Math → Civic → Nigerian Security)</li>
-        <li>Each subject = 2 minutes 30 seconds (auto-advance)</li>
-        <li>Total = 10 minutes (auto submit)</li>
-        <li>Marks per question = 2.5 (total = 100)</li>
-        <li><strong>Strict:</strong> 1st violation = warning; if not corrected within 5s → flagged out.</li>
-      </ul>
-    </div>
-    <div style="margin-top:12px">
-      <div class="muted">Contact</div>
-      <div style="margin-top:8px"><a class="helpLink" href="https://wa.me/2348145415083" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> wa.me/08145415083</a></div>
-    </div>
-  </aside>
-</div>
+  <!-- toasts container -->
+  <div class="toasts" id="toasts"></div>
 
-<div class="footer">© ATech ICT Solution</div>
+  <!-- confirm overlay -->
+  <div id="confirmOverlay" class="hidden"></div>
 
-  </div>  <!-- toasts container -->  <div class="toasts" id="toasts"></div>  <!-- confirm overlay -->  <div id="confirmOverlay" class="hidden"></div><script>
-/* Adjusted multi-step CBT logic:
-   - Added Print Result button in Step 4 (prints a compact result sheet with reference picture, subject scores, total & grade)
-   - Reduced total exam time from 20 -> 10 minutes and section time computed accordingly (2m30s per subject)
-   - Step4 "Congratulations" now uses a small modern card style (no other design changed)
+<script>
+/* Adjusted multi-step CBT logic with:
+   - Print result button (Step 4) showing ATech ICT, reference picture, per-subject scores, total grade
+   - Total exam time reduced from 20 -> 10 minutes
+   - Per-subject time computed from total (so 10 min ÷ 4 = 150s -> 2:30)
+   - Modern-style congratulations card inside results only
 */
 
 // ---------- question set (same as before) ----------
@@ -344,8 +355,7 @@ function imageDiffRatio(a,b){ if(!a||!b) return 1; let diff=0; const step=12; fo
 
 // ---------- state & refs ----------
 let previewStream=null, examStream=null, refImage=null;
-let refDataURL = null; // store captured reference as data URL for printing
-let lastResults = null; // store last computed results for print
+let refDataUrl = null; // <-- store captured reference as data URL for printing
 let totalSeconds=10*60, sectionSeconds=Math.floor((10*60)/4), totalTimerInterval=null, sectionTimerInterval=null;
 let monitorInterval=null, graceTimer=null;
 let currentSubject=0, currentQ=0;
@@ -367,7 +377,6 @@ const pageTitle = document.getElementById('pageTitle'), pageSubtitle = document.
 const rulesAside = document.getElementById('rulesAside');
 const profileAvatar = document.getElementById('profileAvatar');
 const resultsLoader = document.getElementById('resultsLoader'), percentText = document.getElementById('percentText');
-const printResultBtn = document.getElementById('printResultBtn');
 
 // ---------- helpers ----------
 function shuffleArray(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
@@ -432,8 +441,12 @@ captureBtn.addEventListener('click', ()=>{
   const lum = avgLuminance(img);
   if(lum < 25){ showToast('Too dark — increase lighting and retake', 'warn'); return; }
   refImage = img;
-  // store data url for printing later (canvas was just drawn in takeSnapshot)
-  try{ refDataURL = canvas.toDataURL('image/png'); }catch(e){ refDataURL = null; }
+  // save data URL for printing later
+  try{
+    // canvas already has current frame drawn by takeSnapshot, but to be safe redraw from previewVideo
+    ctx.drawImage(previewVideo,0,0,canvas.width,canvas.height);
+    refDataUrl = canvas.toDataURL('image/png');
+  }catch(e){ refDataUrl = null; }
   showToast('Reference photo captured', 'success', 1400);
   startBtn.disabled = false;
 });
@@ -453,8 +466,10 @@ startBtn.addEventListener('click', async ()=>{
     location.reload();
     return;
   }
-  // reduced total time to 10 minutes and compute per-section time
-  totalSeconds = 10*60; sectionSeconds = Math.floor(totalSeconds / SUBJECT_COUNT); currentSubject=0; currentQ=0;
+  // totalSeconds set to 10 minutes; sectionSeconds evenly distributed across subjects
+  totalSeconds = 10*60;
+  sectionSeconds = Math.floor((10*60)/SUBJECT_COUNT);
+  currentSubject=0; currentQ=0;
   answers = new Array(TOTAL_QUESTIONS).fill(null); warned=false; flagged=false;
   updateTimersUI(); renderQuestion(); startTotalTimer(); startSectionTimer(); startMonitoring();
   showToast('Exam started — monitoring active', 'info', 1400);
@@ -503,7 +518,7 @@ nextBtn.addEventListener('click', ()=>{
   if(flagged){ showToast('Exam flagged — cannot continue', 'error'); return; }
   if(currentQ < QUESTIONS_PER_SUBJECT-1){ currentQ++; renderQuestion(); }
   else {
-    if(currentSubject < SUBJECT_COUNT - 1){ currentSubject++; currentQ=0; sectionSeconds = Math.floor(totalSeconds / SUBJECT_COUNT); renderQuestion(); }
+    if(currentSubject < SUBJECT_COUNT - 1){ currentSubject++; currentQ=0; sectionSeconds = Math.floor((10*60)/SUBJECT_COUNT); renderQuestion(); }
     else computeAndShowResults();
   }
 });
@@ -516,7 +531,7 @@ submitBtn.addEventListener('click', async ()=>{
 // timers
 function updateTimersUI(){ const m=Math.floor(totalSeconds/60), s=totalSeconds%60; totalTimerEl.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`; const sm=Math.floor(sectionSeconds/60), ss=sectionSeconds%60; sectionTimerEl.textContent = `${String(sm).padStart(2,'0')}:${String(ss).padStart(2,'0')}`; }
 function startTotalTimer(){ updateTimersUI(); totalTimerInterval = setInterval(()=>{ totalSeconds--; if(totalSeconds<=0){ clearInterval(totalTimerInterval); clearInterval(sectionTimerInterval); computeAndShowResults(); } updateTimersUI(); },1000); }
-function startSectionTimer(){ updateTimersUI(); sectionTimerInterval = setInterval(()=>{ sectionSeconds--; if(sectionSeconds<=0){ if(currentSubject < SUBJECT_COUNT-1){ currentSubject++; currentQ=0; sectionSeconds = Math.floor(totalSeconds / SUBJECT_COUNT); renderQuestion(); } else computeAndShowResults(); } updateTimersUI(); },1000); }
+function startSectionTimer(){ updateTimersUI(); sectionTimerInterval = setInterval(()=>{ sectionSeconds--; if(sectionSeconds<=0){ if(currentSubject < SUBJECT_COUNT-1){ currentSubject++; currentQ=0; sectionSeconds = Math.floor((10*60)/SUBJECT_COUNT); renderQuestion(); } else computeAndShowResults(); } updateTimersUI(); },1000); }
 
 // monitoring thresholds
 const CHECK_MS = 1500, WARN_THRESHOLD = 0.10, FLAG_THRESHOLD = 0.16, GRACE_MS = 5000, MIN_LIGHT = 25;
@@ -617,101 +632,111 @@ function computeAndShowResults(){
       }
       const totalMarksRaw = totalCorrect * MARK_PER_Q;
       const totalMarks = Math.round(totalMarksRaw * 10) / 10;
-      // build result HTML and success/fail message
+      // build result HTML and success/fail message (modern congrats card)
       let html = '';
       const passMark = 40; // you can change
 
-      // compute grade
-      let grade='';
-      if(totalMarks>=80) grade='Distinction'; else if(totalMarks>=65) grade='Upper Class'; else if(totalMarks>=50) grade='Lower Class'; else if(totalMarks>=40) grade='Pass'; else if(totalMarks>=30) grade='Play Class'; else grade='Failed — Retry';
-
+      // modern styled congratulations block (only content changed visually)
       if(totalMarks >= passMark){
-        // modern congratulations card (small, contained change)
-        html += `<div class="congratsCard"><div class="congratsIcon"><i class="fa-solid fa-trophy"></i></div><div><div class="congratsText">Congratulations</div><div class="muted" style="margin-top:6px">You passed the exam.</div></div></div>`;
+        html += `<div class="congratsCard"><div class="congratsIcon"><i class="fa-solid fa-check"></i></div><div><div style="font-weight:900;color:var(--accent-700);font-size:18px">Congratulations</div><div style="margin-top:6px" class="muted">You passed the exam</div></div></div>`;
       } else {
-        html += `<div style="font-weight:900;color:var(--danger);font-size:18px">Failed</div><div style="margin-top:8px" class="muted">You did not meet the pass mark.</div>`;
+        html += `<div class="congratsCard"><div class="congratsIcon" style="background:linear-gradient(135deg,#ef4444,#dc2626)"><i class="fa-solid fa-xmark"></i></div><div><div style="font-weight:900;color:var(--danger);font-size:18px">Result</div><div style="margin-top:6px" class="muted">You did not meet the pass mark</div></div></div>`;
       }
 
-      html += `<div class="resultSummary"><div style="margin-top:12px;font-weight:800">Result — ${nameInput.value}</div><div style="margin-top:8px">Per-subject:</div><ul>`;
+      // Header: ATech ICT + small reference image if available
+      html += `<div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px"><div style="font-weight:800">ATech ICT — CBT Result</div>`;
+      if(refDataUrl){
+        html += `<div style="display:flex;align-items:center;gap:8px"><div class="muted" style="font-size:12px">Reference:</div><img src="${refDataUrl}" alt="reference" style="width:96px;height:72px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);object-fit:cover"></div>`;
+      }
+      html += `</div>`;
+
+      // per-subject breakdown
+      html += `<div style="margin-top:12px;font-weight:800">Candidate — ${escapeHtml(nameInput.value)}</div><div style="margin-top:8px">Per-subject:</div><ul>`;
       for(let s=0;s<SUBJECT_COUNT;s++){
         const marksSub = Math.round(perSub[s] * MARK_PER_Q * 10) / 10;
         html += `<li>${subjects[s].name}: ${perSub[s]} / ${QUESTIONS_PER_SUBJECT} (${marksSub} marks)</li>`;
       }
       html += `</ul><div style="margin-top:8px"><strong>Total: ${totalMarks} / 100</strong></div>`;
+
+      let grade='';
+      if(totalMarks>=80) grade='Distinction'; else if(totalMarks>=65) grade='Upper Class'; else if(totalMarks>=50) grade='Lower Class'; else if(totalMarks>=40) grade='Pass'; else if(totalMarks>=30) grade='Play Class'; else grade='Failed — Retry';
       html += `<div style="margin-top:8px"><strong>Grade: ${grade}</strong></div>`;
 
-      // include reference picture preview (if available)
-      if(refDataURL){
-        html += `<div style="margin-top:12px"><div class="muted">Reference picture:</div><div style="margin-top:6px"><img src="${refDataURL}" alt="Reference" style="max-width:220px;border-radius:8px;border:1px solid rgba(6,95,70,0.06)"></div></div>`;
-      }
-
-      // attach a small hidden metadata for printing
-      html += `<div style="display:none" id="_print_meta">` + JSON.stringify({perSub,totalMarks,grade,name:nameInput.value,ref:refDataURL}) + `</div>`;
+      // Add print button (prints ATech ICT header, ref photo, subject scores, total)
+      html += `<div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px"><button id="printBtn" class="btn print"><i class="fa-solid fa-print"></i> Print Result</button></div>`;
 
       resultContent.innerHTML = html;
       resultContent.classList.remove('hidden');
       document.getElementById('qbox').style.display='none';
 
-      // store lastResults for printing
-      lastResults = { name: nameInput.value, perSub, totalMarks, grade, refDataURL };
-
-      // show print button and wire it
-      printResultBtn.style.display = 'inline-flex';
-      printResultBtn.onclick = ()=> printResults();
+      // attach print handler
+      const printBtn = document.getElementById('printBtn');
+      if(printBtn){
+        printBtn.addEventListener('click', ()=> printResults({
+          candidate: nameInput.value,
+          perSubject: perSub,
+          totalMarks,
+          grade,
+          refDataUrl
+        }));
+      }
     }
   }, 300);
 }
 
-// print function opens a compact print window containing the branding, reference picture, subject scores, total & grade
-function printResults(){
-  if(!lastResults) return showToast('Nothing to print yet', 'warn');
-  const w = window.open('', '_blank', 'width=800,height=900');
-  if(!w) return showToast('Popup blocked — allow popups to print', 'error');
-  const now = new Date().toLocaleString();
-  let rows = '';
-  for(let i=0;i<subjects.length;i++){
-    const scored = lastResults.perSub[i] || 0;
-    const marksSub = Math.round(scored * MARK_PER_Q * 10) / 10;
-    rows += `<tr><td>${subjects[i].name}</td><td style="text-align:center">${scored} / ${QUESTIONS_PER_SUBJECT}</td><td style="text-align:center">${marksSub}</td></tr>`;
+// Escape text for HTML insertion (small helper)
+function escapeHtml(s){ if(!s) return ''; return String(s).replace(/[&<>"']/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]; }); }
+
+// Print function: opens new window and invokes browser print
+function printResults({candidate, perSubject, totalMarks, grade, refDataUrl}){
+  const win = window.open('','_blank','width=800,height=900');
+  const styles = `
+    body{font-family:Inter,system-ui,Roboto,-apple-system,"Segoe UI",Arial;color:#052e14;padding:20px;}
+    .header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+    .title{font-weight:800;font-size:20px;color:#127338}
+    .refimg{width:120px;height:90px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);object-fit:cover}
+    table{width:100%;border-collapse:collapse;margin-top:12px}
+    th,td{padding:8px;border:1px solid #eee;text-align:left}
+    .total{font-weight:900;margin-top:12px;font-size:16px}
+    .smallmuted{color:#4b5563;font-size:13px}
+  `;
+  let subjRows = '';
+  for(let s=0;s<SUBJECT_COUNT;s++){
+    const marksSub = Math.round(perSubject[s] * MARK_PER_Q * 10) / 10;
+    subjRows += `<tr><td>${escapeHtml(subjects[s].name)}</td><td>${perSubject[s]} / ${QUESTIONS_PER_SUBJECT}</td><td>${marksSub}</td></tr>`;
   }
   const html = `
-  <html>
-  <head>
-    <title>ATech ICT — Exam Result</title>
-    <meta charset="utf-8" />
-    <style>
-      body{font-family:Inter,Arial,Helvetica,sans-serif;color:#052e14;padding:22px}
-      .brand{display:flex;align-items:center;gap:12px}
-      .logo{width:44px;height:44px;border-radius:8px;background:#16A34A;color:#fff;display:flex;align-items:center;justify-content:center}
-      h1{font-size:18px;margin:0}
-      table{width:100%;border-collapse:collapse;margin-top:12px}
-      td,th{padding:8px;border:1px solid #e6f6ed}
-      .refImg{max-width:220px;border-radius:8px;border:1px solid #e6f6ed}
-      .summary{margin-top:12px}
-    </style>  </head>
-  <body>
-    <div class="brand"><div class="logo">AT</div><div><h1>ATech ICT — Exam Result</h1><div style="font-size:12px;color:#4b5563">Printed: ${now}</div></div></div>
-    <div style="margin-top:12px"><strong>Candidate:</strong> ${escapeHtml(lastResults.name)}</div>
-    <div style="margin-top:12px">
-      <table>
-        <thead><tr><th>Subject</th><th style="width:140px">Score</th><th style="width:140px">Marks</th></tr></thead>
-        <tbody>${rows}</tbody>
-      </table>
-    </div>
-    <div class="summary">
-      <div><strong>Total:</strong> ${lastResults.totalMarks} / 100</div>
-      <div style="margin-top:6px"><strong>Grade:</strong> ${lastResults.grade}</div>
-    </div>
-    ${ lastResults.refDataURL ? `<div style="margin-top:12px"><strong>Reference picture</strong><div style="margin-top:6px"><img class="refImg" src="${lastResults.refDataURL}" alt="ref" /></div></div>` : '' }
-    <script>setTimeout(()=>{ window.print(); },300);</script>
-  </body>
-  </html>`;
-  w.document.open(); w.document.write(html); w.document.close();
-}function escapeHtml(str){ if(!str) return ''; return String(str).replace(/[&<>"']/g, function (s) { return {'&':'&','<':'<','>':'>','"':'"',"'":"'"}[s]; }); }
+    <html>
+      <head><title>ATech ICT — Result</title><style>${styles}</style></head>
+      <body>
+        <div class="header">
+          <div><div class="title">ATech ICT</div><div class="smallmuted">CBT Result</div></div>
+          ${refDataUrl? `<img src="${refDataUrl}" class="refimg" alt="reference">` : ''}
+        </div>
+        <div>Candidate: <strong>${escapeHtml(candidate)}</strong></div>
+        <table>
+          <thead><tr><th>Subject</th><th>Score (correct)</th><th>Marks</th></tr></thead>
+          <tbody>${subjRows}</tbody>
+        </table>
+        <div class="total">Total: ${totalMarks} / 100</div>
+        <div style="margin-top:6px">Grade: <strong>${escapeHtml(grade)}</strong></div>
+        <script>
+          setTimeout(()=>{ window.print(); setTimeout(()=>{ window.close(); }, 500); }, 300);
+        <\/script>
+      </body>
+    </html>
+  `;
+  win.document.open();
+  win.document.write(html);
+  win.document.close();
+}
 
-// retry retryBtn.addEventListener('click', ()=> location.reload());
+// retry
+retryBtn.addEventListener('click', ()=> location.reload());
 
-// init function prepareOnLoad(){ userQuestionPool = subjects.map(s => shuffleArray(s.questions.map(q => ({...q}))) ); showToast('Welcome — enter name to begin', 'info', 1200); } prepareOnLoad(); </script>
-
+// init
+function prepareOnLoad(){ userQuestionPool = subjects.map(s => shuffleArray(s.questions.map(q => ({...q}))) ); showToast('Welcome — enter name to begin', 'info', 1200); }
+prepareOnLoad();
+</script>
 </body>
 </html>
