@@ -2,7 +2,7 @@
 <html lang="ha">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>CBT Exam — ATech ICT Solution</title>
 <meta name="theme-color" content="#16A34A" />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -16,14 +16,12 @@
   *{box-sizing:border-box}
   body{margin:0;font-family:Inter,system-ui,Roboto,-apple-system,"Segoe UI",Arial;background:linear-gradient(180deg,#f8fff9 0%, #eefef0 100%);color:#052e14;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;align-items:stretch;justify-content:center;padding:14px;}
   .app{width:100%;max-width:980px;display:flex;flex-direction:column;gap:12px}
-  /* NAV */
   .nav{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(90deg,var(--glass),#f6fff6);padding:12px 16px;border-radius:12px;box-shadow:0 6px 18px rgba(6,95,70,0.07);border:1px solid rgba(6,95,70,0.05)}
   .brand{display:flex;gap:12px;align-items:center}
   .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-700));display:flex;align-items:center;justify-content:center;color:white;font-weight:800}
   .brand .text{font-weight:700;font-size:16px;color:var(--accent-700)}
   .nav .sub{font-size:13px;color:var(--muted)}
   .helpLink{background:#25D366;color:white;padding:8px 10px;border-radius:8px;text-decoration:none;font-weight:700;display:inline-flex;gap:8px;align-items:center}
-  /* main */
   .main{display:grid;grid-template-columns:1fr 320px;gap:14px;align-items:start}
   @media(max-width:900px){ .main{grid-template-columns:1fr} }
   .card{background:var(--card);border-radius:12px;padding:14px;box-shadow:0 12px 30px rgba(6,95,70,0.05);border:1px solid rgba(6,95,70,0.04)}
@@ -33,7 +31,6 @@
   .stepText{font-weight:700;color:var(--accent-700);font-size:14px}
   .progressBar{flex:1;height:8px;background:#e9f6ef;border-radius:999px;overflow:hidden}
   .progressFill{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent-700));border-radius:999px;transition:width .35s ease}
-  /* inputs (ENHANCED pill) */
   .inputWrap{display:flex;align-items:center;gap:10px;background:#fbfff9;border-radius:30px;padding:8px;border:1px solid rgba(6,95,70,0.04);box-shadow:0 8px 28px rgba(6,95,70,0.04)}
   .inputIcon{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-700));display:flex;align-items:center;justify-content:center;color:white;font-size:18px}
   input[type="text"]{flex:1;padding:14px;border-radius:20px;border:0;background:transparent;font-size:17px;outline:none;box-shadow:none}
@@ -50,27 +47,23 @@
   .optCard .labelText{font-weight:700}
   .optCard.selected{background:linear-gradient(90deg,#ecfdf5,#f0fff9);border-color:var(--accent-700);box-shadow:0 12px 30px rgba(6,95,70,0.06);transform:translateY(-3px)}
   .controls{display:flex;gap:10px;justify-content:flex-end;margin-top:12px}
-  .aside .rules li{margin:8px 0;font-size:14px}
-  .resultBox{padding:12px;background:#ecfff5;border-radius:10px;margin-top:12px}
+  .resultBox{padding:14px;background:#ecfff5;border-radius:10px;margin-top:12px;box-shadow:0 8px 24px rgba(6,95,70,0.04)}
   .footer{padding:10px;text-align:center;font-size:13px;color:var(--muted);border-top:1px solid rgba(6,95,70,0.03);background:transparent}
   .hidden{display:none !important}
-  /* red instruction box */
   .redBox{margin-top:12px;padding:12px;border-radius:10px;background:#fff5f5;border-left:4px solid rgba(220,38,38,0.9);color:#7a271f}
-  /* toasts */
   .toasts{position:fixed;right:18px;bottom:18px;display:flex;flex-direction:column;gap:8px;z-index:10000}
   .toast{min-width:220px;padding:12px 14px;border-radius:10px;color:white;box-shadow:0 10px 30px rgba(2,6,23,0.18);display:flex;gap:10px;align-items:center;font-weight:700}
   .toast.success{background:linear-gradient(90deg,#10b981,#059669)}
   .toast.info{background:linear-gradient(90deg,#06b6d4,#0891b2)}
   .toast.warn{background:linear-gradient(90deg,#f59e0b,#d97706)}
   .toast.error{background:linear-gradient(90deg,#ef4444,#dc2626)}
-  /* loader (step 4) */
   .loaderWrap{display:flex;flex-direction:column;align-items:center;gap:12px;padding:20px}
   .spinner{width:72px;height:72px;border-radius:999px;border:6px solid rgba(0,0,0,0.06);border-top-color:var(--accent);animation:spin 1s linear infinite}
   @keyframes spin{to{transform:rotate(360deg)}}
   .percent{font-weight:800;color:var(--accent-700);font-size:18px}
-  /* profile pill for displayName in step 2 */
   .profilePill{display:inline-flex;gap:10px;align-items:center;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg,#fbfff9,#f6fff6);border:1px solid rgba(6,95,70,0.04)}
   .profileAvatar{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-700));display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
+  .printBtn{background:#0f172a;color:white;padding:10px 12px;border-radius:10px;border:0;font-weight:800}
   @media(max-width:420px){ video{width:240px;height:180px} .btn{padding:10px 12px} .optCard{padding:10px} }
 </style>
 </head>
@@ -91,8 +84,7 @@
 
     <div class="main">
       <div class="card left">
-        <!-- pageTitle/subtitle will be hidden automatically when user advances -->
-        <div class="title" id="pageTitle">Online CBT ATech ICT Solution</div>
+        <div class="title" id="pageTitle">Online CBT — ATech ICT Solution</div>
         <div class="muted" id="pageSubtitle" style="margin-bottom:8px">Multi-step exam training — camera monitoring enabled</div>
 
         <div class="progressWrap">
@@ -106,7 +98,7 @@
             <label class="muted">Enter your full name</label>
             <div class="inputWrap" style="margin-top:8px">
               <div class="inputIcon"><i class="fa-solid fa-user"></i></div>
-              <input id="nameInput" placeholder="Ameer Lawal" autocomplete="name" />
+              <input id="nameInput" placeholder="Musa Ahmed" autocomplete="name" />
             </div>
           </div>
           <div style="display:flex;gap:10px;justify-content:flex-end">
@@ -114,25 +106,20 @@
           </div>
         </div>
 
-        <!-- STEP 2 (capture ref) -->
+        <!-- STEP 2 -->
         <div id="step2" class="hidden" aria-hidden="true">
           <div style="display:flex;justify-content:space-between;align-items:center">
             <div style="display:flex;flex-direction:column;gap:6px">
-              <!-- profile pill -->
               <div class="profilePill" id="profilePill">
                 <div class="profileAvatar" id="profileAvatar"><i class="fa-solid fa-user"></i></div>
                 <div style="font-weight:800" id="displayName">—</div>
               </div>
-              <div class="muted" style="font-size:13px"></div>
+              <div class="muted" style="font-size:13px">Welcome — capture your reference</div>
             </div>
-            <div class="muted"></div>
+            <div class="muted">Reference photo used for monitoring</div>
           </div>
 
-          <!-- red instruction box -->
-          <div class="redBox" id="redInstr">
-            INSTRUCTIONS: Ensure your face is centered, well-lit and not wearing shades. Reference will be used for continuous monitoring.
-          </div>
-
+          <div class="redBox" id="redInstr">INSTRUCTIONS: Ensure your face is centered, well-lit and not wearing shades. Reference will be used for continuous monitoring.</div>
           <div class="videoWrap"><video id="preview" autoplay muted playsinline></video></div>
           <div id="captureStatus" class="status muted">Waiting for camera...</div>
 
@@ -143,13 +130,13 @@
           </div>
         </div>
 
-        <!-- STEP 3: Exam (no rules shown here) -->
+        <!-- STEP 3 -->
         <div id="step3" class="hidden" aria-hidden="true">
           <div style="display:flex;justify-content:space-between;align-items:center">
             <div style="font-weight:800">Candidate: <span id="candName"></span></div>
             <div style="text-align:right">
-              <div class="timer">Total: <span id="totalTimer">20:00</span></div>
-              <div class="muted">Section: <span id="sectionTimer">05:00</span></div>
+              <div class="timer">Total: <span id="totalTimer">10:00</span></div>
+              <div class="muted">Section: <span id="sectionTimer">02:30</span></div>
             </div>
           </div>
 
@@ -171,11 +158,10 @@
           </div>
         </div>
 
-        <!-- STEP 4: Results (loader -> then results) -->
+        <!-- STEP 4 -->
         <div id="step4" class="hidden" aria-hidden="true">
           <h3 style="margin:0 0 8px 0">Results</h3>
 
-          <!-- loading container -->
           <div id="resultsLoader" class="loaderWrap hidden" aria-hidden="true">
             <div class="spinner" aria-hidden="true"></div>
             <div class="muted">We are calculating your results — please wait</div>
@@ -199,10 +185,10 @@
         <div class="title" style="font-size:16px">Exam Rules</div>
         <div class="muted" style="margin-top:8px">
           <ul class="rules">
-            <li>40 questions — 10 per subject (English → Math → Civic → Nigerian Security)</li>
-            <li>Each subject = 5 minutes (auto-advance)</li>
-            <li>Total = 20 minutes (auto submit)</li>
-            <li>Marks per question = 2.5 (total = 100)</li>
+            <li>40 questions — 10 per subject</li>
+            <li>Each subject auto-advance</li>
+            <li>Total = 10 minutes (auto submit)</li>
+            <li>Marks per question = 2.5 (100 total)</li>
             <li><strong>Strict:</strong> 1st violation = warning; if not corrected within 5s → flagged out.</li>
           </ul>
         </div>
@@ -216,79 +202,46 @@
     <div class="footer">© ATech ICT Solution</div>
   </div>
 
-  <!-- toasts container -->
   <div class="toasts" id="toasts"></div>
-
-  <!-- confirm overlay -->
   <div id="confirmOverlay" class="hidden"></div>
 
 <script>
-/* Adjusted multi-step CBT logic:
-   - Hide pageTitle/subtitle and rulesAside when step >= 2
-   - Step text uses "Step N — Title"
-   - Step4 shows loader for 30s (percent) then displays results
-   - name input pill styling + no black outline
-   - Step2 shows profile avatar + name and red instruction box
-   - rest of logic (randomization, monitoring) preserved
+/* Updated per request:
+   - Total exam time = 10 minutes
+   - Section time = Math.floor(10min / 4) = 2.5min
+   - Print results button & printable layout
+   - Exam allowed only between 06:00 - 18:00 Africa/Lagos
 */
 
-// ---------- question set (same as before) ----------
+// questions (same as before)
 const subjects = [
-  { name:'English', questions:[
-    {q:'Sentence is a group of ...', opts:['World','Word','Alphabet'], a:1},
-    {q:'Antonym of "hot" is ...', opts:['Warm','Cold','Mild'], a:1},
-    {q:'Plural of "child"?', opts:['Childs','Childes','Children'], a:2},
-    {q:'Which is a noun?', opts:['Run','Apple','Quickly'], a:1},
-    {q:'Synonym of "happy"?', opts:['Sad','Joyful','Angry'], a:1},
-    {q:'Choose correct article: ___ apple', opts:['A','An','The'], a:1},
-    {q:'Which is a verb?', opts:['Jump','Blue','Tall'], a:0},
-    {q:'Opposite of "early"?', opts:['Late','Soon','Before'], a:0},
-    {q:'Plural of "mouse"?', opts:['Mouses','Mice','Mouse'], a:1},
-    {q:'What is an adjective?', opts:['Describes noun','Action word','Name'], a:0}
-  ]},
-  { name:'Mathematics', questions:[
-    {q:'5 + 5 = ?', opts:['9','10','11'], a:1},
-    {q:'12 ÷ 3 = ?', opts:['3','4','5'], a:1},
-    {q:'7 × 6 = ?', opts:['42','36','48'], a:0},
-    {q:'10 - 4 = ?', opts:['6','5','7'], a:0},
-    {q:'3 × 3 = ?', opts:['6','9','8'], a:1},
-    {q:'Square root of 81?', opts:['9','8','7'], a:0},
-    {q:'2^3 = ?', opts:['6','8','9'], a:1},
-    {q:'Which is even?', opts:['11','14','13'], a:1},
-    {q:'Decimal of 1/2?', opts:['0.5','0.2','2'], a:0},
-    {q:'Perimeter of square side 4?', opts:['12','16','8'], a:1}
-  ]},
-  { name:'Civic Education', questions:[
-    {q:'Nigeria gained independence in ...', opts:['1960','1970','1957'], a:0},
-    {q:'A democratic responsibility is ...', opts:['Voting','Looting','Forcing'], a:0},
-    {q:'Who is head of state?', opts:['Governor','President','Mayor'], a:1},
-    {q:'One right of a citizen is ...', opts:['Vote','Bomb','Rob'], a:0},
-    {q:'Legislative arm is ...', opts:['Judiciary','Executive','Legislature'], a:2},
-    {q:'What is a constitution?', opts:['Law document','Food','City'], a:0},
-    {q:'Local government head is called?', opts:['Chairman','President','Judge'], a:0},
-    {q:'A civic duty includes ...', opts:['Paying taxes','Stealing','Vandalism'], a:0},
-    {q:'Role of judiciary?', opts:['Interpret laws','Make laws','Execute laws'], a:0},
-    {q:'Democracy means ...', opts:['Rule by people','Rule by one','No rules'], a:0}
-  ]},
-  { name:'Nigerian Security', questions:[
-    {q:'Which agency handles internal security?', opts:['NCDC','Army','Police'], a:2},
-    {q:'Measure to improve security?', opts:['Community policing','Ignore crime','Support criminals'], a:0},
-    {q:'What is "integrity"?', opts:['Honesty','Bribery','Secrecy'], a:0},
-    {q:'What helps emergency response?', opts:['Good roads','Bad governance','Noise'], a:0},
-    {q:'Who coordinates national security policy?', opts:['Local chief','President','Teacher'], a:1},
-    {q:'What is a security check?', opts:['Screening','Singing','Eating'], a:0},
-    {q:'Which helps reduce crime?', opts:['Education','Corruption','Silence'], a:0},
-    {q:'Role of police?', opts:['Maintain law & order','Promote crime','Tax people'], a:0},
-    {q:'Emergency number in Nigeria?', opts:['911','112','199'], a:1},
-    {q:'What is cyber security?', opts:['Protecting online systems','Cooking','Farming'], a:0}
-  ]}
+  { name:'English', questions:[{q:'Sentence is a group of ...', opts:['World','Word','Alphabet'], a:1},{q:'Antonym of "hot" is ...', opts:['Warm','Cold','Mild'], a:1},{q:'Plural of "child"?', opts:['Childs','Childes','Children'], a:2},{q:'Which is a noun?', opts:['Run','Apple','Quickly'], a:1},{q:'Synonym of "happy"?', opts:['Sad','Joyful','Angry'], a:1},{q:'Choose correct article: ___ apple', opts:['A','An','The'], a:1},{q:'Which is a verb?', opts:['Jump','Blue','Tall'], a:0},{q:'Opposite of "early"?', opts:['Late','Soon','Before'], a:0},{q:'Plural of "mouse"?', opts:['Mouses','Mice','Mouse'], a:1},{q:'What is an adjective?', opts:['Describes noun','Action word','Name'], a:0}]},
+  { name:'Mathematics', questions:[{q:'5 + 5 = ?', opts:['9','10','11'], a:1},{q:'12 ÷ 3 = ?', opts:['3','4','5'], a:1},{q:'7 × 6 = ?', opts:['42','36','48'], a:0},{q:'10 - 4 = ?', opts:['6','5','7'], a:0},{q:'3 × 3 = ?', opts:['6','9','8'], a:1},{q:'Square root of 81?', opts:['9','8','7'], a:0},{q:'2^3 = ?', opts:['6','8','9'], a:1},{q:'Which is even?', opts:['11','14','13'], a:1},{q:'Decimal of 1/2?', opts:['0.5','0.2','2'], a:0},{q:'Perimeter of square side 4?', opts:['12','16','8'], a:1}]},
+  { name:'Civic Education', questions:[{q:'Nigeria gained independence in ...', opts:['1960','1970','1957'], a:0},{q:'A democratic responsibility is ...', opts:['Voting','Looting','Forcing'], a:0},{q:'Who is head of state?', opts:['Governor','President','Mayor'], a:1},{q:'One right of a citizen is ...', opts:['Vote','Bomb','Rob'], a:0},{q:'Legislative arm is ...', opts:['Judiciary','Executive','Legislature'], a:2},{q:'What is a constitution?', opts:['Law document','Food','City'], a:0},{q:'Local government head is called?', opts:['Chairman','President','Judge'], a:0},{q:'A civic duty includes ...', opts:['Paying taxes','Stealing','Vandalism'], a:0},{q:'Role of judiciary?', opts:['Interpret laws','Make laws','Execute laws'], a:0},{q:'Democracy means ...', opts:['Rule by people','Rule by one','No rules'], a:0}]},
+  { name:'Nigerian Security', questions:[{q:'Which agency handles internal security?', opts:['NCDC','Army','Police'], a:2},{q:'Measure to improve security?', opts:['Community policing','Ignore crime','Support criminals'], a:0},{q:'What is "integrity"?', opts:['Honesty','Bribery','Secrecy'], a:0},{q:'What helps emergency response?', opts:['Good roads','Bad governance','Noise'], a:0},{q:'Who coordinates national security policy?', opts:['Local chief','President','Teacher'], a:1},{q:'What is a security check?', opts:['Screening','Singing','Eating'], a:0},{q:'Which helps reduce crime?', opts:['Education','Corruption','Silence'], a:0},{q:'Role of police?', opts:['Maintain law & order','Promote crime','Tax people'], a:0},{q:'Emergency number in Nigeria?', opts:['911','112','199'], a:1},{q:'What is cyber security?', opts:['Protecting online systems','Cooking','Farming'], a:0}]}
 ];
 
 const QUESTIONS_PER_SUBJECT = 10, SUBJECT_COUNT = subjects.length, TOTAL_QUESTIONS = SUBJECT_COUNT * QUESTIONS_PER_SUBJECT;
 const MARK_PER_Q = 100 / TOTAL_QUESTIONS;
+const TOTAL_EXAM_SECONDS = 10 * 60; // 10 minutes
+const SECTION_SECONDS_FIXED = Math.floor(TOTAL_EXAM_SECONDS / SUBJECT_COUNT); // 150s = 2.5min
 
-// ---------- UI / small helpers ----------
+// UI refs
 const toastsEl = document.getElementById('toasts');
+const stepText = document.getElementById('stepText'), progressFill = document.getElementById('progressFill');
+const step1El = document.getElementById('step1'), step2El = document.getElementById('step2'), step3El = document.getElementById('step3'), step4El = document.getElementById('step4');
+const proceedBtn = document.getElementById('proceedBtn'), nameInput = document.getElementById('nameInput'), displayName = document.getElementById('displayName');
+const previewVideo = document.getElementById('preview'), captureBtn = document.getElementById('captureBtn'), startBtn = document.getElementById('startBtn'), backToStep1 = document.getElementById('backToStep1');
+const candNameEl = document.getElementById('candName'), examCam = document.getElementById('examCam');
+const qSubjectEl = document.getElementById('qSubject'), qTextEl = document.getElementById('qText'), optionsEl = document.getElementById('options');
+const prevBtn = document.getElementById('prevBtn'), nextBtn = document.getElementById('nextBtn'), submitBtn = document.getElementById('submitBtn');
+const progressText = document.getElementById('progressText'), totalTimerEl = document.getElementById('totalTimer'), sectionTimerEl = document.getElementById('sectionTimer');
+const warnEl = document.getElementById('warnMsg'), flagEl = document.getElementById('flagMsg'), resultContent = document.getElementById('resultContent');
+const retryBtn = document.getElementById('retryBtn');
+const pageTitle = document.getElementById('pageTitle'), pageSubtitle = document.getElementById('pageSubtitle'), navSub = document.getElementById('navSub');
+const rulesAside = document.getElementById('rulesAside'), profileAvatar = document.getElementById('profileAvatar');
+const resultsLoader = document.getElementById('resultsLoader'), percentText = document.getElementById('percentText');
+
 function showToast(msg, type='info', ms=3200){
   const t = document.createElement('div');
   t.className = 'toast ' + (type||'info');
@@ -317,64 +270,32 @@ function showConfirm(message){
   });
 }
 
-// audio/vibrate warning (beef)
+// audio/vibrate
 let audioCtx = null;
-function playWarningBeef(){
-  try{
-    if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    const t = audioCtx.currentTime;
-    const o = audioCtx.createOscillator(), g = audioCtx.createGain();
-    o.type = 'sine';
-    o.frequency.setValueAtTime(120, t);
-    g.gain.setValueAtTime(0.001, t);
-    g.gain.linearRampToValueAtTime(0.12, t+0.02);
-    g.gain.linearRampToValueAtTime(0.0, t+0.55);
-    o.connect(g); g.connect(audioCtx.destination); o.start(); o.stop(t+0.55);
-    const o2 = audioCtx.createOscillator(), g2 = audioCtx.createGain();
-    o2.type = 'sine'; o2.frequency.setValueAtTime(220, t);
-    g2.gain.setValueAtTime(0.0, t); g2.gain.linearRampToValueAtTime(0.06, t+0.02); g2.gain.linearRampToValueAtTime(0.0, t+0.55);
-    o2.connect(g2); g2.connect(audioCtx.destination); o2.start(); o2.stop(t+0.55);
-  }catch(e){ console.warn('Audio ctx not available', e); }
-}
+function playWarningBeef(){ try{ if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)(); const t = audioCtx.currentTime; const o = audioCtx.createOscillator(), g = audioCtx.createGain(); o.type='sine'; o.frequency.setValueAtTime(120,t); g.gain.setValueAtTime(0.001,t); g.gain.linearRampToValueAtTime(0.12,t+0.02); g.gain.linearRampToValueAtTime(0.0,t+0.55); o.connect(g); g.connect(audioCtx.destination); o.start(); o.stop(t+0.55); const o2 = audioCtx.createOscillator(), g2 = audioCtx.createGain(); o2.type='sine'; o2.frequency.setValueAtTime(220,t); g2.gain.setValueAtTime(0.0,t); g2.gain.linearRampToValueAtTime(0.06,t+0.02); g2.gain.linearRampToValueAtTime(0.0,t+0.55); o2.connect(g2); g2.connect(audioCtx.destination); o2.start(); o2.stop(t+0.55);}catch(e){console.warn(e);} }
 function vibratePattern(){ try{ if(navigator.vibrate) navigator.vibrate([180,80,160]); }catch(e){} }
 function warnFeedback(){ vibratePattern(); playWarningBeef(); }
 
-// ---------- snapshot helpers ----------
+// snapshot helpers
 const canvas = document.createElement('canvas'); canvas.width=320; canvas.height=240;
 const ctx = canvas.getContext('2d');
 function takeSnapshot(videoEl){ try{ ctx.drawImage(videoEl,0,0,canvas.width,canvas.height); return ctx.getImageData(0,0,canvas.width,canvas.height); }catch(e){ return null; } }
-function avgLuminance(img){ if(!img) return 0; let sum=0,cnt=0; for(let i=0;i<img.data.length;i+=4*30){ const r=img.data[i], g=img.data[i+1], b=img.data[i+2]; sum += 0.299*r + 0.587*g + 0.114*b; cnt++; } return Math.round(sum/cnt || 0); }
+function avgLuminance(img){ if(!img) return 0; let sum=0,cnt=0; for(let i=0;i<img.data.length;i+=4*30){ const r=img.data[i], g=img.data[i+1], b=img.data[i+2]; sum+=0.299*r + 0.587*g + 0.114*b; cnt++; } return Math.round(sum/cnt||0); }
 function imageDiffRatio(a,b){ if(!a||!b) return 1; let diff=0; const step=12; for(let i=0;i<a.data.length;i+=4*step){ diff += Math.abs(a.data[i]-b.data[i]) + Math.abs(a.data[i+1]-b.data[i+1]) + Math.abs(a.data[i+2]-b.data[i+2]); } const max = (a.data.length/(4*step)) * 3 * 255; return diff / max; }
 
-// ---------- state & refs ----------
+// state
 let previewStream=null, examStream=null, refImage=null;
-let totalSeconds=20*60, sectionSeconds=5*60, totalTimerInterval=null, sectionTimerInterval=null;
+let totalSeconds=TOTAL_EXAM_SECONDS, sectionSeconds=SECTION_SECONDS_FIXED, totalTimerInterval=null, sectionTimerInterval=null;
 let monitorInterval=null, graceTimer=null;
 let currentSubject=0, currentQ=0;
 let answers = new Array(TOTAL_QUESTIONS).fill(null);
 let warned=false, flagged=false;
 let userQuestionPool = [];
+let examStartTs = null; // timestamp when exam started
 
-const stepText = document.getElementById('stepText'), progressFill = document.getElementById('progressFill');
-const step1El = document.getElementById('step1'), step2El = document.getElementById('step2'), step3El = document.getElementById('step3'), step4El = document.getElementById('step4');
-const proceedBtn = document.getElementById('proceedBtn'), nameInput = document.getElementById('nameInput'), displayName = document.getElementById('displayName');
-const previewVideo = document.getElementById('preview'), captureBtn = document.getElementById('captureBtn'), startBtn = document.getElementById('startBtn'), backToStep1 = document.getElementById('backToStep1');
-const candNameEl = document.getElementById('candName'), examCam = document.getElementById('examCam');
-const qSubjectEl = document.getElementById('qSubject'), qTextEl = document.getElementById('qText'), optionsEl = document.getElementById('options');
-const prevBtn = document.getElementById('prevBtn'), nextBtn = document.getElementById('nextBtn'), submitBtn = document.getElementById('submitBtn');
-const progressText = document.getElementById('progressText'), totalTimerEl = document.getElementById('totalTimer'), sectionTimerEl = document.getElementById('sectionTimer');
-const warnEl = document.getElementById('warnMsg'), flagEl = document.getElementById('flagMsg'), resultContent = document.getElementById('resultContent');
-const retryBtn = document.getElementById('retryBtn');
-const pageTitle = document.getElementById('pageTitle'), pageSubtitle = document.getElementById('pageSubtitle'), navSub = document.getElementById('navSub');
-const rulesAside = document.getElementById('rulesAside');
-const profileAvatar = document.getElementById('profileAvatar');
-const resultsLoader = document.getElementById('resultsLoader'), percentText = document.getElementById('percentText');
-
-// ---------- helpers ----------
 function shuffleArray(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
-function prepareUserQuestions(){ userQuestionPool = subjects.map(s => shuffleArray(s.questions.map(q => ({...q}))) ); showToast('Questions randomized for this session', 'info', 1400); }
+function prepareUserQuestions(){ userQuestionPool = subjects.map(s => shuffleArray(s.questions.map(q => ({...q}))) ); showToast('Questions randomized for this session', 'info', 1200); }
 
-// setStep: show/hide pageTitle & rulesAside per user's request
 function setStep(n){
   step1El.classList.add('hidden'); step2El.classList.add('hidden'); step3El.classList.add('hidden'); step4El.classList.add('hidden');
   if(n===1) step1El.classList.remove('hidden');
@@ -384,23 +305,18 @@ function setStep(n){
   const titles = ['Enter name','Reference picture','Exam in progress','Results'];
   stepText.textContent = `Step ${n} — ${titles[n-1]}`;
   progressFill.style.width = `${((n-1)/3)*100}%`;
-
-  // per request: HIDE page header & subtitle and rulesAside during steps 2/3/4
+  // hide header & rules aside for steps >=2
   if(n >= 2){
-    if(pageTitle) pageTitle.style.display='none';
-    if(pageSubtitle) pageSubtitle.style.display='none';
-    if(navSub) navSub.style.display='none';
+    pageTitle.style.display='none'; pageSubtitle.style.display='none'; navSub.style.display='none';
     if(rulesAside) rulesAside.style.display='none';
   } else {
-    if(pageTitle) pageTitle.style.display='block';
-    if(pageSubtitle) pageSubtitle.style.display='block';
-    if(navSub) navSub.style.display='block';
+    pageTitle.style.display='block'; pageSubtitle.style.display='block'; navSub.style.display='block';
     if(rulesAside) rulesAside.style.display='block';
   }
 }
 setStep(1);
 
-// ---------- Step 1 -> Step 2 ----------
+// Step1 -> Step2
 proceedBtn.addEventListener('click', async ()=>{
   const name = nameInput.value.trim();
   if(!name){ showToast('Please enter your name', 'warn'); return; }
@@ -413,7 +329,6 @@ proceedBtn.addEventListener('click', async ()=>{
     previewVideo.srcObject = previewStream;
     captureBtn.disabled = false;
     showToast('Camera ready — capture reference', 'success', 1600);
-    previewStream.getVideoTracks()[0].onended = ()=> { showToast('Preview camera ended', 'error', 3000); };
   }catch(e){
     showToast('Camera permission required', 'error', 3200);
     setStep(1);
@@ -421,12 +336,9 @@ proceedBtn.addEventListener('click', async ()=>{
 });
 
 // back
-backToStep1.addEventListener('click', ()=>{
-  if(previewStream){ previewStream.getTracks().forEach(t=>t.stop()); previewStream=null; }
-  setStep(1);
-});
+backToStep1.addEventListener('click', ()=>{ if(previewStream){ previewStream.getTracks().forEach(t=>t.stop()); previewStream=null; } setStep(1); });
 
-// capture reference
+// capture ref
 captureBtn.addEventListener('click', ()=>{
   const img = takeSnapshot(previewVideo);
   if(!img){ showToast('Capture failed — try again', 'error'); return; }
@@ -437,9 +349,27 @@ captureBtn.addEventListener('click', ()=>{
   startBtn.disabled = false;
 });
 
+// helper: check Nigeria time window 06:00-18:00
+function isWithinNigeriaWindow(){
+  try{
+    const now = new Date();
+    const la = new Date(now.toLocaleString('en-US', { timeZone: 'Africa/Lagos' }));
+    const h = la.getHours();
+    return (h >= 6 && h < 18);
+  }catch(e){
+    // if browser doesn't support timeZone, fallback to local hours (best-effort)
+    const h = new Date().getHours();
+    return (h >= 6 && h < 18);
+  }
+}
+
 // start exam
 startBtn.addEventListener('click', async ()=>{
   if(!refImage){ showToast('Please capture reference first', 'warn'); return; }
+  if(!isWithinNigeriaWindow()){
+    showToast('Exam allowed only between 06:00 — 18:00 (Africa/Lagos). Cannot start now.', 'error', 6000);
+    return;
+  }
   if(previewStream){ previewStream.getTracks().forEach(t=>t.stop()); previewStream=null; }
   setStep(3);
   candNameEl.textContent = nameInput.value.trim();
@@ -452,13 +382,18 @@ startBtn.addEventListener('click', async ()=>{
     location.reload();
     return;
   }
-  totalSeconds = 20*60; sectionSeconds = 5*60; currentSubject=0; currentQ=0;
-  answers = new Array(TOTAL_QUESTIONS).fill(null); warned=false; flagged=false;
+  // set timers: total 10min, section = 150s
+  totalSeconds = TOTAL_EXAM_SECONDS;
+  sectionSeconds = SECTION_SECONDS_FIXED;
+  currentSubject = 0; currentQ = 0;
+  answers = new Array(TOTAL_QUESTIONS).fill(null);
+  warned = false; flagged = false;
+  examStartTs = Date.now();
   updateTimersUI(); renderQuestion(); startTotalTimer(); startSectionTimer(); startMonitoring();
   showToast('Exam started — monitoring active', 'info', 1400);
 });
 
-// render question from userQuestionPool
+// render question
 function renderQuestion(){
   const subjPool = userQuestionPool[currentSubject];
   const qObj = subjPool[currentQ];
@@ -483,7 +418,6 @@ function renderQuestion(){
   progressText.textContent = `Subject ${currentSubject+1}/${SUBJECT_COUNT} • Q ${(currentQ+1) + currentSubject*QUESTIONS_PER_SUBJECT} / ${TOTAL_QUESTIONS}`;
   prevBtn.disabled = (currentSubject===0 && currentQ===0);
   nextBtn.textContent = (currentSubject===SUBJECT_COUNT-1 && currentQ===QUESTIONS_PER_SUBJECT-1) ? 'Finish' : 'Next';
-  // restore if previously answered
   const prevVal = answers[currentSubject*QUESTIONS_PER_SUBJECT + currentQ];
   if(typeof prevVal === 'number'){
     const card = optionsEl.querySelector(`input[value="${prevVal}"]`);
@@ -492,48 +426,19 @@ function renderQuestion(){
 }
 
 // nav
-prevBtn.addEventListener('click', ()=>{
-  if(flagged){ showToast('Exam flagged — cannot continue', 'error'); return; }
-  if(currentQ > 0){ currentQ--; renderQuestion(); }
-  else if(currentSubject > 0){ currentSubject--; currentQ = QUESTIONS_PER_SUBJECT-1; renderQuestion(); }
-});
-nextBtn.addEventListener('click', ()=>{
-  if(flagged){ showToast('Exam flagged — cannot continue', 'error'); return; }
-  if(currentQ < QUESTIONS_PER_SUBJECT-1){ currentQ++; renderQuestion(); }
-  else {
-    if(currentSubject < SUBJECT_COUNT - 1){ currentSubject++; currentQ=0; sectionSeconds = 5*60; renderQuestion(); }
-    else computeAndShowResults();
-  }
-});
-submitBtn.addEventListener('click', async ()=>{
-  const ok = await showConfirm('Submit exam now?');
-  if(!ok){ showToast('Submission canceled', 'info'); return; }
-  computeAndShowResults();
-});
+prevBtn.addEventListener('click', ()=>{ if(flagged){ showToast('Exam flagged — cannot continue', 'error'); return; } if(currentQ > 0){ currentQ--; renderQuestion(); } else if(currentSubject > 0){ currentSubject--; currentQ = QUESTIONS_PER_SUBJECT-1; sectionSeconds = SECTION_SECONDS_FIXED; renderQuestion(); }});
+nextBtn.addEventListener('click', ()=>{ if(flagged){ showToast('Exam flagged — cannot continue', 'error'); return; } if(currentQ < QUESTIONS_PER_SUBJECT-1){ currentQ++; renderQuestion(); } else { if(currentSubject < SUBJECT_COUNT - 1){ currentSubject++; currentQ=0; sectionSeconds = SECTION_SECONDS_FIXED; renderQuestion(); } else computeAndShowResults(); }});
+submitBtn.addEventListener('click', async ()=>{ const ok = await showConfirm('Submit exam now?'); if(!ok){ showToast('Submission canceled', 'info'); return; } computeAndShowResults(); });
 
 // timers
 function updateTimersUI(){ const m=Math.floor(totalSeconds/60), s=totalSeconds%60; totalTimerEl.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`; const sm=Math.floor(sectionSeconds/60), ss=sectionSeconds%60; sectionTimerEl.textContent = `${String(sm).padStart(2,'0')}:${String(ss).padStart(2,'0')}`; }
 function startTotalTimer(){ updateTimersUI(); totalTimerInterval = setInterval(()=>{ totalSeconds--; if(totalSeconds<=0){ clearInterval(totalTimerInterval); clearInterval(sectionTimerInterval); computeAndShowResults(); } updateTimersUI(); },1000); }
-function startSectionTimer(){ updateTimersUI(); sectionTimerInterval = setInterval(()=>{ sectionSeconds--; if(sectionSeconds<=0){ if(currentSubject < SUBJECT_COUNT-1){ currentSubject++; currentQ=0; sectionSeconds = 5*60; renderQuestion(); } else computeAndShowResults(); } updateTimersUI(); },1000); }
+function startSectionTimer(){ updateTimersUI(); sectionTimerInterval = setInterval(()=>{ sectionSeconds--; if(sectionSeconds<=0){ if(currentSubject < SUBJECT_COUNT-1){ currentSubject++; currentQ=0; sectionSeconds = SECTION_SECONDS_FIXED; renderQuestion(); } else computeAndShowResults(); } updateTimersUI(); },1000); }
 
-// monitoring thresholds
+// monitoring
 const CHECK_MS = 1500, WARN_THRESHOLD = 0.10, FLAG_THRESHOLD = 0.16, GRACE_MS = 5000, MIN_LIGHT = 25;
-function startMonitoring(){
-  if(monitorInterval) clearInterval(monitorInterval);
-  monitorInterval = setInterval(()=>{
-    if(flagged) return;
-    if(!examStream || examStream.getVideoTracks().length===0 || examStream.getVideoTracks()[0].readyState==='ended'){ triggerWarning('Camera disconnected'); return; }
-    const cur = takeSnapshot(examCam);
-    if(!cur){ triggerWarning('No frame'); return; }
-    const lum = avgLuminance(cur); if(lum < MIN_LIGHT){ triggerWarning('Too dark'); return; }
-    const ratio = imageDiffRatio(refImage, cur);
-    if(ratio > FLAG_THRESHOLD){ handleFlag('Significant visual change detected (possible absence or different person)'); return; }
-    if(ratio > WARN_THRESHOLD){ triggerWarning('Face differs from reference (suspicious)'); return; }
-    clearWarning();
-  }, CHECK_MS);
-}
+function startMonitoring(){ if(monitorInterval) clearInterval(monitorInterval); monitorInterval = setInterval(()=>{ if(flagged) return; if(!examStream || examStream.getVideoTracks().length===0 || examStream.getVideoTracks()[0].readyState==='ended'){ triggerWarning('Camera disconnected'); return; } const cur = takeSnapshot(examCam); if(!cur){ triggerWarning('No frame'); return; } const lum = avgLuminance(cur); if(lum < MIN_LIGHT){ triggerWarning('Too dark'); return; } const ratio = imageDiffRatio(refImage, cur); if(ratio > FLAG_THRESHOLD){ handleFlag('Significant visual change detected (possible absence or different person)'); return; } if(ratio > WARN_THRESHOLD){ triggerWarning('Face differs from reference (suspicious)'); return; } clearWarning(); }, CHECK_MS); }
 
-// warnings + feedback
 function triggerWarning(reason){
   if(flagged) return;
   warned = true;
@@ -566,7 +471,6 @@ function handleFlag(reason){
   Array.from(document.querySelectorAll('input[type=radio]')).forEach(i=>i.disabled=true);
   nextBtn.disabled = true; submitBtn.disabled = true; prevBtn.disabled = true;
   resultContent.innerHTML = `<div style="font-weight:800;color:var(--danger)">MALPRACTICE DETECTED</div><div style="margin-top:8px">Reason: ${reason}</div><div style="margin-top:8px">Exam stopped.</div>`;
-  // show results step with flagged message
   setStep(4);
   resultsLoader.classList.add('hidden');
   resultContent.classList.remove('hidden');
@@ -574,24 +478,22 @@ function handleFlag(reason){
 }
 function handleStreamEnded(reason){ console.log('Stream ended:', reason); triggerWarning('Camera disconnected or blocked'); }
 
-// ---------- result flow with loader ----------
+// compute + loader + print
 function computeAndShowResults(){
   if(flagged){ handleFlag('Flagged before submit'); return; }
   if(totalTimerInterval) clearInterval(totalTimerInterval);
   if(sectionTimerInterval) clearInterval(sectionTimerInterval);
   if(monitorInterval) clearInterval(monitorInterval);
   if(examStream){ examStream.getTracks().forEach(t=>t.stop()); examStream=null; }
-  // ensure save current
   const sel = document.querySelector('input[name="opt"]:checked');
   if(sel){ const overall = currentSubject*QUESTIONS_PER_SUBJECT + currentQ; answers[overall] = Number(sel.value); }
 
-  // compute in background (simulate): show loader for 30s with percent progress, then show result
   setStep(4);
   resultContent.classList.add('hidden');
   resultsLoader.classList.remove('hidden');
 
-  // simulate progress 0..100 over 30 seconds
-  const DURATION = 30000; // 30s
+  // simulate 15s loader (shorter) — you can change to 30s if you want
+  const DURATION = 15000;
   const start = Date.now();
   percentText.textContent = '0%';
   let progInterval = setInterval(()=>{
@@ -600,7 +502,6 @@ function computeAndShowResults(){
     percentText.textContent = `${pct}%`;
     if(elapsed >= DURATION){
       clearInterval(progInterval);
-      // compute actual results and show
       resultsLoader.classList.add('hidden');
       // compute per-subject & total
       let perSub = [], totalCorrect = 0;
@@ -615,15 +516,24 @@ function computeAndShowResults(){
       }
       const totalMarksRaw = totalCorrect * MARK_PER_Q;
       const totalMarks = Math.round(totalMarksRaw * 10) / 10;
-      // build result HTML and success/fail message
+      // time spent
+      const examEnd = Date.now();
+      const spentMs = examStartTs ? Math.max(0, examEnd - examStartTs) : (TOTAL_EXAM_SECONDS - totalSeconds) * 1000;
+      const spentSec = Math.floor(spentMs/1000);
+      const spentMin = Math.floor(spentSec/60), spentS = spentSec % 60;
+      const timeSpentStr = `${String(spentMin).padStart(2,'0')}:${String(spentS).padStart(2,'0')}`;
+
+      // build result display + print button
       let html = '';
-      const passMark = 40; // you can change
+      const passMark = 40;
       if(totalMarks >= passMark){
-        html += `<div style="font-weight:900;color:var(--accent-700);font-size:18px">Congratulations</div><div style="margin-top:8px" class="muted">You passed the exam.</div>`;
+        html += `<div style="font-weight:900;color:var(--accent-700);font-size:20px">Congratulations</div><div style="margin-top:8px" class="muted">You passed the exam.</div>`;
       } else {
-        html += `<div style="font-weight:900;color:var(--danger);font-size:18px">Failed</div><div style="margin-top:8px" class="muted">You did not meet the pass mark.</div>`;
+        html += `<div style="font-weight:900;color:var(--danger);font-size:20px">Failed</div><div style="margin-top:8px" class="muted">You did not meet the pass mark.</div>`;
       }
-      html += `<div style="margin-top:12px;font-weight:800">Result — ${nameInput.value}</div><div style="margin-top:8px">Per-subject:</div><ul>`;
+      html += `<div style="margin-top:12px;font-weight:800">Result — ${escapeHtml(nameInput.value)}</div>`;
+      html += `<div style="margin-top:10px"><strong>Time spent:</strong> ${timeSpentStr}</div>`;
+      html += `<div style="margin-top:8px"><strong>Per-subject:</strong></div><ul>`;
       for(let s=0;s<SUBJECT_COUNT;s++){
         const marksSub = Math.round(perSub[s] * MARK_PER_Q * 10) / 10;
         html += `<li>${subjects[s].name}: ${perSub[s]} / ${QUESTIONS_PER_SUBJECT} (${marksSub} marks)</li>`;
@@ -632,19 +542,106 @@ function computeAndShowResults(){
       let grade='';
       if(totalMarks>=80) grade='Distinction'; else if(totalMarks>=65) grade='Upper Class'; else if(totalMarks>=50) grade='Lower Class'; else if(totalMarks>=40) grade='Pass'; else if(totalMarks>=30) grade='Play Class'; else grade='Failed — Retry';
       html += `<div style="margin-top:8px"><strong>Grade: ${grade}</strong></div>`;
+
+      // print button
+      html += `<div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end;align-items:center">
+                 <button id="printBtn" class="printBtn"><i class="fa-solid fa-print"></i> Print Results</button>
+               </div>`;
+
       resultContent.innerHTML = html;
       resultContent.classList.remove('hidden');
       document.getElementById('qbox').style.display='none';
-      // show page title/subtitle? per request they wanted them hidden in step4 so keep hidden
+
+      // attach print click (delay to ensure button exists)
+      setTimeout(()=> {
+        const b = document.getElementById('printBtn');
+        if(b) b.addEventListener('click', ()=> printResults(perSub, totalMarks, grade, timeSpentStr));
+      }, 50);
     }
-  }, 300);
+  }, 200);
 }
+
+// print: open new window with formatted results (includes reference photo if available)
+function printResults(perSub, totalMarks, grade, timeSpentStr){
+  // create ref image dataURL from refImage
+  let imgData = '';
+  try{
+    if(refImage){
+      canvas.width = refImage.width || 320;
+      canvas.height = refImage.height || 240;
+      ctx.putImageData(refImage, 0, 0);
+      imgData = canvas.toDataURL('image/png');
+    }
+  }catch(e){ imgData = ''; }
+
+  const win = window.open('', '_blank', 'noopener');
+  const title = 'ATech ICT — Exam Results';
+  const name = escapeHtml(nameInput.value || '');
+  const nowStr = new Date().toLocaleString();
+  const subjectsHtml = subjects.map((s, i) => {
+    const marksSub = Math.round(perSub[i] * MARK_PER_Q * 10) / 10;
+    return `<tr><td style="padding:6px 10px;border-bottom:1px solid #eee">${escapeHtml(s.name)}</td><td style="padding:6px 10px;border-bottom:1px solid #eee;text-align:right">${perSub[i]} / ${QUESTIONS_PER_SUBJECT}</td><td style="padding:6px 10px;border-bottom:1px solid #eee;text-align:right">${marksSub}</td></tr>`;
+  }).join('');
+
+  const html = `
+    <html><head><title>${title}</title>
+      <style>
+        body{font-family:Inter, system-ui, Roboto, Arial; padding:28px; color:#062617}
+        .brand{display:flex;gap:12px;align-items:center}
+        .logo{width:48px;height:48px;border-radius:10px;background:#16A34A;color:white;display:flex;align-items:center;justify-content:center;font-weight:800}
+        .h1{font-size:20px;font-weight:900;margin:0}
+        .muted{color:#4b5563}
+        .card{margin-top:14px;padding:14px;border-radius:8px;border:1px solid #e6f6ec}
+        table{width:100%;border-collapse:collapse;margin-top:10px}
+        .leftCol{width:70%}
+        .rightCol{width:30%;text-align:right}
+      </style>
+    </head><body>
+      <div class="brand"><div class="logo">AT</div><div><div class="h1">ATech ICT</div><div class="muted">CBT Exam Results</div></div></div>
+      <div class="card">
+        <div style="display:flex;gap:12px;align-items:center">
+          <div style="flex:1">
+            <div style="font-weight:800">${escapeHtml(name)}</div>
+            <div class="muted">Reference photo</div>
+            ${ imgData ? `<div style="margin-top:8px"><img src="${imgData}" width="160" style="border-radius:8px;border:1px solid #eee" /></div>` : `<div class="muted" style="margin-top:8px">No reference photo</div>` }
+          </div>
+          <div style="text-align:right">
+            <div class="muted">Time printed</div>
+            <div style="font-weight:800">${escapeHtml(nowStr)}</div>
+            <div style="margin-top:8px" class="muted">Time spent</div>
+            <div style="font-weight:800">${escapeHtml(timeSpentStr)}</div>
+          </div>
+        </div>
+
+        <div style="margin-top:14px">
+          <table>
+            <thead><tr><th style="text-align:left;padding:6px">Subject</th><th style="text-align:right;padding:6px">Correct</th><th style="text-align:right;padding:6px">Marks</th></tr></thead>
+            <tbody>
+              ${subjectsHtml}
+            </tbody>
+          </table>
+          <div style="display:flex;justify-content:space-between;margin-top:12px;align-items:center">
+            <div><strong>Total:</strong> ${totalMarks} / 100</div>
+            <div><strong>Grade:</strong> ${escapeHtml(grade)}</div>
+          </div>
+        </div>
+      </div>
+      <script>window.print();</script>
+    </body></html>
+  `;
+  win.document.open();
+  win.document.write(html);
+  win.document.close();
+}
+
+// sanitize basic
+function escapeHtml(s){ if(!s) return ''; return String(s).replace(/[&<>"']/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]; }); }
 
 // retry
 retryBtn.addEventListener('click', ()=> location.reload());
 
 // init
-function prepareOnLoad(){ userQuestionPool = subjects.map(s => shuffleArray(s.questions.map(q => ({...q}))) ); showToast('Welcome — enter name to begin', 'info', 1200); }
+function prepareOnLoad(){ userQuestionPool = subjects.map(s => shuffleArray(s.questions.map(q => ({...q}))) ); showToast('Welcome — enter name to begin (Exam window: 06:00–18:00 Africa/Lagos)', 'info', 2600); }
 prepareOnLoad();
 </script>
 </body>
