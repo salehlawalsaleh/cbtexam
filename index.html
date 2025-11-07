@@ -1,95 +1,68 @@
 <!doctype html>
-<html lang="en">
+<html lang="ha">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
 <title>CBT Exam — ATech ICT Solution</title>
 <meta name="theme-color" content="#16A34A" />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Po1f2Xr0x1G1z5Yf1G5qk6Yt2x8v1k3z0l1r3p9u5QjVugq2u8oP8m7f3n2Kc9D9Xl1y2z3q4r5s6t7u8v9w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style>
   :root{
     --bg:#f0fff4; --card:#ffffff; --accent:#16A34A; --accent-700:#127338;
     --muted:#4b5563; --soft:#ecfef3; --warn:#f59e0b; --danger:#dc2626;
-    --glass: rgba(255,255,255,0.7);
+    --glass: rgba(255,255,255,0.75);
   }
   *{box-sizing:border-box}
-  body{
-    margin:0;font-family:Inter,system-ui,Roboto,-apple-system,"Segoe UI",Arial;
-    background:linear-gradient(180deg,#f8fff9 0%, #eefef0 100%);
-    color:#052e14;-webkit-font-smoothing:antialiased;
-    display:flex;align-items:stretch;justify-content:center;min-height:100vh;padding:14px;
-  }
-  .app {
-    width:100%; max-width:980px; display:flex; flex-direction:column; gap:12px;
-  }
-
-  /* NAVBAR */
-  .nav {
-    display:flex; align-items:center; justify-content:space-between;
-    background:linear-gradient(90deg,var(--glass), #f6fff6);
-    padding:12px 16px; border-radius:12px; box-shadow:0 6px 18px rgba(6,95,70,0.07);
-    border:1px solid rgba(6,95,70,0.05);
-  }
-  .brand { display:flex; gap:12px; align-items:center; }
-  .brand .logo { width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-700)); display:flex;align-items:center;justify-content:center;color:white;font-weight:800; box-shadow:0 6px 18px rgba(22,163,74,0.14);}
-  .brand .text { font-weight:700; font-size:16px; color:var(--accent-700) }
-  .nav .sub { font-size:13px; color:var(--muted) }
-  .nav .right { display:flex; gap:8px; align-items:center; }
-
-  /* main content */
-  .main { display:grid; grid-template-columns:1fr 320px; gap:14px; align-items:start; }
-  @media(max-width:900px){ .main{ grid-template-columns:1fr; } }
-
-  /* left card */
-  .card { background:var(--card); border-radius:12px; padding:14px; box-shadow:0 12px 30px rgba(6,95,70,0.05); border:1px solid rgba(6,95,70,0.04); }
-  .title { font-weight:800; color:var(--accent-700); font-size:18px; margin-bottom:6px }
-  .muted { color:var(--muted); font-size:13px }
-
-  /* progress */
-  .progressWrap{display:flex;align-items:center;gap:12px;margin:12px 0}
+  body{margin:0;font-family:Inter,system-ui,Roboto,-apple-system,"Segoe UI",Arial;background:linear-gradient(180deg,#f8fff9 0%, #eefef0 100%);color:#052e14;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;align-items:stretch;justify-content:center;padding:14px;}
+  .app{width:100%;max-width:980px;display:flex;flex-direction:column;gap:12px}
+  /* NAV */
+  .nav{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(90deg,var(--glass),#f6fff6);padding:12px 16px;border-radius:12px;box-shadow:0 6px 18px rgba(6,95,70,0.07);border:1px solid rgba(6,95,70,0.05)}
+  .brand{display:flex;gap:12px;align-items:center}
+  .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-700));display:flex;align-items:center;justify-content:center;color:white;font-weight:800}
+  .brand .text{font-weight:700;font-size:16px;color:var(--accent-700)}
+  .nav .sub{font-size:13px;color:var(--muted)}
+  .helpLink{background:#25D366;color:white;padding:8px 10px;border-radius:8px;text-decoration:none;font-weight:700;display:inline-flex;gap:8px;align-items:center}
+  /* main */
+  .main{display:grid;grid-template-columns:1fr 320px;gap:14px;align-items:start}
+  @media(max-width:900px){ .main{grid-template-columns:1fr} }
+  .card{background:var(--card);border-radius:12px;padding:14px;box-shadow:0 12px 30px rgba(6,95,70,0.05);border:1px solid rgba(6,95,70,0.04)}
+  .title{font-weight:800;color:var(--accent-700);font-size:18px;margin-bottom:6px}
+  .muted{color:var(--muted);font-size:13px}
+  .progressWrap{display:flex;align-items:center;gap:12px;padding:12px 0}
   .stepText{font-weight:700;color:var(--accent-700);font-size:14px}
-  .progressBar{flex:1;height:10px;background:#e9f6ef;border-radius:999px;overflow:hidden}
+  .progressBar{flex:1;height:8px;background:#e9f6ef;border-radius:999px;overflow:hidden}
   .progressFill{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent-700));border-radius:999px;transition:width .35s ease}
-
-  /* inputs - modern */
-  .field { display:flex; flex-direction:column; gap:8px; margin-bottom:12px; }
-  input[type="text"]{padding:14px;border-radius:12px;border:1px solid #e6f6ed;background:#fcfff9;font-size:15px;box-shadow:0 6px 18px rgba(22,163,74,0.04)}
-  .btn { background:var(--accent); color:white; border:0; padding:12px 16px; border-radius:12px; font-weight:700; cursor:pointer; display:inline-flex; gap:8px; align-items:center; }
-  .btn.secondary{ background:transparent; border:1px solid rgba(6,95,70,0.08); color:var(--accent-700); padding:10px 14px; }
-  .btn:disabled{ opacity:.6; cursor:not-allowed; }
-
-  /* video */
-  .videoWrap{ display:flex; justify-content:center; margin:12px 0; }
-  video{ width:300px; height:220px; border-radius:12px; border:4px solid rgba(22,163,74,0.06); background:#000; object-fit:cover; box-shadow:0 10px 30px rgba(2,6,23,0.06) }
-
-  /* question area */
-  .qbox { margin-top:12px; padding:12px; border-radius:12px; background:linear-gradient(180deg,#fff,#f9fff5); border:1px solid rgba(6,95,70,0.03) }
-  .opts label { display:block; margin:10px 0; padding:12px; border-radius:10px; border:1px solid #eef9ef; cursor:pointer; background:white; transition:transform .08s ease, box-shadow .08s ease; }
-  .opts input{ margin-right:10px }
-  .opts label:hover{ transform:translateY(-4px); box-shadow:0 10px 30px rgba(2,6,23,0.04) }
-
-  .controls{ display:flex; gap:10px; justify-content:flex-end; margin-top:12px }
-
-  /* right column */
-  .aside .rules li{ margin:8px 0; font-size:14px }
-  .helpLink{ display:inline-block; background:#25D366; color:white; padding:8px 10px; border-radius:8px; text-decoration:none; font-weight:700 }
-
+  /* inputs */
+  input[type="text"]{width:100%;padding:12px;border-radius:12px;border:1px solid #e6f6ed;background:#fcfff9;font-size:15px;box-shadow:0 6px 18px rgba(22,163,74,0.03)}
+  .btn{background:var(--accent);color:white;border:0;padding:12px 16px;border-radius:12px;font-weight:700;cursor:pointer;display:inline-flex;gap:8px;align-items:center}
+  .btn.secondary{background:transparent;border:1px solid rgba(6,95,70,0.08);color:var(--accent-700);padding:10px 12px;border-radius:10px}
+  .btn:disabled{opacity:.6;cursor:not-allowed}
+  .videoWrap{display:flex;justify-content:center;margin:12px 0}
+  video{width:300px;height:220px;border-radius:12px;border:4px solid rgba(22,163,74,0.06);background:#000;object-fit:cover;box-shadow:0 10px 30px rgba(2,6,23,0.06)}
+  .qbox{margin-top:12px;padding:12px;border-radius:12px;background:linear-gradient(180deg,#fff,#f9fff5);border:1px solid rgba(6,95,70,0.03)}
+  /* options as boxes */
+  .opts{display:flex;flex-direction:column;gap:10px;margin-top:10px}
+  .optCard{display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px;border:1px solid #eef9ef;background:white;cursor:pointer;transition:transform .08s ease,box-shadow .08s ease}
+  .optCard input{display:none}
+  .optCard .labelText{font-weight:700}
+  .optCard.selected{background:linear-gradient(90deg,#ecfdf5,#f0fff9);border-color:var(--accent-700);box-shadow:0 12px 30px rgba(6,95,70,0.06);transform:translateY(-3px)}
+  .controls{display:flex;gap:10px;justify-content:flex-end;margin-top:12px}
+  .aside .rules li{margin:8px 0;font-size:14px}
+  .resultBox{padding:12px;background:#ecfff5;border-radius:10px;margin-top:12px}
+  .footer{padding:10px;text-align:center;font-size:13px;color:var(--muted);border-top:1px solid rgba(6,95,70,0.03);background:transparent}
+  .hidden{display:none !important}
   /* toasts */
-  .toasts{ position:fixed; right:18px; bottom:18px; display:flex; flex-direction:column; gap:8px; z-index:10000; }
-  .toast{ min-width:220px; padding:12px 14px; border-radius:10px; color:white; box-shadow:0 10px 30px rgba(2,6,23,0.18); display:flex; gap:10px; align-items:center; font-weight:700 }
-  .toast.success{ background:linear-gradient(90deg,#10b981,#059669) }
-  .toast.info{ background:linear-gradient(90deg,#06b6d4,#0891b2) }
-  .toast.warn{ background:linear-gradient(90deg,#f59e0b,#d97706) }
-  .toast.error{ background:linear-gradient(90deg,#ef4444,#dc2626) }
-
-  /* confirm modal */
-  .confirmOverlay{ position:fixed; inset:0; background:rgba(2,6,23,0.45); display:flex; align-items:center; justify-content:center; z-index:12000; }
-  .confirmBox{ background:white; padding:18px; border-radius:12px; width:320px; box-shadow:0 20px 60px rgba(2,6,23,0.3); text-align:center }
-  .confirmBox .title{ color:#0f172a; margin-bottom:12px }
-
-  /* small */
-  @media(max-width:420px){ video{width:240px;height:180px} .card{padding:12px} .btn{padding:10px 12px} .progressWrap{gap:8px} }
+  .toasts{position:fixed;right:18px;bottom:18px;display:flex;flex-direction:column;gap:8px;z-index:10000}
+  .toast{min-width:220px;padding:12px 14px;border-radius:10px;color:white;box-shadow:0 10px 30px rgba(2,6,23,0.18);display:flex;gap:10px;align-items:center;font-weight:700}
+  .toast.success{background:linear-gradient(90deg,#10b981,#059669)}
+  .toast.info{background:linear-gradient(90deg,#06b6d4,#0891b2)}
+  .toast.warn{background:linear-gradient(90deg,#f59e0b,#d97706)}
+  .toast.error{background:linear-gradient(90deg,#ef4444,#dc2626)}
+  /* confirm overlay */
+  .confirmOverlay{position:fixed;inset:0;background:rgba(2,6,23,0.45);display:flex;align-items:center;justify-content:center;z-index:12000}
+  .confirmBox{background:white;padding:18px;border-radius:12px;width:320px;box-shadow:0 20px 60px rgba(2,6,23,0.3);text-align:center}
+  @media(max-width:420px){ video{width:240px;height:180px} .btn{padding:10px 12px} .optCard{padding:10px} }
 </style>
 </head>
 <body>
@@ -102,8 +75,8 @@
           <div class="sub">CBT Exam Training</div>
         </div>
       </div>
-      <div class="right">
-        <div class="sub">Mobile first • Strict monitoring</div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <div class="sub">Mobile-first • Strict monitoring</div>
         <a class="helpLink" href="https://wa.me/2348145415083" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Help</a>
       </div>
     </div>
@@ -113,16 +86,16 @@
         <div class="title">Online CBT — ATech ICT Solution</div>
         <div class="muted">Multi-step exam training — camera monitoring enabled</div>
 
-        <div class="progressWrap" style="margin-top:12px">
+        <div class="progressWrap">
           <div class="stepText" id="stepText">Step 1 of 4 — Enter name</div>
           <div class="progressBar"><div class="progressFill" id="progressFill"></div></div>
         </div>
 
         <!-- STEP 1 -->
         <div id="step1">
-          <div class="field">
+          <div style="margin:10px 0">
             <label class="muted">Enter your full name</label>
-            <input id="nameInput" placeholder="e.g. Musa Ahmed">
+            <input id="nameInput" placeholder="e.g. Musa Ahmed" />
           </div>
           <div style="display:flex;gap:10px;justify-content:flex-end">
             <button id="proceedBtn" class="btn"><i class="fa-solid fa-arrow-right"></i> Next</button>
@@ -136,7 +109,7 @@
               <div style="font-weight:800" id="displayName"></div>
               <div class="muted" style="font-size:13px">Step 2 — Capture reference</div>
             </div>
-            <div class="muted">Reference will be used for monitoring</div>
+            <div class="muted">Reference photo used for monitoring</div>
           </div>
 
           <div class="videoWrap"><video id="preview" autoplay muted playsinline></video></div>
@@ -144,7 +117,7 @@
 
           <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px">
             <button id="backToStep1" class="btn secondary"><i class="fa-solid fa-arrow-left"></i> Back</button>
-            <button id="captureBtn" class="btn secondary" disabled><i class="fa-solid fa-camera"></i> Capture Reference</button>
+            <button id="captureBtn" class="btn secondary" disabled><i class="fa-solid fa-camera"></i> Capture</button>
             <button id="startBtn" class="btn" disabled><i class="fa-solid fa-play"></i> Start Exam</button>
           </div>
         </div>
@@ -155,7 +128,7 @@
             <div style="font-weight:800">Candidate: <span id="candName"></span></div>
             <div style="text-align:right">
               <div class="timer">Total: <span id="totalTimer">20:00</span></div>
-              <div class="muted">Section time: <span id="sectionTimer">05:00</span></div>
+              <div class="muted">Section: <span id="sectionTimer">05:00</span></div>
             </div>
           </div>
 
@@ -171,7 +144,7 @@
             <div class="controls">
               <button id="prevBtn" class="btn secondary"><i class="fa-solid fa-chevron-left"></i> Previous</button>
               <button id="nextBtn" class="btn"><i class="fa-solid fa-chevron-right"></i> Next</button>
-              <button id="submitBtn" class="btn"><i class="fa-solid fa-paper-plane"></i> Submit Exam</button>
+              <button id="submitBtn" class="btn"><i class="fa-solid fa-paper-plane"></i> Submit</button>
             </div>
             <div style="margin-top:8px" class="muted" id="progressText"></div>
           </div>
@@ -185,7 +158,9 @@
             <div class="muted">Thank you for taking the exam</div>
             <a class="helpLink" href="https://wa.me/2348145415083" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Contact</a>
           </div>
-          <div style="display:flex;justify-content:flex-end;margin-top:12px"><button id="retryBtn" class="btn secondary">Retry</button></div>
+          <div style="display:flex;justify-content:flex-end;margin-top:12px">
+            <button id="retryBtn" class="btn secondary">Retry</button>
+          </div>
         </div>
 
       </div>
@@ -207,46 +182,100 @@
         </div>
       </aside>
     </div>
+
+    <div class="footer">© ATech ICT Solution</div>
   </div>
 
-  <!-- Toasts -->
+  <!-- toasts container -->
   <div class="toasts" id="toasts"></div>
 
-  <!-- Confirm overlay (hidden until needed) -->
+  <!-- confirm overlay -->
   <div id="confirmOverlay" class="hidden"></div>
 
 <script>
-/* Modern multi-step CBT with:
-   - modern UI (navbar, inputs), Font Awesome
-   - toasts replacing alerts
-   - custom confirm modal
-   - randomization: questions shuffled per-subject per-user
-   - monitoring: reference photo compared with live frames
+/* Modern multi-step CBT — complete
+   - Per-user shuffling of questions (shuffle inside each subject)
+   - Options displayed as clickable boxes (single-choice)
+   - Toast notifications and custom confirm
+   - Camera monitoring comparing to reference
 */
 
-// ---------- Utilities: toasts & confirm ----------
+// ---------- Questions (10 per subject) ----------
+const subjects = [
+  { name:'English', questions:[
+    {q:'Sentence is a group of ...', opts:['World','Word','Alphabet'], a:1},
+    {q:'Antonym of "hot" is ...', opts:['Warm','Cold','Mild'], a:1},
+    {q:'Plural of "child"?', opts:['Childs','Childes','Children'], a:2},
+    {q:'Which is a noun?', opts:['Run','Apple','Quickly'], a:1},
+    {q:'Synonym of "happy"?', opts:['Sad','Joyful','Angry'], a:1},
+    {q:'Choose correct article: ___ apple', opts:['A','An','The'], a:1},
+    {q:'Which is a verb?', opts:['Jump','Blue','Tall'], a:0},
+    {q:'Opposite of "early"?', opts:['Late','Soon','Before'], a:0},
+    {q:'Plural of "mouse"?', opts:['Mouses','Mice','Mouse'], a:1},
+    {q:'What is an adjective?', opts:['Describes noun','Action word','Name'], a:0}
+  ]},
+  { name:'Mathematics', questions:[
+    {q:'5 + 5 = ?', opts:['9','10','11'], a:1},
+    {q:'12 ÷ 3 = ?', opts:['3','4','5'], a:1},
+    {q:'7 × 6 = ?', opts:['42','36','48'], a:0},
+    {q:'10 - 4 = ?', opts:['6','5','7'], a:0},
+    {q:'3 × 3 = ?', opts:['6','9','8'], a:1},
+    {q:'Square root of 81?', opts:['9','8','7'], a:0},
+    {q:'2^3 = ?', opts:['6','8','9'], a:1},
+    {q:'Which is even?', opts:['11','14','13'], a:1},
+    {q:'Decimal of 1/2?', opts:['0.5','0.2','2'], a:0},
+    {q:'Perimeter of square side 4?', opts:['12','16','8'], a:1}
+  ]},
+  { name:'Civic Education', questions:[
+    {q:'Nigeria gained independence in ...', opts:['1960','1970','1957'], a:0},
+    {q:'A democratic responsibility is ...', opts:['Voting','Looting','Forcing'], a:0},
+    {q:'Who is head of state?', opts:['Governor','President','Mayor'], a:1},
+    {q:'One right of a citizen is ...', opts:['Vote','Bomb','Rob'], a:0},
+    {q:'Legislative arm is ...', opts:['Judiciary','Executive','Legislature'], a:2},
+    {q:'What is a constitution?', opts:['Law document','Food','City'], a:0},
+    {q:'Local government head is called?', opts:['Chairman','President','Judge'], a:0},
+    {q:'A civic duty includes ...', opts:['Paying taxes','Stealing','Vandalism'], a:0},
+    {q:'Role of judiciary?', opts:['Interpret laws','Make laws','Execute laws'], a:0},
+    {q:'Democracy means ...', opts:['Rule by people','Rule by one','No rules'], a:0}
+  ]},
+  { name:'Nigerian Security', questions:[
+    {q:'Which agency handles internal security?', opts:['NCDC','Army','Police'], a:2},
+    {q:'Measure to improve security?', opts:['Community policing','Ignore crime','Support criminals'], a:0},
+    {q:'What is "integrity"?', opts:['Honesty','Bribery','Secrecy'], a:0},
+    {q:'What helps emergency response?', opts:['Good roads','Bad governance','Noise'], a:0},
+    {q:'Who coordinates national security policy?', opts:['Local chief','President','Teacher'], a:1},
+    {q:'What is a security check?', opts:['Screening','Singing','Eating'], a:0},
+    {q:'Which helps reduce crime?', opts:['Education','Corruption','Silence'], a:0},
+    {q:'Role of police?', opts:['Maintain law & order','Promote crime','Tax people'], a:0},
+    {q:'Emergency number in Nigeria?', opts:['911','112','199'], a:1},
+    {q:'What is cyber security?', opts:['Protecting online systems','Cooking','Farming'], a:0}
+  ]}
+];
+
+const QUESTIONS_PER_SUBJECT = 10;
+const SUBJECT_COUNT = subjects.length;
+const TOTAL_QUESTIONS = SUBJECT_COUNT * QUESTIONS_PER_SUBJECT;
+const MARK_PER_Q = 100 / TOTAL_QUESTIONS;
+
+// ---------- UI refs ----------
 const toastsEl = document.getElementById('toasts');
-function showToast(msg, type='info', ms=3500){
+function showToast(msg, type='info', ms=3200){
   const t = document.createElement('div');
   t.className = 'toast ' + (type||'info');
   t.innerHTML = `<i class="fa-solid fa-bell"></i><div style="flex:1">${msg}</div>`;
   toastsEl.appendChild(t);
-  setTimeout(()=> t.style.opacity = '0.96', 10);
-  setTimeout(()=> {
-    t.style.transition = 'opacity .25s ease, transform .25s ease';
-    t.style.opacity = '0'; t.style.transform = 'translateY(8px)';
-    setTimeout(()=> t.remove(), 300);
-  }, ms);
+  setTimeout(()=> t.style.opacity = '0.98', 10);
+  setTimeout(()=> { t.style.transition='opacity .25s ease, transform .25s ease'; t.style.opacity='0'; t.style.transform='translateY(8px)'; setTimeout(()=> t.remove(), 300); }, ms);
 }
 
-// custom confirm dialog (promise-based)
+// custom confirm
 function showConfirm(message){
   return new Promise(resolve=>{
     const overlay = document.getElementById('confirmOverlay');
     overlay.innerHTML = `
-      <div class="confirmOverlay" id="confWrap">
+      <div class="confirmOverlay">
         <div class="confirmBox">
-          <div class="title" style="font-weight:800">${message}</div>
+          <div style="font-weight:800">${message}</div>
           <div style="margin-top:12px;display:flex;gap:8px;justify-content:center">
             <button id="confNo" class="btn secondary">No</button>
             <button id="confYes" class="btn">Yes</button>
@@ -255,25 +284,20 @@ function showConfirm(message){
       </div>`;
     overlay.classList.remove('hidden');
     const yes = document.getElementById('confYes'), no = document.getElementById('confNo');
-    yes.focus();
     yes.onclick = ()=> { overlay.classList.add('hidden'); overlay.innerHTML=''; resolve(true); };
     no.onclick = ()=> { overlay.classList.add('hidden'); overlay.innerHTML=''; resolve(false); };
   });
 }
 
-// ---------- Questions and state ----------
-const subjects = [
-  { name:'English', questions:[ /* 10 */ {q:'Sentence is a group of ...', opts:['A. World','B. Word','C. Alphabet'], a:1},{q:'Antonym of "hot" is ...', opts:['A. Warm','B. Cold','C. Mild'], a:1},{q:'Plural of "child"?', opts:['A. Childs','B. Childes','C. Children'], a:2},{q:'Which is a noun?', opts:['A. Run','B. Apple','C. Quickly'], a:1},{q:'Synonym of "happy"?', opts:['A. Sad','B. Joyful','C. Angry'], a:1},{q:'Choose correct article: ___ apple', opts:['A. A','B. An','C. The'], a:1},{q:'Which is a verb?', opts:['A. Jump','B. Blue','C. Tall'], a:0},{q:'Opposite of "early"?', opts:['A. Late','B. Soon','C. Before'], a:0},{q:'Plural of "mouse"?', opts:['A. Mouses','B. Mice','C. Mouse'], a:1},{q:'What is an adjective?', opts:['A. Describes noun','B. Action word','C. Name'], a:0}]},
-  { name:'Mathematics', questions:[ {q:'5 + 5 = ?', opts:['A. 9','B. 10','C. 11'], a:1},{q:'12 ÷ 3 = ?', opts:['A. 3','B. 4','C. 5'], a:1},{q:'7 × 6 = ?', opts:['A. 42','B. 36','C. 48'], a:0},{q:'10 - 4 = ?', opts:['A. 6','B. 5','C. 7'], a:0},{q:'3 × 3 = ?', opts:['A. 6','B. 9','C. 8'], a:1},{q:'Square root of 81?', opts:['A. 9','B. 8','C. 7'], a:0},{q:'2^3 = ?', opts:['A. 6','B. 8','C. 9'], a:1},{q:'Which is even?', opts:['A. 11','B. 14','C. 13'], a:1},{q:'Decimal of 1/2?', opts:['A. 0.5','B. 0.2','C. 2'], a:0},{q:'Perimeter of square side 4?', opts:['A. 12','B. 16','C. 8'], a:1}]},
-  { name:'Civic Education', questions:[ {q:'Nigeria gained independence in ...', opts:['A. 1960','B. 1970','C. 1957'], a:0},{q:'A democratic responsibility is ...', opts:['A. Voting','B. Looting','C. Forcing'], a:0},{q:'Who is head of state?', opts:['A. Governor','B. President','C. Mayor'], a:1},{q:'One right of a citizen is ...', opts:['A. Vote','B. Bomb','C. Rob'], a:0},{q:'Legislative arm is ...', opts:['A. Judiciary','B. Executive','C. Legislature'], a:2},{q:'What is a constitution?', opts:['A. Law document','B. Food','C. City'], a:0},{q:'Local government head is called?', opts:['A. Chairman','B. President','C. Judge'], a:0},{q:'A civic duty includes ...', opts:['A. Paying taxes','B. Stealing','C. Vandalism'], a:0},{q:'Role of judiciary?', opts:['A. Interpret laws','B. Make laws','C. Execute laws'], a:0},{q:'Democracy means ...', opts:['A. Rule by people','B. Rule by one','C. No rules'], a:0}]},
-  { name:'Nigerian Security', questions:[ {q:'Which agency handles internal security?', opts:['A. NCDC','B. Army','C. Police'], a:2},{q:'Measure to improve security?', opts:['A. Community policing','B. Ignore crime','C. Support criminals'], a:0},{q:'What is "integrity"?', opts:['A. Honesty','B. Bribery','C. Secrecy'], a:0},{q:'What helps emergency response?', opts:['A. Good roads','B. Bad governance','C. Noise'], a:0},{q:'Who coordinates national security policy?', opts:['A. Local chief','B. President','C. Teacher'], a:1},{q:'What is a security check?', opts:['A. Screening','B. Singing','C. Eating'], a:0},{q:'Which helps reduce crime?', opts:['A. Education','B. Corruption','C. Silence'], a:0},{q:'Role of police?', opts:['A. Maintain law & order','B. Promote crime','C. Tax people'], a:0},{q:'Emergency number in Nigeria?', opts:['A. 911','B. 112','C. 199'], a:1},{q:'What is cyber security?', opts:['A. Protecting online systems','B. Cooking','C. Farming'], a:0}]}
-];
+// canvas snapshot helpers
+const canvas = document.createElement('canvas'); canvas.width=320; canvas.height=240;
+const ctx = canvas.getContext('2d');
+function takeSnapshot(videoEl){ try{ ctx.drawImage(videoEl,0,0,canvas.width,canvas.height); return ctx.getImageData(0,0,canvas.width,canvas.height); }catch(e){ return null; } }
+function avgLuminance(img){ if(!img) return 0; let sum=0,cnt=0; for(let i=0;i<img.data.length;i+=4*30){ const r=img.data[i], g=img.data[i+1], b=img.data[i+2]; sum += 0.299*r + 0.587*g + 0.114*b; cnt++; } return Math.round(sum/cnt || 0); }
+function imageDiffRatio(a,b){ if(!a||!b) return 1; let diff=0; const step=12; for(let i=0;i<a.data.length;i+=4*step){ diff += Math.abs(a.data[i]-b.data[i]) + Math.abs(a.data[i+1]-b.data[i+1]) + Math.abs(a.data[i+2]-b.data[i+2]); } const max = (a.data.length/(4*step)) * 3 * 255; return diff / max; }
+function beep(ms=200,f=800){ try{ const A=new (window.AudioContext||window.webkitAudioContext)(); const o=A.createOscillator(); const g=A.createGain(); o.connect(g); g.connect(A.destination); o.type='sine'; o.frequency.value=f; g.gain.setValueAtTime(0.16,A.currentTime); o.start(); o.stop(A.currentTime+ms/1000);}catch(e){} }
 
-const QUESTIONS_PER_SUBJECT = 10;
-const SUBJECT_COUNT = subjects.length;
-const TOTAL_QUESTIONS = SUBJECT_COUNT * QUESTIONS_PER_SUBJECT;
-const MARK_PER_Q = 100 / TOTAL_QUESTIONS;
-
+// ---------- state ----------
 let previewStream=null, examStream=null;
 let refImage=null;
 let totalSeconds=20*60, sectionSeconds=5*60, totalTimerInterval=null, sectionTimerInterval=null;
@@ -282,12 +306,13 @@ let currentSubject=0, currentQ=0;
 let answers = new Array(TOTAL_QUESTIONS).fill(null);
 let warned=false, flagged=false;
 
-// canvas
-const canvas = document.createElement('canvas'); canvas.width=320; canvas.height=240;
-const ctx = canvas.getContext('2d');
+// per-user randomized pool (shuffle inside each subject)
+function shuffleArray(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+let userQuestionPool = [];
+function prepareUserQuestions(){ userQuestionPool = subjects.map(s => shuffleArray(s.questions.map(q => ({...q}))) ); showToast('Questions randomized for this session', 'info', 1800); }
 
-// DOM refs
-const stepTextEl = document.getElementById('stepText');
+// ---------- elements ----------
+const stepText = document.getElementById('stepText');
 const progressFill = document.getElementById('progressFill');
 const step1El = document.getElementById('step1');
 const step2El = document.getElementById('step2');
@@ -296,12 +321,11 @@ const step4El = document.getElementById('step4');
 
 const proceedBtn = document.getElementById('proceedBtn');
 const nameInput = document.getElementById('nameInput');
+const displayName = document.getElementById('displayName');
 const previewVideo = document.getElementById('preview');
 const captureBtn = document.getElementById('captureBtn');
-const retakeBtn = document.getElementById('retakeBtn');
-const captureStatus = document.getElementById('captureStatus');
-const backToStep1 = document.getElementById('backToStep1');
 const startBtn = document.getElementById('startBtn');
+const backToStep1 = document.getElementById('backToStep1');
 
 const candNameEl = document.getElementById('candName');
 const examCam = document.getElementById('examCam');
@@ -317,56 +341,31 @@ const sectionTimerEl = document.getElementById('sectionTimer');
 const warnEl = document.getElementById('warnMsg');
 const flagEl = document.getElementById('flagMsg');
 const resultContent = document.getElementById('resultContent');
-const displayName = document.getElementById('displayName');
+const retryBtn = document.getElementById('retryBtn');
 
-// shuffle helper
-function shuffleArray(a){
-  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
-  return a;
-}
-
-// prepare randomized question pools per-subject (shuffled order for each user)
-let userQuestionPool = []; // array of subjects each with shuffled questions
-function prepareUserQuestions(){
-  userQuestionPool = subjects.map(s=>{
-    // clone questions then shuffle
-    const clone = s.questions.map(q=> ({...q}) );
-    return shuffleArray(clone.slice());
-  });
-  // update UI info
-  showToast('Questions randomized for this session', 'info', 2400);
-}
-
-// step UI controller
+// ---------- step navigation ----------
 function setStep(n){
-  // hide all
   step1El.classList.add('hidden'); step2El.classList.add('hidden'); step3El.classList.add('hidden'); step4El.classList.add('hidden');
   if(n===1) step1El.classList.remove('hidden');
   if(n===2) step2El.classList.remove('hidden');
   if(n===3) step3El.classList.remove('hidden');
   if(n===4) step4El.classList.remove('hidden');
-  stepTextEl.textContent = `Step ${n} of 4 — ${['Enter name','Reference picture','Exam in progress','Results'][n-1]}`;
+  const titles = ['Enter name','Reference picture','Exam in progress','Results'];
+  stepText.textContent = `Step ${n} of 4 — ${titles[n-1]}`;
   progressFill.style.width = `${((n-1)/3)*100}%`;
 }
+setStep(1);
 
-// snapshot & helpers
-function takeSnapshot(videoEl){ try{ ctx.drawImage(videoEl,0,0,canvas.width,canvas.height); return ctx.getImageData(0,0,canvas.width,canvas.height); }catch(e){ return null; } }
-function avgLuminance(img){ if(!img) return 0; let sum=0,cnt=0; for(let i=0;i<img.data.length;i+=4*30){ const r=img.data[i], g=img.data[i+1], b=img.data[i+2]; sum += 0.299*r + 0.587*g + 0.114*b; cnt++; } return Math.round(sum/cnt || 0); }
-function imageDiffRatio(a,b){ if(!a||!b) return 1; let diff=0; const step=12; for(let i=0;i<a.data.length;i+=4*step){ diff += Math.abs(a.data[i]-b.data[i]) + Math.abs(a.data[i+1]-b.data[i+1]) + Math.abs(a.data[i+2]-b.data[i+2]); } const max = (a.data.length/(4*step)) * 3 * 255; return diff / max; }
-function beep(ms=200,f=800){ try{ const A=new (window.AudioContext||window.webkitAudioContext)(); const o=A.createOscillator(); const g=A.createGain(); o.connect(g); g.connect(A.destination); o.type='sine'; o.frequency.value=f; g.gain.setValueAtTime(0.16,A.currentTime); o.start(); o.stop(A.currentTime+ms/1000);}catch(e){} }
-
-// ---------- Flow: Step 1 -> 2 ----------
+// ---------- Step 1 -> 2 (open preview) ----------
 proceedBtn.addEventListener('click', async ()=>{
   const name = nameInput.value.trim();
-  if(!name) return showToast('Please enter your name', 'warn');
+  if(!name){ showToast('Please enter your name', 'warn'); return; }
   displayName.textContent = name;
-  setStep(2);
   prepareUserQuestions();
-  // open preview camera
+  setStep(2);
   try{
     previewStream = await navigator.mediaDevices.getUserMedia({video:{facingMode:'user'}, audio:false});
     previewVideo.srcObject = previewStream;
-    captureStatus.textContent = 'Camera started. Align face and tap Capture Reference.';
     captureBtn.disabled = false;
     showToast('Camera ready — capture reference', 'success', 2000);
     previewStream.getVideoTracks()[0].onended = ()=> { showToast('Preview camera ended', 'error', 3000); };
@@ -376,38 +375,28 @@ proceedBtn.addEventListener('click', async ()=>{
   }
 });
 
-// back to step1
+// back
 backToStep1.addEventListener('click', ()=>{
   if(previewStream){ previewStream.getTracks().forEach(t=>t.stop()); previewStream=null; }
   setStep(1);
 });
 
-// capture ref
+// capture reference
 captureBtn.addEventListener('click', ()=>{
   const img = takeSnapshot(previewVideo);
-  if(!img) return showToast('Capture failed — try again', 'error');
+  if(!img){ showToast('Capture failed — try again', 'error'); return; }
   const lum = avgLuminance(img);
-  if(lum < 25){ return showToast('Too dark — increase lighting and retake', 'warn'); }
+  if(lum < 25){ showToast('Too dark — increase lighting and retake', 'warn'); return; }
   refImage = img;
-  captureStatus.textContent = 'Reference captured. Good lighting.';
-  retakeBtn.classList.remove('hidden');
+  showToast('Reference photo captured', 'success', 1600);
+  captureBtn.disabled = false;
   startBtn.disabled = false;
-  showToast('Reference photo captured', 'success', 1800);
+  document.getElementById('retakeBtn')?.classList.remove('hidden');
 });
 
-// retake
-retakeBtn.addEventListener('click', ()=>{
-  refImage = null;
-  captureStatus.textContent = 'Reference cleared. Capture again.';
-  retakeBtn.classList.add('hidden');
-  startBtn.disabled = true;
-  showToast('Reference cleared', 'info', 1200);
-});
-
-// ---------- Start exam (Step 3) ----------
+// start exam (Step 3)
 startBtn.addEventListener('click', async ()=>{
-  if(!refImage) return showToast('Please capture reference first', 'warn');
-  // stop preview to free camera
+  if(!refImage){ showToast('Please capture reference first', 'warn'); return; }
   if(previewStream){ previewStream.getTracks().forEach(t=>t.stop()); previewStream=null; }
   setStep(3);
   candNameEl.textContent = nameInput.value.trim();
@@ -420,82 +409,80 @@ startBtn.addEventListener('click', async ()=>{
     location.reload();
     return;
   }
-  // init
-  totalSeconds = 20*60; sectionSeconds = 5*60;
-  currentSubject = 0; currentQ = 0;
+  // reset
+  totalSeconds = 20*60; sectionSeconds = 5*60; currentSubject=0; currentQ=0;
   answers = new Array(TOTAL_QUESTIONS).fill(null);
   warned=false; flagged=false;
-  updateTimersUI();
-  renderQuestion();
-  startTotalTimer();
-  startSectionTimer();
-  startMonitoring();
-  showToast('Exam started — camera monitoring active', 'info', 2500);
+  updateTimersUI(); renderQuestion(); startTotalTimer(); startSectionTimer(); startMonitoring();
+  showToast('Exam started — monitoring active', 'info', 1800);
 });
 
-// render question (uses userQuestionPool which was prepared earlier)
+// ---------- render questions (from userQuestionPool) ----------
 function renderQuestion(){
-  const subjObj = userQuestionPool[currentSubject];
-  const qObj = subjObj[currentQ];
+  const subjPool = userQuestionPool[currentSubject];
+  const qObj = subjPool[currentQ];
   qSubjectEl.textContent = subjects[currentSubject].name + ` (Q ${currentQ+1}/${QUESTIONS_PER_SUBJECT})`;
   qTextEl.textContent = qObj.q;
   optionsEl.innerHTML = '';
   qObj.opts.forEach((opt, idx)=>{
+    const overall = currentSubject*QUESTIONS_PER_SUBJECT + currentQ;
     const id = `opt_${currentSubject}_${currentQ}_${idx}`;
-    const wrapper = document.createElement('label');
-    wrapper.setAttribute('for', id);
-    wrapper.innerHTML = `<input type="radio" name="opt" id="${id}" value="${idx}"> ${opt}`;
+    const wrapper = document.createElement('div');
+    wrapper.className = 'optCard';
+    wrapper.innerHTML = `<input type="radio" name="opt" id="${id}" value="${idx}" aria-label="${opt}"><div class="labelText">${opt}</div>`;
+    // click behaviour: mark selected visually
+    wrapper.addEventListener('click', ()=>{
+      // unselect others
+      Array.from(optionsEl.querySelectorAll('.optCard')).forEach(c => c.classList.remove('selected'));
+      wrapper.classList.add('selected');
+      const input = wrapper.querySelector('input[type="radio"]');
+      input.checked = true;
+      // save immediately
+      answers[overall] = Number(input.value);
+    });
     optionsEl.appendChild(wrapper);
   });
   progressText.textContent = `Subject ${currentSubject+1}/${SUBJECT_COUNT} • Q ${(currentQ+1) + currentSubject*QUESTIONS_PER_SUBJECT} / ${TOTAL_QUESTIONS}`;
   prevBtn.disabled = (currentSubject===0 && currentQ===0);
   nextBtn.textContent = (currentSubject===SUBJECT_COUNT-1 && currentQ===QUESTIONS_PER_SUBJECT-1) ? 'Finish' : 'Next';
+  // restore previously selected answer (if any)
+  const prevVal = answers[currentSubject*QUESTIONS_PER_SUBJECT + currentQ];
+  if(typeof prevVal === 'number'){
+    const card = optionsEl.querySelector(`input[value="${prevVal}"]`);
+    if(card){ card.checked = true; card.closest('.optCard')?.classList.add('selected'); }
+  }
 }
 
 // navigation
 prevBtn.addEventListener('click', ()=>{
-  if(flagged) return showToast('Exam flagged — cannot continue', 'error');
-  if(currentQ > 0) { currentQ--; renderQuestion(); }
-  else if(currentSubject > 0) { currentSubject--; currentQ = QUESTIONS_PER_SUBJECT-1; renderQuestion(); }
+  if(flagged){ showToast('Exam flagged — cannot continue', 'error'); return; }
+  if(currentQ > 0){ currentQ--; renderQuestion(); }
+  else if(currentSubject > 0){ currentSubject--; currentQ = QUESTIONS_PER_SUBJECT-1; renderQuestion(); }
 });
 
 nextBtn.addEventListener('click', ()=>{
-  if(flagged) return showToast('Exam flagged — cannot continue', 'error');
-  const sel = document.querySelector('input[name="opt"]:checked');
-  const overall = currentSubject*QUESTIONS_PER_SUBJECT + currentQ;
-  if(sel) answers[overall] = Number(sel.value);
-
+  if(flagged){ showToast('Exam flagged — cannot continue', 'error'); return; }
+  // make sure current selection saved (cards save on click already)
   if(currentQ < QUESTIONS_PER_SUBJECT-1){ currentQ++; renderQuestion(); }
   else {
-    if(currentSubject < SUBJECT_COUNT - 1){ currentSubject++; currentQ = 0; sectionSeconds = 5*60; renderQuestion(); }
+    if(currentSubject < SUBJECT_COUNT - 1){ currentSubject++; currentQ=0; sectionSeconds = 5*60; renderQuestion(); }
     else computeAndShowResults();
   }
 });
 
-// Submit with custom confirm
+// submit
 submitBtn.addEventListener('click', async ()=>{
   const ok = await showConfirm('Submit exam now?');
-  if(!ok) return showToast('Submission canceled', 'info');
+  if(!ok){ showToast('Submission canceled', 'info'); return; }
   computeAndShowResults();
 });
 
 // ---------- timers ----------
-function updateTimersUI(){
-  const m = Math.floor(totalSeconds/60), s = totalSeconds%60;
-  totalTimerEl.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-  const sm = Math.floor(sectionSeconds/60), ss = sectionSeconds%60;
-  sectionTimerEl.textContent = `${String(sm).padStart(2,'0')}:${String(ss).padStart(2,'0')}`;
-}
-function startTotalTimer(){
-  updateTimersUI();
-  totalTimerInterval = setInterval(()=>{ totalSeconds--; if(totalSeconds<=0){ clearInterval(totalTimerInterval); clearInterval(sectionTimerInterval); computeAndShowResults(); } updateTimersUI(); },1000);
-}
-function startSectionTimer(){
-  updateTimersUI();
-  sectionTimerInterval = setInterval(()=>{ sectionSeconds--; if(sectionSeconds<=0){ if(currentSubject < SUBJECT_COUNT-1){ currentSubject++; currentQ=0; sectionSeconds = 5*60; renderQuestion(); } else computeAndShowResults(); } updateTimersUI(); },1000);
-}
+function updateTimersUI(){ const m=Math.floor(totalSeconds/60), s=totalSeconds%60; totalTimerEl.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`; const sm=Math.floor(sectionSeconds/60), ss=sectionSeconds%60; sectionTimerEl.textContent = `${String(sm).padStart(2,'0')}:${String(ss).padStart(2,'0')}`; }
+function startTotalTimer(){ updateTimersUI(); totalTimerInterval = setInterval(()=>{ totalSeconds--; if(totalSeconds<=0){ clearInterval(totalTimerInterval); clearInterval(sectionTimerInterval); computeAndShowResults(); } updateTimersUI(); },1000); }
+function startSectionTimer(){ updateTimersUI(); sectionTimerInterval = setInterval(()=>{ sectionSeconds--; if(sectionSeconds<=0){ if(currentSubject < SUBJECT_COUNT-1){ currentSubject++; currentQ=0; sectionSeconds = 5*60; renderQuestion(); } else computeAndShowResults(); } updateTimersUI(); },1000); }
 
-// ---------- Monitoring ----------
+// ---------- monitoring ----------
 const CHECK_MS = 1500;
 const WARN_THRESHOLD = 0.10;
 const FLAG_THRESHOLD = 0.16;
@@ -533,14 +520,13 @@ function triggerWarning(reason){
     if(ratio > WARN_THRESHOLD || lum < MIN_LIGHT){ handleFlag('Violation persisted after warning'); } else clearWarning();
   }, GRACE_MS);
 }
-
 function clearWarning(){ warnEl.textContent = ''; if(graceTimer){ clearTimeout(graceTimer); graceTimer=null } }
 
 function handleFlag(reason){
   if(flagged) return;
   flagged = true;
   flagEl.textContent = '🚫 MALPRACTICE: Exam stopped due to suspicious behavior';
-  showToast('Flagged: exam stopped', 'error', 4000);
+  showToast('Flagged: exam stopped', 'error', 3000);
   beep(1000,320);
   if(totalTimerInterval) clearInterval(totalTimerInterval);
   if(sectionTimerInterval) clearInterval(sectionTimerInterval);
@@ -550,69 +536,61 @@ function handleFlag(reason){
   Array.from(document.querySelectorAll('input[type=radio]')).forEach(i=>i.disabled=true);
   nextBtn.disabled = true; submitBtn.disabled = true; prevBtn.disabled = true;
   resultContent.innerHTML = `<div style="font-weight:800;color:var(--danger)">MALPRACTICE DETECTED</div>
-    <div style="margin-top:8px">Reason: ${reason}</div>
-    <div style="margin-top:8px">Exam stopped.</div>`;
+    <div style="margin-top:8px">Reason: ${reason}</div><div style="margin-top:8px">Exam stopped.</div>`;
   setStep(4);
   document.getElementById('qbox').style.display='none';
 }
 
-function handleStreamEnded(reason){
-  console.log('Stream ended:', reason);
-  triggerWarning('Camera disconnected or blocked');
-}
+function handleStreamEnded(reason){ console.log('Stream ended:', reason); triggerWarning('Camera disconnected or blocked'); }
 
-// ---------- Results ----------
+// ---------- compute results ----------
 function computeAndShowResults(){
   if(flagged){ handleFlag('Flagged before submit'); return; }
   if(totalTimerInterval) clearInterval(totalTimerInterval);
   if(sectionTimerInterval) clearInterval(sectionTimerInterval);
   if(monitorInterval) clearInterval(monitorInterval);
   if(examStream){ examStream.getTracks().forEach(t=>t.stop()); examStream=null; }
+  // ensure current answer saved
   const sel = document.querySelector('input[name="opt"]:checked');
   if(sel){ const overall = currentSubject*QUESTIONS_PER_SUBJECT + currentQ; answers[overall] = Number(sel.value); }
 
   // per-subject & total
   let perSub = [], totalCorrect = 0;
-  for(let s=0; s<SUBJECT_COUNT; s++){
+  for(let s=0;s<SUBJECT_COUNT;s++){
     let correct = 0;
-    for(let q=0; q<QUESTIONS_PER_SUBJECT; q++){
+    for(let q=0;q<QUESTIONS_PER_SUBJECT;q++){
       const idx = s*QUESTIONS_PER_SUBJECT + q;
       const selVal = answers[idx];
-      if(typeof selVal === 'number' && selVal === userQuestionPool[s][q].a) correct++;
+      if(typeof selVal==='number' && selVal === userQuestionPool[s][q].a) correct++;
     }
     perSub.push(correct);
     totalCorrect += correct;
   }
   const totalMarksRaw = totalCorrect * MARK_PER_Q;
-  const totalMarks = Math.round(totalMarksRaw * 10) / 10; // one decimal
+  const totalMarks = Math.round(totalMarksRaw * 10) / 10;
 
   let html = `<div style="font-weight:800">Result — ${nameInput.value}</div><div style="margin-top:8px">Per-subject:</div><ul>`;
-  for(let s=0; s<SUBJECT_COUNT; s++){
+  for(let s=0;s<SUBJECT_COUNT;s++){
     const marksSub = Math.round(perSub[s] * MARK_PER_Q * 10) / 10;
     html += `<li>${subjects[s].name}: ${perSub[s]} / ${QUESTIONS_PER_SUBJECT} (${marksSub} marks)</li>`;
   }
   html += `</ul><div style="margin-top:8px"><strong>Total: ${totalMarks} / 100</strong></div>`;
-  let grade = '';
-  if(totalMarks >= 80) grade = 'Distinction';
-  else if(totalMarks >= 65) grade = 'Upper Class';
-  else if(totalMarks >= 50) grade = 'Lower Class';
-  else if(totalMarks >= 40) grade = 'Pass';
-  else if(totalMarks >= 30) grade = 'Play Class';
-  else grade = 'Failed — Retry';
+  let grade='';
+  if(totalMarks>=80) grade='Distinction'; else if(totalMarks>=65) grade='Upper Class'; else if(totalMarks>=50) grade='Lower Class'; else if(totalMarks>=40) grade='Pass'; else if(totalMarks>=30) grade='Play Class'; else grade='Failed — Retry';
   html += `<div style="margin-top:8px"><strong>Grade: ${grade}</strong></div>`;
-
   resultContent.innerHTML = html;
   setStep(4);
   document.getElementById('qbox').style.display='none';
 }
 
 // retry
-document.getElementById('retryBtn').addEventListener('click', ()=> location.reload());
+retryBtn.addEventListener('click', ()=> location.reload());
 
-// init UI
+// init: shuffle for user on load
+prepareUserQuestions();
 setStep(1);
-showToast('Welcome — enter name to begin', 'info', 2000);
-console.log('Ready — modern CBT UI with per-user randomization.');
+showToast('Welcome — enter name to begin', 'info', 1600);
+console.log('Ready — modern CBT (40 Q, per-user randomized).');
 </script>
 </body>
 </html>
