@@ -232,10 +232,10 @@
         <div class="title" style="font-size:16px">Exam Rules</div>
         <div class="muted" style="margin-top:8px">
           <ul class="rules">
-            <li>40 questions — 10 per subject (English → Math → Civic → Nigerian Security)</li>
+            <li>48 questions — 12 per subject (English → Math → Civic → Nigerian Security)</li>
             <li>Each subject = 2.5 minutes (auto-advance)</li>
             <li>Total = 10 minutes (auto submit)</li>
-            <li>Marks per question = 2.5 (total = 100)</li>
+            <li>Marks per question = 100 / 48 (total = 100)</li>
             <li><strong>Strict:</strong> 1st violation = warning; if not corrected within 5s → flagged out.</li>
           </ul>
         </div>
@@ -256,13 +256,15 @@
   <div id="confirmOverlay" class="hidden"></div>
 
 <script>
-/* Adjusted multi-step CBT logic with:
-   - Print result opens window showing result but DOES NOT auto print (Android-friendly)
-   - Submit confirm is shown as centered modal (#confirmOverlay)
-   - Changing tab / hiding page during exam = immediate flag (exam stopped)
+/* Changes implemented:
+   - QUESTIONS_PER_SUBJECT = 12 (2 more per subject)
+   - Submit on last question shows special confirm message
+   - Print result opens new window with QR (Google Chart API) and verification code (SHA-256 truncated)
+   - Visibility change (tab switching) flags exam
+   - Warning includes sound + vibration (existing warnFeedback)
 */
 
-// ---------- question set (same as before) ----------
+// ---------- question set (added 2 questions per subject) ----------
 const subjects = [
   { name:'English', questions:[
     {q:'Sentence is a group of ...', opts:['World','Word','Alphabet'], a:1},
@@ -274,7 +276,9 @@ const subjects = [
     {q:'Which is a verb?', opts:['Jump','Blue','Tall'], a:0},
     {q:'Opposite of "early"?', opts:['Late','Soon','Before'], a:0},
     {q:'Plural of "mouse"?', opts:['Mouses','Mice','Mouse'], a:1},
-    {q:'What is an adjective?', opts:['Describes noun','Action word','Name'], a:0}
+    {q:'What is an adjective?', opts:['Describes noun','Action word','Name'], a:0},
+    {q:'Choose correct preposition: She is ___ the room', opts:['in','on','at'], a:0},
+    {q:'Which is past tense of "go"?', opts:['goed','went','gone'], a:1}
   ]},
   { name:'Mathematics', questions:[
     {q:'5 + 5 = ?', opts:['9','10','11'], a:1},
@@ -286,7 +290,9 @@ const subjects = [
     {q:'2^3 = ?', opts:['6','8','9'], a:1},
     {q:'Which is even?', opts:['11','14','13'], a:1},
     {q:'Decimal of 1/2?', opts:['0.5','0.2','2'], a:0},
-    {q:'Perimeter of square side 4?', opts:['12','16','8'], a:1}
+    {q:'Perimeter of square side 4?', opts:['12','16','8'], a:1},
+    {q:'What is 15% of 200?', opts:['20','30','40'], a:1},
+    {q:'LCM of 4 and 6?', opts:['12','24','6'], a:0}
   ]},
   { name:'Civic Education', questions:[
     {q:'Nigeria gained independence in ...', opts:['1960','1970','1957'], a:0},
@@ -298,7 +304,9 @@ const subjects = [
     {q:'Local government head is called?', opts:['Chairman','President','Judge'], a:0},
     {q:'A civic duty includes ...', opts:['Paying taxes','Stealing','Vandalism'], a:0},
     {q:'Role of judiciary?', opts:['Interpret laws','Make laws','Execute laws'], a:0},
-    {q:'Democracy means ...', opts:['Rule by people','Rule by one','No rules'], a:0}
+    {q:'Democracy means ...', opts:['Rule by people','Rule by one','No rules'], a:0},
+    {q:'A fundamental duty is ...', opts:['Obeying law','Breaking law','Corruption'], a:0},
+    {q:'Who makes laws at national level?', opts:['Assembly','Court','Police'], a:0}
   ]},
   { name:'Nigerian Security', questions:[
     {q:'Which agency handles internal security?', opts:['NCDC','Army','Police'], a:2},
@@ -310,11 +318,13 @@ const subjects = [
     {q:'Which helps reduce crime?', opts:['Education','Corruption','Silence'], a:0},
     {q:'Role of police?', opts:['Maintain law & order','Promote crime','Tax people'], a:0},
     {q:'Emergency number in Nigeria?', opts:['911','112','199'], a:1},
-    {q:'What is cyber security?', opts:['Protecting online systems','Cooking','Farming'], a:0}
+    {q:'What is cyber security?', opts:['Protecting online systems','Cooking','Farming'], a:0},
+    {q:'What prevents fraud online?', opts:['Strong passwords','Sharing PIN','Weak codes'], a:0},
+    {q:'Which agency tackles health emergencies?', opts:['NCDC','Army','Police'], a:0}
   ]}
 ];
 
-const QUESTIONS_PER_SUBJECT = 10, SUBJECT_COUNT = subjects.length, TOTAL_QUESTIONS = SUBJECT_COUNT * QUESTIONS_PER_SUBJECT;
+const QUESTIONS_PER_SUBJECT = 12, SUBJECT_COUNT = subjects.length, TOTAL_QUESTIONS = SUBJECT_COUNT * QUESTIONS_PER_SUBJECT;
 const MARK_PER_Q = 100 / TOTAL_QUESTIONS;
 
 // ---------- UI / small helpers ----------
@@ -464,7 +474,6 @@ captureBtn.addEventListener('click', ()=>{
   refImage = img;
   // save data URL for printing later
   try{
-    // canvas already has current frame drawn by takeSnapshot, but to be safe redraw from previewVideo
     ctx.drawImage(previewVideo,0,0,canvas.width,canvas.height);
     refDataUrl = canvas.toDataURL('image/png');
   }catch(e){ refDataUrl = null; }
@@ -544,8 +553,10 @@ nextBtn.addEventListener('click', ()=>{
   }
 });
 submitBtn.addEventListener('click', async ()=>{
-  // show centered modal confirmation (handled in showConfirm)
-  const ok = await showConfirm('Submit exam now?');
+  // special confirm if on last question
+  const isLast = (currentSubject === SUBJECT_COUNT-1 && currentQ === QUESTIONS_PER_SUBJECT-1);
+  const message = isLast ? 'Are you sure to submit this? This can be undone' : 'Submit exam now?';
+  const ok = await showConfirm(message);
   if(!ok){ showToast('Submission canceled', 'info'); return; }
   computeAndShowResults();
 });
@@ -575,7 +586,6 @@ function startMonitoring(){
 // visibility handling: switching tab / app -> immediate flag (as requested)
 document.addEventListener('visibilitychange', ()=> {
   if(document.hidden){
-    // if exam step is active and not already flagged
     if(!flagged && !step3El.classList.contains('hidden')){
       handleFlag('Switched tab or app (focus lost)');
     }
@@ -701,7 +711,7 @@ function computeAndShowResults(){
       resultContent.classList.remove('hidden');
       document.getElementById('qbox').style.display='none';
 
-      // attach print handler
+      // attach print handler (async due to hash generation)
       const printBtn = document.getElementById('printBtn');
       if(printBtn){
         printBtn.addEventListener('click', ()=> printResults({
@@ -719,9 +729,37 @@ function computeAndShowResults(){
 // Escape text for HTML insertion (small helper)
 function escapeHtml(s){ if(!s) return ''; return String(s).replace(/[&<>"']/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]; }); }
 
-// Print function: opens new window and shows result (does NOT auto-call print())
-function printResults({candidate, perSubject, totalMarks, grade, refDataUrl}){
-  const win = window.open('','_blank','width=820,height=900');
+// helper: compute SHA-256 hex
+async function sha256Hex(msg){
+  try{
+    const data = new TextEncoder().encode(msg);
+    const hash = await crypto.subtle.digest('SHA-256', data);
+    return Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,'0')).join('');
+  }catch(e){
+    // fallback simple checksum
+    let s=0; for(let i=0;i<msg.length;i++) s=(s+msg.charCodeAt(i))%1000000000;
+    return s.toString(16);
+  }
+}
+
+// Print function: opens new window and shows result + QR + verification code
+async function printResults({candidate, perSubject, totalMarks, grade, refDataUrl}){
+  // build payload to embed in QR & to compute verification code
+  const payload = {
+    candidate: candidate || '',
+    perSubject,
+    totalMarks,
+    grade,
+    timestamp: Date.now()
+  };
+  const payloadStr = JSON.stringify(payload);
+  const hex = await sha256Hex(payloadStr);
+  const verCode = hex.slice(0,12).toUpperCase(); // short verification code
+
+  // QR image via Google Chart API (encodes payload + verification code)
+  const qrPayload = { ...payload, verification: verCode };
+  const qrUrl = 'https://chart.googleapis.com/chart?cht=qr&chs=240x240&chl=' + encodeURIComponent(JSON.stringify(qrPayload));
+
   const styles = `
     body{font-family:Inter,system-ui,Roboto,-apple-system,"Segoe UI",Arial;color:#052e14;padding:20px;}
     .header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
@@ -731,6 +769,8 @@ function printResults({candidate, perSubject, totalMarks, grade, refDataUrl}){
     th,td{padding:8px;border:1px solid #eee;text-align:left}
     .total{font-weight:900;margin-top:12px;font-size:16px}
     .smallmuted{color:#4b5563;font-size:13px}
+    .qrwrap{display:flex;justify-content:center;margin-top:16px}
+    .vercode{margin-top:8px;text-align:center;font-weight:800}
   `;
   let subjRows = '';
   for(let s=0;s<SUBJECT_COUNT;s++){
@@ -752,17 +792,27 @@ function printResults({candidate, perSubject, totalMarks, grade, refDataUrl}){
         </table>
         <div class="total">Total: ${totalMarks} / 100</div>
         <div style="margin-top:6px">Grade: <strong>${escapeHtml(grade)}</strong></div>
+
+        <div class="qrwrap">
+          <div>
+            <img src="${qrUrl}" alt="QR code" style="width:180px;height:180px;border:1px solid #eee;padding:6px;background:#fff;border-radius:8px">
+            <div class="vercode">Verification: <span style="font-family:monospace">${verCode}</span></div>
+            <div style="margin-top:8px" class="smallmuted">Scan QR to view/embed this result. Code shown for quick verification.</div>
+          </div>
+        </div>
+
         <div style="margin-top:12px" class="smallmuted">Use your browser's Print function to save or print this result (menu → Print).</div>
       </body>
     </html>
   `;
   try{
+    const win = window.open('','_blank','width=820,height=900');
+    if(!win){ showToast('Unable to open print window (popup blocked?)', 'error', 4000); return; }
     win.document.open();
     win.document.write(html);
     win.document.close();
     win.focus();
   }catch(e){
-    // fallback: show toast if popup blocked
     showToast('Unable to open print window (popup blocked?)', 'error', 4000);
   }
 }
