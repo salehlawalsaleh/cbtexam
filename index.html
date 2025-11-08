@@ -126,7 +126,7 @@
       <div class="card left">
         <!-- pageTitle/subtitle will be hidden automatically when user advances -->
         <div class="title" id="pageTitle">Online CBT — ATech ICT Solution</div>
-        <div class="muted" id="pageSubtitle" style="margin-bottom:8px">Multi-step exam training — camera monitoring enabled</div>
+        <div class="muted" id="pageSubtitle" style="margin-bottom:8px">CBT Exam training + CCTV AI monitoring enabled</div>
 
         <div class="progressWrap">
           <div class="stepText" id="stepText">Step 1 — Enter name</div>
@@ -140,7 +140,7 @@
             <div class="inputWrap" style="margin-top:8px">
               <div class="inputIcon"><i class="fa-solid fa-user"></i></div>
               <!-- maxlength 15 added below -->
-              <input id="nameInput" placeholder="Musa Ahmed" autocomplete="name" maxlength="15" />
+              <input id="nameInput" placeholder="i.e Lawal Ameer" autocomplete="none" maxlength="15" />
             </div>
           </div>
           <div style="display:flex;gap:10px;justify-content:flex-end">
@@ -157,9 +157,9 @@
                 <div class="profileAvatar" id="profileAvatar"><i class="fa-solid fa-user"></i></div>
                 <div style="font-weight:800" id="displayName">—</div>
               </div>
-              <div class="muted" style="font-size:13px">Welcome — capture your reference</div>
+              <div class="muted" style="font-size:13px">Welcome</div>
             </div>
-            <div class="muted">Reference photo used for monitoring</div>
+            <div class="muted"></div>
           </div>
 
           <!-- red instruction box -->
@@ -768,7 +768,7 @@ async function printResults({candidate, perSubject, totalMarks, grade, refDataUr
       <head><title>ATech ICT — Result</title><style>${styles}</style></head>
       <body>
         <div class="header">
-          <div><div class="title">ATech ICT</div><div class="smallmuted">CBT Result</div></div>
+          <div><div class="title">ATech ICT Solution</div><div class="smallmuted">CBT Result Candidate Copy</div></div>
           ${refDataUrl? `<img src="${refDataUrl}" class="refimg" alt="reference">` : ''}
         </div>
         <div>Candidate: <strong>${escapeHtml(candidate)}</strong></div>
